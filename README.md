@@ -2,7 +2,16 @@
 
 > An n8n-orchestrated OSINT intelligence agency that answers one question: **"Is something real starting on the internet right now — or am I looking at noise?"**
 
-SIGNAL plans an investigation, sweeps seven independent public channels, deep-crawls and fingerprints evidence, extracts atomic claims, resolves entities into a relationship graph, compares everything against **its own PostgreSQL/pgvector memory**, forms three competing hypotheses, **red-teams itself with adversarial searches**, then issues a deterministic 0–100 score — NOISE → WEAK → EMERGING → SIGNIFICANT → CRITICAL. Humans close the loop (Investigate / Watch / Dismiss), and dismissed patterns that re-emerge are automatically reopened.
+## Overview
+- **What it is:** A 107‑node n8n workflow that automatically plans, senses seven independent channels, deep‑crawls, clusters evidence, extracts atomic claims, builds a relationship graph, forms three hypotheses, red‑teams with adversarial searches and issues a deterministic 0‑100 score.
+- **Novelty:** n8n as the product (every step inspectable), deterministic judge (LLM never invents the score), forensic source collapse, re‑emergence engine (pgvector), env‑gated integrations.
+- **Tools:** n8n, FastAPI, PostgreSQL + pgvector, Groq → OpenRouter LLM, deterministic DNA scoring, pgvector, plain‑HTML/CSS/JS UI with SVG radar/graph, 72 pytest tests.
+- **Use cases:** Competitive intelligence, risk monitoring, market‑entry scouting, research/journalism, automated alerts (Telegram/WhatsApp/GitHub).
+- **Target audience:** Product & innovation managers, risk & compliance officers, analysts/journalists, startup founders, n8n enthusiasts.
+
+![SIGNAL Overview](https://via.placeholder.com/800x300?text=SIGNAL+Overview+Diagram)
+
+SIGNAL plans an investigation, sweeps seven independent public channels, deep‑crawls and fingerprints evidence, extracts atomic claims, resolves entities into a relationship graph, compares everything against **its own PostgreSQL/pgvector memory**, forms three competing hypotheses, **red-teams itself with adversarial searches**, then issues a deterministic 0–100 score — NOISE → WEAK → EMERGING → SIGNIFICANT → CRITICAL. Humans close the loop (Investigate / Watch / Dismiss), and dismissed patterns that re-emerge are automatically reopened.
 
 The entire intelligence discipline is **a 107-node n8n workflow** (+ 4 support workflows). n8n is not glue here — it is the product.
 
