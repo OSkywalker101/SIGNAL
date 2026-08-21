@@ -1,0 +1,252 @@
+{
+ "name": "SIGNAL \u2014 Telegram Command Center",
+ "nodes": [
+  {
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "signal/telegram-callback",
+    "responseMode": "responseNode",
+    "options": {}
+   },
+   "id": "0000005f-0000-4000-8000-000000000095",
+   "name": "Telegram Updates",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2.1,
+   "position": [
+    0,
+    0
+   ],
+   "webhookId": "signal-telegram-callback"
+  },
+  {
+   "parameters": {
+    "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst b = $input.first().json.body || $input.first().json;\nconst cb = b.callback_query || b.callbackQuery;\nlet decision = null, signalId = null, raw = null;\nif (cb && cb.data) {\n  raw = cb.data;\n  const parts = raw.split(\":\");\n  if (parts.length >= 3 && parts[0] === \"signal\") { decision = parts[2].toUpperCase(); signalId = parts[1]; }\n} else if (b.message && b.message.text) {\n  const t = b.message.text.trim();\n  if (/^\\/signals?/i.test(t)) decision = \"SHOW_EVIDENCE\";\n}\nreturn [{ json: { decision, signal_id: signalId, raw, telegram_user: cb && cb.from ? cb.from.username : (b.message && b.message.from ? b.message.from.username : null), is_callback: !!cb } }];"
+   },
+   "id": "00000060-0000-4000-8000-000000000096",
+   "name": "Parse Callback",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    220,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": false,
+         "leftValue": "",
+         "typeValidation": "loose"
+        },
+        "conditions": [
+         {
+          "id": "s1",
+          "leftValue": "={{ $json.decision }}",
+          "rightValue": "INVESTIGATE|WATCH|DISMISS|CONFIRM|REMIND",
+          "operator": {
+           "type": "string",
+           "operation": "regex"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "decision"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": false,
+         "leftValue": "",
+         "typeValidation": "loose"
+        },
+        "conditions": [
+         {
+          "id": "s2",
+          "leftValue": "={{ $json.decision }}",
+          "rightValue": "SHOW_EVIDENCE",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "evidence"
+      }
+     ]
+    },
+    "options": {
+     "fallbackOutput": "extra",
+     "renameFallbackOutput": "unknown"
+    }
+   },
+   "id": "00000061-0000-4000-8000-000000000097",
+   "name": "Route Command",
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3.4,
+   "position": [
+    440,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "=INSERT INTO user_feedback (signal_id, decision, channel, decided_via) VALUES ('{{ $json.signal_id }}','{{ $json.decision }}','telegram','button') ON CONFLICT DO NOTHING; UPDATE signals SET status='{{ {\"INVESTIGATE\":\"INVESTIGATING\",\"WATCH\":\"WATCHING\",\"DISMISS\":\"DISMISSED\",\"CONFIRM\":\"CONFIRMED\",\"REMIND\":\"REMINDER_SET\"}[$json.decision] || \"WATCHING\" }}' WHERE signal_id='{{ $json.signal_id }}'; INSERT INTO actions (signal_id,action_type,payload,status) VALUES ('{{ $json.signal_id }}','user_decision','{\"via\":\"telegram\"}'::jsonb,'done');",
+    "options": {}
+   },
+   "id": "00000062-0000-4000-8000-000000000098",
+   "name": "Record User Decision",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    660,
+    -100
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "D67cN6VpSL3w4WpL",
+     "name": "postgres"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "operation": "executeQuery",
+    "query": "=SELECT c.statement, c.actor, c.action, s.publisher, s.source_url FROM claims c LEFT JOIN sources s ON s.run_id = c.run_id WHERE c.signal_id='{{ $json.signal_id }}' ORDER BY c.created_at DESC LIMIT 10;",
+    "options": {}
+   },
+   "id": "00000063-0000-4000-8000-000000000099",
+   "name": "Load Evidence Package",
+   "type": "n8n-nodes-base.postgres",
+   "typeVersion": 2.6,
+   "position": [
+    660,
+    100
+   ],
+   "credentials": {
+    "postgres": {
+     "id": "D67cN6VpSL3w4WpL",
+     "name": "postgres"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "alwaysOutputData": true
+  },
+  {
+   "parameters": {
+    "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst d = $input.first().json;\nconst DEC = { INVESTIGATE: \"\ud83d\udd0d Investigation queued - n8n will re-run the pipeline against this signal.\", WATCH: \"\ud83d\udc40 Signal moved to WATCH - daily monitoring continues.\", DISMISS: \"\u274c Signal dismissed and recorded. It will re-alert only if it RE-EMERGES with stronger evidence.\", CONFIRM: \"\u2705 Confirmation recorded. Signal escalated to CONFIRMED.\", REMIND: \"\u23f0 Reminder scheduled.\", SHOW_EVIDENCE: \"\ud83d\udcda Evidence package follows.\" };\nreturn [{ json: { reply: DEC[d.decision] || \"Acknowledged.\", decision: d.decision, signal_id: d.signal_id } }];"
+   },
+   "id": "00000064-0000-4000-8000-000000000100",
+   "name": "Format Acknowledgement",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    880,
+    0
+   ]
+  },
+  {
+   "parameters": {
+    "respondWith": "firstIncomingItem",
+    "options": {}
+   },
+   "id": "00000065-0000-4000-8000-000000000101",
+   "name": "Acknowledge",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.5,
+   "position": [
+    1100,
+    0
+   ]
+  }
+ ],
+ "connections": {
+  "Telegram Updates": {
+   "main": [
+    [
+     {
+      "node": "Parse Callback",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Parse Callback": {
+   "main": [
+    [
+     {
+      "node": "Route Command",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Route Command": {
+   "main": [
+    [
+     {
+      "node": "Record User Decision",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Load Evidence Package",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Format Acknowledgement",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Record User Decision": {
+   "main": [
+    [
+     {
+      "node": "Format Acknowledgement",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Load Evidence Package": {
+   "main": [
+    [
+     {
+      "node": "Format Acknowledgement",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "pinData": {},
+ "meta": {
+  "templateCredsSetupCompleted": true
+ }
+}

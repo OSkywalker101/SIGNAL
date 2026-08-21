@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SIGNAL — The Internet's Early Warning System</title>
+<link rel="stylesheet" href="app.css"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛰️</text></svg>"/>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">🛰️</span>
+    <div>
+      <h1>SIGNAL</h1>
+      <p>The Internet's Early Warning System · orchestrated by <b>n8n</b></p>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <span id="health-dot" class="dot" title="checking…"></span>
+    <button id="btn-investigate" class="btn primary">⚡ INVESTIGATE</button>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-view="command">COMMAND CENTER</button>
+  <button class="tab" data-view="timeline">TIMELINE</button>
+  <button class="tab" data-view="runs">RUN TELEMETRY</button>
+</nav>
+
+<main id="view-command" class="view active">
+  <section id="stat-cards" class="cards"></section>
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Signals</h2>
+      <div class="filters">
+        <select id="f-class">
+          <option value="">All classifications</option>
+          <option>CRITICAL</option><option>SIGNIFICANT</option>
+          <option>EMERGING</option><option>WEAK</option><option>NOISE</option>
+        </select>
+        <select id="f-status">
+          <option value="">All statuses</option>
+          <option>DETECTED</option><option>EMERGING</option><option>INVESTIGATING</option>
+          <option>CONFIRMED</option><option>WATCH</option><option>DISMISSED</option><option>ESCALATED</option>
+        </select>
+        <label class="chk"><input type="checkbox" id="f-demo"/> demo only</label>
+      </div>
+    </div>
+    <div id="signals-table"></div>
+  </section>
+</main>
+
+<main id="view-timeline" class="view">
+  <section class="panel">
+    <div class="panel-head"><h2>Score Evolution & Channel Activity</h2></div>
+    <div id="timeline-list"></div>
+  </section>
+</main>
+
+<main id="view-runs" class="view">
+  <section class="panel">
+    <div class="panel-head"><h2>Investigation Runs — n8n execution telemetry</h2></div>
+    <div id="runs-table"></div>
+  </section>
+</main>
+
+<!-- Signal detail drawer -->
+<div id="drawer" class="drawer hidden">
+  <div class="drawer-head">
+    <button id="drawer-close" class="btn ghost">✕</button>
+    <div id="drawer-title"></div>
+    <div id="drawer-actions" class="actions"></div>
+  </div>
+  <div class="drawer-tabs" id="drawer-tabs">
+    <button class="dtab active" data-tab="overview">OVERVIEW</button>
+    <button class="dtab" data-tab="evidence">EVIDENCE</button>
+    <button class="dtab" data-tab="hypotheses">HYPOTHESES</button>
+    <button class="dtab" data-tab="graph">GRAPH</button>
+    <button class="dtab" data-tab="redteam">RED TEAM</button>
+    <button class="dtab" data-tab="invalidators">INVALIDATORS</button>
+  </div>
+  <div id="drawer-body" class="drawer-body"></div>
+</div>
+<div id="scrim" class="scrim hidden"></div>
+
+<!-- Investigate modal -->
+<div id="modal" class="modal hidden">
+  <div class="modal-card">
+    <h3>⚡ New Investigation</h3>
+    <p class="muted">The n8n Intelligence Pipeline will plan → sense 7 channels → deep-crawl → hypothesize → red-team → score.</p>
+    <input id="inv-topic" placeholder='Topic e.g. "solid-state battery commercialization"'/>
+    <details>
+      <summary class="muted">Demo scenario (deterministic fixtures — never presented as live data)</summary>
+      <select id="inv-scenario">
+        <option value="">— live sensors —</option>
+        <option value="infra_accel">infra_accel · compute build-out acceleration</option>
+        <option value="tech_shift">tech_shift · technology transition</option>
+        <option value="false_signal">false_signal · syndicated echo chamber</option>
+        <option value="collapse">collapse · narrative collapse</option>
+        <option value="reemergence">reemergence · dismissed pattern returns</option>
+      </select>
+    </details>
+    <div class="modal-actions">
+      <button id="inv-cancel" class="btn ghost">Cancel</button>
+      <button id="inv-run" class="btn primary">RUN PIPELINE</button>
+    </div>
+    <pre id="inv-status" class="statusline"></pre>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="app.js"></script>
+</body>
+</html>

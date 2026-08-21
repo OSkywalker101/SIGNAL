@@ -1,0 +1,29 @@
+# Secrets & credentials
+.env
+secrets.txt
+*.secret
+credentials*.json
+n8n/credentials/
+
+# Node
+node_modules/
+frontend/dist/
+*.log
+npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Databases & artifacts
+*.db
+*.sqlite
+data/pg*/
+backups/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,66 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: signal-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-signal}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me_in_prod}
+      POSTGRES_DB: ${POSTGRES_DB:-signal}
+    ports:
+      - "${SIGNAL_PG_PORT:-5432}:5432"
+    volumes:
+      - signal_pg_data:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-signal} -d ${POSTGRES_DB:-signal}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks: [signal-network]
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: signal-n8n
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "${SIGNAL_N8N_PORT:-5678}:5678"
+    environment:
+      - N8N_HOST=${N8N_HOST:-localhost}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
+      - WEBHOOK_URL=${WEBHOOK_URL:-http://localhost:5678}
+      - GENERIC_TIMEZONE=UTC
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=${POSTGRES_DB:-signal}
+      - DB_POSTGRESDB_USER=${POSTGRES_USER:-signal}
+      - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD:-change_me_in_prod}
+      - N8N_DIAGNOSTICS_ENABLED=false
+      - N8N_VERSION_NOTIFICATIONS_ENABLED=false
+      - N8N_PERSONALIZATION_ENABLED=false
+      - N8N_RUNNERS_ENABLED=true
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
+      - NODE_OPTIONS=--max-old-space-size=2048
+    volumes:
+      - signal_n8n_data:/home/node/.n8n
+      - ./n8n/workflows:/home/node/workflows:ro
+    networks: [signal-network]
+
+volumes:
+  signal_pg_data:
+    name: signal_pg_data
+  signal_n8n_data:
+    name: signal_n8n_data
+
+networks:
+  signal-network:
+    name: signal-network
+    driver: bridge
