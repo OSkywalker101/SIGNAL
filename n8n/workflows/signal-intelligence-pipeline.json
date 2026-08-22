@@ -8,7 +8,7 @@
     "width": 620,
     "color": 4
    },
-   "id": "s-822388908060",
+   "id": "s-780846734740",
    "name": "Note ## 1 \u00b7 INPUT\n**\ud83e\udde0 S",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -36,7 +36,7 @@
   },
   {
    "parameters": {
-    "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst body = ($input.first().json.body || $input.first().json) || {};\nconst mode = body.url ? \"url\" : (body.entities || body.domains ? \"structured\" : \"natural\");\nreturn [{ json: {\n  run_id: UTIL.uuid(),\n  mode,\n  topic: String(body.topic || body.query || body.text || \"Untitled topic\").slice(0, 200),\n  url: body.url || null,\n  scenario_key: body.scenario_key || null,\n  demo_mode: ($env.DEMO_MODE === \"true\") || !!body.scenario_key,\n  sensitivity: body.sensitivity || \"standard\",\n  time_horizon_days: parseInt(body.time_horizon_days || \"28\", 10),\n  requested_at: new Date().toISOString(),\n}}];"
+    "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst body = ($input.first().json.body || $input.first().json) || {};\nconst mode = body.url ? \"url\" : (body.entities || body.domains ? \"structured\" : \"natural\");\nreturn [{ json: {\n  run_id: UTIL.uuid(),\n  mode,\n  topic: String(body.topic || body.query || body.text || \"Untitled topic\").slice(0, 200),\n  url: body.url || null,\n  scenario_key: body.scenario_key || null,\n  demo_mode: $env.DEMO_MODE === \"true\",\n  sensitivity: body.sensitivity || \"standard\",\n  time_horizon_days: parseInt(body.time_horizon_days || \"28\", 10),\n  requested_at: new Date().toISOString(),\n}}];"
    },
    "id": "00000002-0000-4000-8000-000000000002",
    "name": "Initialize Run",
@@ -89,7 +89,7 @@
     "width": 900,
     "color": 3
    },
-   "id": "s-208448253757",
+   "id": "s-700522224310",
    "name": "Note ## 2 \u00b7 THINK\n**\ud83e\udded A",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -206,7 +206,7 @@
      },
      "conditions": [
       {
-       "id": "c874",
+       "id": "c9599",
        "leftValue": "={{ $json.output && $json.output.topic ? 'yes' : 'no' }}",
        "rightValue": "yes",
        "operator": {
@@ -292,7 +292,7 @@
     "width": 1560,
     "color": 5
    },
-   "id": "s-992400011444",
+   "id": "s-317919599140",
    "name": "Note ## 3 \u00b7 SENSE\nSeven",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -303,54 +303,9 @@
   },
   {
    "parameters": {
-    "conditions": {
-     "options": {
-      "caseSensitive": true,
-      "leftValue": "",
-      "typeValidation": "loose"
-     },
-     "conditions": [
-      {
-       "id": "c8484",
-       "leftValue": "={{ $('Initialize Run').first().json.scenario_key || '' }}",
-       "rightValue": "",
-       "operator": {
-        "type": "string",
-        "operation": "notEmpty"
-       }
-      }
-     ],
-     "combinator": "and"
-    },
-    "options": {}
-   },
-   "id": "0000000c-0000-4000-8000-000000000012",
-   "name": "Demo Scenario?",
-   "type": "n8n-nodes-base.if",
-   "typeVersion": 2.3,
-   "position": [
-    2200,
-    0
-   ]
-  },
-  {
-   "parameters": {
-    "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Deterministic DEMO SIMULATION sensor fixtures. Never presented as live data.\nconst init = $(\"Initialize Run\").first().json;\nconst S = init.scenario_key || \"infra_accel\";\nconst D = (daysAgo) => new Date(Date.now() - daysAgo * 864e5).toISOString();\nfunction src(title, pub, daysAgo, excerpt, type, extra) {\n  return Object.assign({\n    source_url: \"demo://\" + UTIL.hash(title),\n    title, publisher: pub, author: null,\n    published_at: D(daysAgo), retrieved_at: new Date().toISOString(),\n    excerpt: excerpt || title, source_type: type || \"news\",\n    channel: type === \"policy\" ? \"policy\" : (type === \"research\" ? \"research\" : (type === \"github\" ? \"github\" : (type === \"community\" ? \"community\" : (type === \"jobs\" ? \"jobs\" : \"news\")))),\n    is_demo: true\n  }, extra || {});\n}\nconst F = {\n  infra_accel: [\n    src(\"YottaGrid announces 40,000-GPU AI compute cluster in Pune\", \"Reuters\", 1, \"YottaGrid said it will deploy 40,000 GPUs across two data centers in Pune, hiring 27 CUDA engineers to run inference workloads.\", \"news\"),\n    src(\"YottaGrid 40000 GPU cluster Pune expansion\", \"Bloomberg\", 1, \"Bloomberg confirms YottaGrid's Pune AI cluster plans first reported by Reuters.\", \"news\"),\n    src(\"YottaGrid Pune AI cluster: what we know\", \"TechCrunch\", 1, \"TechCrunch recaps the YottaGrid announcement circulating widely today.\", \"news\"),\n    src(\"Indian AI ministry clears Rs 10,000 crore compute procurement\", \"PIB Government\", 2, \"The cabinet approved national compute procurement including subsidy for private AI data centers.\", \"policy\"),\n    src(\"IndiaAI mission GPU tender attracts 14 bids\", \"Federal Register India Desk\", 3, \"Procurement records show 14 qualified bids for the national GPU tender.\", \"policy\"),\n    src(\"Hiring surge: CUDA and inference engineers in Bengaluru\", \"JobsWire\", 2, \"Postings for CUDA/inference roles jumped sharply this month across YottaGrid, Sarvam and Krutrim.\", \"jobs\"),\n    src(\"sarvam-2 open-source inference stack hits 5k stars\", \"GitHub Trending\", 2, \"Repository activity around Indian inference stacks accelerated; 38 new contributors this week.\", \"github\"),\n    src(\"Efficient low-resource inference for Indic languages\", \"arXiv\", 4, \"New paper benchmarks quantized inference on commodity GPUs with Indic language focus.\", \"research\"),\n    src(\"Discussion: is India building too much GPU capacity?\", \"Reddit r/india\", 3, \"Community debate on whether the compute build-out is sustainable.\", \"community\"),\n    src(\"YottaGrid partners with NVIDIA on AI factory reference design\", \"Company Press Release\", 1, \"Direct press release: partnership to standardize AI factory deployments in India.\", \"news\"),\n    src(\"Copy: YottaGrid partners with NVIDIA on AI factory\", \"Syndication Daily\", 1, \"Verbatim copy of the YottaGrid press release.\", \"news\"),\n    src(\"Copy2: YottaGrid-NVIDIA AI factory partnership announced\", \"Aggregator Hub\", 1, \"Another syndicated copy of the same press release.\", \"news\")\n  ],\n  tech_shift: [\n    src(\"Startups pivot from transformer-only stacks to hybrid SSM architectures\", \"The Information\", 1, \"Three funded labs confirmed migrating core inference to state-space hybrids.\", \"news\"),\n    src(\"SSM hybrid inference benchmark beats transformers at long context\", \"arXiv\", 2, \"Paper shows 3x throughput at 128k context for hybrid SSM models.\", \"research\"),\n    src(\"Hybrid-ssm-inference library crosses 8k stars\", \"GitHub Trending\", 1, \"Explosive growth of the reference implementation.\", \"github\"),\n    src(\"Chipmaker launches SSM accelerator block\", \"SemiAnalysis\", 2, \"New silicon targets state-space workloads specifically.\", \"news\"),\n    src(\"Are SSMs overhyped? A contrarian view\", \"Blogosphere\", 3, \"Argument that transformer inertia will prevail.\", \"community\"),\n    src(\"Agency drafts guidance on novel model architectures\", \"Policy Desk\", 4, \"Regulators begin evaluating evaluation criteria for non-transformer models.\", \"policy\")\n  ],\n  false_signal: [\n    src(\"MegaCorp AI announces massive data center\", \"Press Release Wire\", 1, \"Announcement claims 100,000 GPU facility.\", \"news\"),\n    src(\"MegaCorp AI data center announcement\", \"Syndicated A\", 1, \"Copy of press release.\", \"news\"),\n    src(\"MegaCorp AI data center press release reposted\", \"Syndicated B\", 1, \"Another copy.\", \"news\"),\n    src(\"Analysts doubt MegaCorp funding for announced data center\", \"Independent Wire\", 2, \"No permits filed; financing unverified; competitor analysis calls timeline implausible.\", \"news\"),\n    src(\"County records show no MegaCorp permit applications\", \"Public Records Desk\", 2, \"Official filings contradict the announcement.\", \"policy\")\n  ],\n  collapse: [\n    src(\"GPU rental prices slide as capacity outpaces demand\", \"Market Wire\", 1, \"Spot prices down 30% quarter-over-quarter.\", \"news\"),\n    src(\"Two AI data center projects quietly shelved\", \"Trade Journal\", 2, \"Permits withdrawn; staffing plans frozen.\", \"news\"),\n    src(\"Inference startup layoffs reverse earlier hiring boom\", \"JobsWire\", 1, \"Postings fall back toward baseline after Q2 spike.\", \"jobs\"),\n    src(\"Open-source inference activity cools\", \"GitHub Trending\", 2, \"Commit velocity down 45% from last month.\", \"github\")\n  ],\n  reemergence: [\n    src(\"Quantum error correction startup re-emerges with new backing\", \"Science Business\", 1, \"Previously dismissed team returns with credible hardware partner.\", \"news\"),\n    src(\"Logical qubit milestone replicated by second lab\", \"arXiv\", 2, \"Independent replication strengthens earlier contested claim.\", \"research\"),\n    src(\"Revisiting the dismissed quantum networking signal\", \"Analyst Blog\", 3, \"Pattern matches the signal we dismissed last quarter - now with independent confirmation.\", \"community\")\n  ]\n};\nconst items = (F[S] || F.infra_accel).map(x => ({ json: x }));\nitems.forEach(i => { i.json.demo_note = \"DEMO SIMULATION\"; });\nreturn items;"
-   },
-   "id": "0000000d-0000-4000-8000-000000000013",
-   "name": "Demo Sensor Fixtures",
-   "type": "n8n-nodes-base.code",
-   "typeVersion": 2,
-   "position": [
-    2420,
-    -320
-   ]
-  },
-  {
-   "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst p = $input.first().json.output || $input.first().json;\nconst init = $(\"Initialize Run\").first().json;\nconst topic = p.topic || init.topic;\nconst queries = (p.queries || []).map(q => String(q)).filter(Boolean);\nconst counter = (p.counter_queries || []).map(q => String(q)).filter(Boolean);\nreturn [{ json: {\n  ...init,\n  plan_topic: topic,\n  primary_query: queries[0] || topic,\n  web_query: queries.slice(0, 3).join(\" OR \"),\n  counter_query_joined: (counter.length ? counter : [`${topic} slowdown`, `${topic} decline`]).join(\" OR \"),\n  plan: {\n    topic,\n    provider: p.provider || \"groq\",\n    research_domains: p.research_domains || [],\n    queries,\n    entities: p.entities || [],\n    counter_queries: counter,\n    time_horizon_days: parseInt(p.time_horizon_days || init.time_horizon_days || \"28\", 10)\n  }\n}}];"
    },
-   "id": "0000000e-0000-4000-8000-000000000014",
+   "id": "0000000c-0000-4000-8000-000000000012",
    "name": "Normalize Plan",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -371,7 +326,7 @@
      }
     }
    },
-   "id": "0000000f-0000-4000-8000-000000000015",
+   "id": "0000000d-0000-4000-8000-000000000013",
    "name": "\ud83c\udf10 WEB RADAR",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -396,7 +351,7 @@
     "includeOtherFields": true,
     "options": {}
    },
-   "id": "00000010-0000-4000-8000-000000000016",
+   "id": "0000000e-0000-4000-8000-000000000014",
    "name": "Tag web",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -410,7 +365,7 @@
     "url": "=https://news.google.com/rss/search?q={{ encodeURIComponent($json.plan_topic) }}&hl=en-US&gl=US&ceid=US:en",
     "options": {}
    },
-   "id": "00000011-0000-4000-8000-000000000017",
+   "id": "0000000f-0000-4000-8000-000000000015",
    "name": "\ud83d\udcf0 NEWS RADAR",
    "type": "n8n-nodes-base.rssFeedRead",
    "typeVersion": 1.2,
@@ -435,7 +390,7 @@
     "includeOtherFields": true,
     "options": {}
    },
-   "id": "00000012-0000-4000-8000-000000000018",
+   "id": "00000010-0000-4000-8000-000000000016",
    "name": "Tag news",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -459,7 +414,7 @@
      ]
     }
    },
-   "id": "00000013-0000-4000-8000-000000000019",
+   "id": "00000011-0000-4000-8000-000000000017",
    "name": "\ud83d\udcbb GITHUB RADAR",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -484,7 +439,7 @@
     "includeOtherFields": true,
     "options": {}
    },
-   "id": "00000014-0000-4000-8000-000000000020",
+   "id": "00000012-0000-4000-8000-000000000018",
    "name": "Tag github",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -499,7 +454,7 @@
     "url": "=https://hn.algolia.com/api/v1/search_by_date?query={{ encodeURIComponent($json.plan_topic + ' hiring') }}&tags=story&hitsPerPage=15",
     "options": {}
    },
-   "id": "00000015-0000-4000-8000-000000000021",
+   "id": "00000013-0000-4000-8000-000000000019",
    "name": "\ud83d\udcbc WORKFORCE RADAR",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -524,7 +479,7 @@
     "includeOtherFields": true,
     "options": {}
    },
-   "id": "00000016-0000-4000-8000-000000000022",
+   "id": "00000014-0000-4000-8000-000000000020",
    "name": "Tag jobs",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -539,7 +494,7 @@
     "url": "=https://www.federalregister.gov/api/v1/documents.json?per_page=10&order=newest&conditions%5Bterm%5D={{ encodeURIComponent($json.plan_topic) }}",
     "options": {}
    },
-   "id": "00000017-0000-4000-8000-000000000023",
+   "id": "00000015-0000-4000-8000-000000000021",
    "name": "\ud83c\udfdb\ufe0f POLICY RADAR",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -564,7 +519,7 @@
     "includeOtherFields": true,
     "options": {}
    },
-   "id": "00000018-0000-4000-8000-000000000024",
+   "id": "00000016-0000-4000-8000-000000000022",
    "name": "Tag policy",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -585,7 +540,7 @@
      }
     }
    },
-   "id": "00000019-0000-4000-8000-000000000025",
+   "id": "00000017-0000-4000-8000-000000000023",
    "name": "\ud83d\udd2c RESEARCH RADAR",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -610,7 +565,7 @@
     "includeOtherFields": true,
     "options": {}
    },
-   "id": "0000001a-0000-4000-8000-000000000026",
+   "id": "00000018-0000-4000-8000-000000000024",
    "name": "Tag research",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -634,7 +589,7 @@
      ]
     }
    },
-   "id": "0000001b-0000-4000-8000-000000000027",
+   "id": "00000019-0000-4000-8000-000000000025",
    "name": "\ud83d\udcac COMMUNITY RADAR",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -659,7 +614,7 @@
     "includeOtherFields": true,
     "options": {}
    },
-   "id": "0000001c-0000-4000-8000-000000000028",
+   "id": "0000001a-0000-4000-8000-000000000026",
    "name": "Tag community",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -673,7 +628,7 @@
     "mode": "append",
     "options": {}
    },
-   "id": "0000001d-0000-4000-8000-000000000029",
+   "id": "0000001b-0000-4000-8000-000000000027",
    "name": "M1",
    "type": "n8n-nodes-base.merge",
    "typeVersion": 2.1,
@@ -687,7 +642,7 @@
     "mode": "append",
     "options": {}
    },
-   "id": "0000001e-0000-4000-8000-000000000030",
+   "id": "0000001c-0000-4000-8000-000000000028",
    "name": "M2",
    "type": "n8n-nodes-base.merge",
    "typeVersion": 2.1,
@@ -701,7 +656,7 @@
     "mode": "append",
     "options": {}
    },
-   "id": "0000001f-0000-4000-8000-000000000031",
+   "id": "0000001d-0000-4000-8000-000000000029",
    "name": "M3",
    "type": "n8n-nodes-base.merge",
    "typeVersion": 2.1,
@@ -715,7 +670,7 @@
     "mode": "append",
     "options": {}
    },
-   "id": "00000020-0000-4000-8000-000000000032",
+   "id": "0000001e-0000-4000-8000-000000000030",
    "name": "M4",
    "type": "n8n-nodes-base.merge",
    "typeVersion": 2.1,
@@ -729,7 +684,7 @@
     "mode": "append",
     "options": {}
    },
-   "id": "00000021-0000-4000-8000-000000000033",
+   "id": "0000001f-0000-4000-8000-000000000031",
    "name": "M5",
    "type": "n8n-nodes-base.merge",
    "typeVersion": 2.1,
@@ -743,7 +698,7 @@
     "mode": "append",
     "options": {}
    },
-   "id": "00000022-0000-4000-8000-000000000034",
+   "id": "00000020-0000-4000-8000-000000000032",
    "name": "M6",
    "type": "n8n-nodes-base.merge",
    "typeVersion": 2.1,
@@ -756,7 +711,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Normalize every sensor's output shape into one source schema.\nconst items = $input.all();\nconst out = [];\nconst seen = new Set();\nconst health = {};\nfor (const it of items) {\n  const j = it.json || {};\n  const ch = j.channel || \"web\";\n  if (!health[ch]) health[ch] = { channel: ch, count: 0, errors: 0 };\n  if (j.error || j.message && !j.title && !j.items && !j.hits) { health[ch].errors++; continue; }\n  let batch = [];\n  try {\n    if (ch === \"web\") {\n      const html = typeof j.data === \"string\" ? j.data : JSON.stringify(j);\n      const re = /<a[^>]+class=\"result__a\"[^>]*href=\"([^\"]+)\"[^>]*>([\\s\\S]*?)<\\/a>/g;\n      let m, n = 0;\n      while ((m = re.exec(html)) && n < 12) {\n        let url = m[1];\n        const u = url.match(/uddg=([^&]+)/);\n        if (u) url = decodeURIComponent(u[1]);\n        const title = m[2].replace(/<[^>]+>/g, \"\").trim();\n        if (title && url.startsWith(\"http\")) { batch.push({ title, source_url: url }); n++; }\n      }\n      batch = batch.map(b => ({ ...b, excerpt: \"\", publisher: (b.source_url.split(\"/\")[2] || \"\").replace(\"www.\", \"\") }));\n    } else if (ch === \"news\") {\n      batch = [{ title: j.title, source_url: j.link, publisher: (j.creator || j.link || \"\").slice(0, 60), published_at: j.pubDate, excerpt: j.contentSnippet || (j.content || \"\").replace(/<[^>]+>/g, \"\").slice(0, 300) }];\n    } else if (ch === \"github\") {\n      batch = (j.items || []).map(r => ({ title: r.full_name + \": \" + (r.description || \"\"), source_url: r.html_url, publisher: \"GitHub\", author: r.owner && r.owner.login, published_at: r.pushed_at, excerpt: `stars=${r.stargazers_count} pushed=${r.pushed_at} lang=${r.language}`, source_type: \"github\" }));\n    } else if (ch === \"jobs\") {\n      batch = (j.hits || []).map(h => ({ title: h.title, source_url: h.url || (\"https://news.ycombinator.com/item?id=\" + h.objectID), publisher: \"Hacker News\", author: h.author, published_at: h.created_at, excerpt: (h.story_text || h.title || \"\"), source_type: \"jobs\" }));\n    } else if (ch === \"policy\") {\n      batch = (j.results || []).map(d => ({ title: d.title, source_url: d.html_url, publisher: (d.agencies && d.agencies[0] && d.agencies[0].name) || \"Federal Register\", published_at: d.publication_date, excerpt: d.abstract || \"\", source_type: \"policy\" }));\n    } else if (ch === \"research\") {\n      const xml = typeof j.data === \"string\" ? j.data : \"\";\n      const entries = xml.split(\"<entry>\").slice(1);\n      batch = entries.map(e => ({\n        title: (e.match(/<title>([\\s\\S]*?)<\\/title>/) || [, \"\"])[1].trim(),\n        source_url: (e.match(/<id>([\\s\\S]*?)<\\/id>/) || [, \"\"])[1].trim(),\n        publisher: \"arXiv\",\n        published_at: (e.match(/<published>([\\s\\S]*?)<\\/published>/) || [, \"\"])[1].trim(),\n        excerpt: ((e.match(/<summary>([\\s\\S]*?)<\\/summary>/) || [, \"\"])[1] || \"\").trim().slice(0, 300),\n        source_type: \"research\"\n      }));\n    } else if (ch === \"community\") {\n      batch = ((j.data || {}).children || []).map(c => ({ title: c.data.title, source_url: \"https://reddit.com\" + c.data.permalink, publisher: \"r/\" + c.data.subreddit, author: c.data.author, published_at: c.data.created_utc ? new Date(c.data.created_utc * 1000).toISOString() : null, excerpt: (c.data.selftext || \"\").slice(0, 300), source_type: \"community\" }));\n    }\n  } catch (e) { health[ch].errors++; continue; }\n  for (const b of batch) {\n    if (!b || !b.title || !b.source_url || !String(b.source_url).startsWith(\"http\")) continue;\n    const uh = UTIL.hash(b.source_url);\n    if (seen.has(uh)) continue;\n    seen.add(uh);\n    health[ch].count++;\n    out.push({ json: {\n      source_url: b.source_url, url_hash: uh,\n      title: String(b.title).slice(0, 300),\n      publisher: (b.publisher || \"\").slice(0, 120) || null,\n      author: b.author || null,\n      published_at: b.published_at || null,\n      excerpt: String(b.excerpt || \"\").slice(0, 500),\n      source_type: b.source_type || (ch === \"news\" ? \"news\" : ch),\n      channel: ch,\n      credibility_base: ({ policy: 0.92, research: 0.88, github: 0.80, news: 0.78, jobs: 0.72, community: 0.58, web: 0.62 })[ch] || 0.6,\n      fingerprint: UTIL.hash(String(b.title) + \"|\" + String(b.excerpt || \"\").slice(0, 200))\n    }});\n  }\n}\nif (!out.length) out.push({ json: { _empty_corpus: true, health } });\nelse out[0].json._health = health;\nreturn out;"
    },
-   "id": "00000023-0000-4000-8000-000000000035",
+   "id": "00000021-0000-4000-8000-000000000033",
    "name": "Unify Sensor Feeds",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -772,7 +727,7 @@
     "width": 2620,
     "color": 6
    },
-   "id": "s-823770757423",
+   "id": "s-005326492572",
    "name": "Note ## 4 \u00b7 INVESTIGATE",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -790,7 +745,7 @@
     ],
     "options": {}
    },
-   "id": "00000024-0000-4000-8000-000000000036",
+   "id": "00000022-0000-4000-8000-000000000034",
    "name": "Dedup by URL",
    "type": "n8n-nodes-base.removeDuplicates",
    "typeVersion": 2,
@@ -808,7 +763,7 @@
     "dataPropertyName": "content_hash",
     "binaryData": false
    },
-   "id": "00000025-0000-4000-8000-000000000037",
+   "id": "00000023-0000-4000-8000-000000000035",
    "name": "Fingerprint Content",
    "type": "n8n-nodes-base.crypto",
    "typeVersion": 2,
@@ -827,7 +782,7 @@
     ],
     "options": {}
    },
-   "id": "00000026-0000-4000-8000-000000000038",
+   "id": "00000024-0000-4000-8000-000000000036",
    "name": "Dedup by Hash",
    "type": "n8n-nodes-base.removeDuplicates",
    "typeVersion": 2,
@@ -842,7 +797,7 @@
     "maxItems": 60,
     "options": {}
    },
-   "id": "00000027-0000-4000-8000-000000000039",
+   "id": "00000025-0000-4000-8000-000000000037",
    "name": "Cap Corpus",
    "type": "n8n-nodes-base.limit",
    "typeVersion": 1,
@@ -855,7 +810,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst corpus = $input.all().filter(i => i.json.source_url && !i.json.is_demo);\ncorpus.sort((a, b) => String(b.json.excerpt || \"\").length - String(a.json.excerpt || \"\").length);\nconst queue = corpus.slice(0, 8).map(i => ({ json: { ...i.json, crawl_url: i.json.source_url, run_id: $(\"Initialize Run\").first().json.run_id } }));\nreturn queue.length ? queue : [{ json: { _no_crawl: true, run_id: $(\"Initialize Run\").first().json.run_id } }];"
    },
-   "id": "00000028-0000-4000-8000-000000000040",
+   "id": "00000026-0000-4000-8000-000000000038",
    "name": "Prepare Crawl Queue",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -869,7 +824,7 @@
     "batchSize": 4,
     "options": {}
    },
-   "id": "00000029-0000-4000-8000-000000000041",
+   "id": "00000027-0000-4000-8000-000000000039",
    "name": "\ud83d\udd77\ufe0f DEEP CRAWL",
    "type": "n8n-nodes-base.splitInBatches",
    "typeVersion": 3,
@@ -884,7 +839,7 @@
     "amount": 0.3,
     "unit": "seconds"
    },
-   "id": "0000002a-0000-4000-8000-000000000042",
+   "id": "00000028-0000-4000-8000-000000000040",
    "name": "\u23f3 Politeness Delay",
    "type": "n8n-nodes-base.wait",
    "typeVersion": 1.1,
@@ -906,7 +861,7 @@
      "timeout": 8000
     }
    },
-   "id": "0000002b-0000-4000-8000-000000000043",
+   "id": "00000029-0000-4000-8000-000000000041",
    "name": "\ud83d\udd78\ufe0f Fetch Page",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -931,7 +886,7 @@
     "includeOtherFields": true,
     "options": {}
    },
-   "id": "0000002c-0000-4000-8000-000000000044",
+   "id": "0000002a-0000-4000-8000-000000000042",
    "name": "Wrap HTML",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -964,7 +919,7 @@
     },
     "options": {}
    },
-   "id": "0000002d-0000-4000-8000-000000000045",
+   "id": "0000002b-0000-4000-8000-000000000043",
    "name": "\ud83d\udcc4 Extract Page Text",
    "type": "n8n-nodes-base.htmlExtract",
    "typeVersion": 1.2,
@@ -978,7 +933,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Build a safe INSERT per crawled page (or a no-op when extraction failed).\nconst init = $(\"Initialize Run\").first().json;\nlet queued = [];\ntry { queued = $(\"\u23f3 Politeness Delay\").all(); } catch (e) {}\nreturn $input.all().map((it, idx) => {\n  const j = it.json || {};\n  const q = queued[idx] ? queued[idx].json : {};\n  const pageText = String(j.body_text || \"\").replace(/\\s+/g, \" \").slice(0, 1500);\n  const pageTitle = j.page_title || null;\n  const srcUrl = q.source_url || j.source_url || null;\n  if (!srcUrl || !pageText || pageText.length < 40) return { json: { sql: \"SELECT 1 AS noop;\", stage: \"cache_skip\" } };\n  const payload = UTIL.esc(JSON.stringify({ source_url: srcUrl, page_text: pageText, page_title: pageTitle }));\n  return { json: { sql: `INSERT INTO actions (action_type,payload,status,detail) VALUES ('crawled_page','${payload}'::jsonb,'done','${init.run_id}');`, stage: \"cache_page\" } };\n});"
    },
-   "id": "0000002e-0000-4000-8000-000000000046",
+   "id": "0000002c-0000-4000-8000-000000000044",
    "name": "Build Cache SQL",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -993,7 +948,7 @@
     "query": "={{ $json.sql }}",
     "options": {}
    },
-   "id": "0000002f-0000-4000-8000-000000000047",
+   "id": "0000002d-0000-4000-8000-000000000045",
    "name": "\ud83d\udcbe Cache Crawled Page",
    "type": "n8n-nodes-base.postgres",
    "typeVersion": 2.6,
@@ -1015,7 +970,7 @@
     "query": "=SELECT payload FROM actions WHERE action_type='crawled_page' AND detail='{{ $('Prepare Crawl Queue').first().json.run_id }}' AND created_at > now() - interval '15 minutes';",
     "options": {}
    },
-   "id": "00000030-0000-4000-8000-000000000048",
+   "id": "0000002e-0000-4000-8000-000000000046",
    "name": "\ud83d\udcda Load Cached Pages",
    "type": "n8n-nodes-base.postgres",
    "typeVersion": 2.6,
@@ -1036,7 +991,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Merge cached crawled page text back into the corpus.\nlet cached = [];\ntry { cached = $(\"Load Cached Pages\").all().map(i => i.json.payload || {}); } catch (e) {}\nconst byUrl = {};\nfor (const c of cached) { if (c && c.source_url) byUrl[c.source_url] = c; }\nconst corpusIn = $(\"Cap Corpus\").all()\n  .filter(i => i.json.source_url)\n  .map(i => {\n    const c = byUrl[i.json.source_url];\n    if (c && c.page_text) {\n      i.json.crawled_text = String(c.page_text).slice(0, 1500);\n      i.json.page_title = c.page_title || null;\n      i.json.crawl_ok = true;\n    } else { i.json.crawl_ok = false; }\n    return i;\n  });\nif (!corpusIn.length) throw new Error(\"Empty corpus after enrichment\");\nreturn corpusIn;"
    },
-   "id": "00000031-0000-4000-8000-000000000049",
+   "id": "0000002f-0000-4000-8000-000000000047",
    "name": "Enrich Corpus",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1052,7 +1007,7 @@
     "width": 480,
     "color": 2
    },
-   "id": "s-509009810064",
+   "id": "s-813489816505",
    "name": "Note ## 5 \u00b7 CONNECT\n\ud83d\udd2c a",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -1065,7 +1020,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Rule-based atomic claim extraction. Every claim references its source.\nconst corpus = $input.all().filter(i => i.json.title);\nconst PATTERNS = [\n  { action: \"hires\", re: /\\b(hire[sd]?|hiring|recruit(s|ing)?|headcount|job postings?|vacanc(y|ies)|engineers?|roles?)\\b/i, objHint: /(?:hiring|hires)\\s+([\\w\\s-]{3,40}?)(?:\\s+(?:this|across|to|for|in)\\b|$)/i },\n  { action: \"invests\", re: /\\b(invest(s|ment)?|funding|raised|series [abc]|round of|crore|billion|million|\\$\\s?\\d)/i },\n  { action: \"expands\", re: /\\b(expand(s|ing)?|new facility|data ?center|capacity|cluster|build-?out)\\b/i },\n  { action: \"partners\", re: /\\b(partner(s|ship|ing)?|collaborat(e|ion)|moU|alliance)\\b/i },\n  { action: \"launches\", re: /\\b(launch(es|ed)?|unveil(s|ed)?|release[sd]?|ships?|announce[sd]?)\\b/i },\n  { action: \"procures\", re: /\\b(procure(s|ment)?|tender|rfp|contract awarded|sanction(ed)?)\\b/i },\n  { action: \"publishes_research\", re: /\\b(paper|study|benchmark|researchers?|arxiv|preprint)\\b/i },\n  { action: \"warns_or_declines\", re: /\\b(slowdown|decline|layoff|shelved|withdrawn|cool(s|ed)?|slide|falls?)\\b/i }\n];\nconst claims = [];\nfor (const item of corpus) {\n  const d = item.json;\n  const text = `${d.title}. ${d.excerpt || \"\"} ${d.crawled_text || \"\"}`;\n  for (const p of PATTERNS) {\n    if (!p.re.test(text)) continue;\n    const qtyMatch = text.match(/\\b(\\d{1,3}(?:,\\d{3})+|\\d{1,6})\\s*(k\\b|gpu|engineers?|jobs?|crore|million|billion|stars?|contributors?|qubits?|nodes?)?/i);\n    const actorGuess = (d.title.match(/^([A-Z][\\w&.-]+(?:\\s+[A-Z][\\w&.-]+){0,3})/) || [])[1] || d.publisher || \"Unknown actor\";\n    claims.push({\n      statement: d.title,\n      actor: actorGuess.trim(),\n      action: p.action,\n      object: (p.objHint && (text.match(p.objHint) || [])[1] || d.title).toString().slice(0, 80),\n      quantity: qtyMatch ? parseFloat(qtyMatch[1].replace(/,/g, \"\")) : null,\n      quantity_unit: qtyMatch && qtyMatch[2] ? qtyMatch[2].trim() : null,\n      claimed_at: d.published_at || new Date().toISOString(),\n      source_url: d.source_url,\n      channel: d.channel,\n      is_demo: !!d.is_demo\n    });\n    break; // one strongest claim per document keeps precision high\n  }\n}\nif (!claims.length) claims.push({ statement: \"(no atomic claims extracted)\", actor: null, action: \"none\", object: null, quantity: null, claimed_at: new Date().toISOString(), source_url: null, channel: \"none\", is_demo: false });\nreturn [{ json: { claims, corpus: corpus.map(i => i.json) } }];"
    },
-   "id": "00000032-0000-4000-8000-000000000050",
+   "id": "00000030-0000-4000-8000-000000000048",
    "name": "\ud83d\udd2c EVIDENCE LAB",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1078,7 +1033,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Alias-aware canonical entity resolution.\nconst ALIAS = {\n  \"nvidia\": [\"nvidia corp\", \"nvidia corporation\", \"nvda\"],\n  \"alphabet\": [\"google\", \"google llc\", \"google inc\"],\n  \"meta\": [\"facebook\", \"meta platforms\"],\n  \"microsoft\": [\"msft\"],\n  \"tsmc\": [\"taiwan semiconductor\"],\n  \"yottagrid\": [\"yotta grid\", \"yottagrid inc\"],\n  \"openai\": [\"open ai\"]\n};\nconst TYPE_HINTS = [\n  [/gpu|cuda|inference|transformer|ssm|quantum|model|chip|stack|framework|library/i, \"technology\"],\n  [/ministry|government|agency|commission|parliament|regulator|cabinet|federal/i, \"government\"],\n  [/university|lab|institute|arxiv|journal/i, \"research_topic\"],\n  [/city|bengaluru|pune|india|valley|county/i, \"location\"]\n];\nfunction canonical(name) {\n  let n = String(name || \"\").toLowerCase().trim()\n    .replace(/\\b(inc|corp|corporation|ltd|llc|gmbh|pvt|private limited|limited|company|group|holdings|plc)\\b\\.?/g, \"\")\n    .replace(/[^a-z0-9 ]/g, \" \").replace(/\\s+/g, \" \").trim();\n  for (const [canon, alts] of Object.entries(ALIAS)) if (alts.includes(n)) return canon;\n  return n || \"unknown\";\n}\nfunction guessType(n) {\n  for (const [re, t] of TYPE_HINTS) if (re.test(n)) return t;\n  return \"company\";\n}\nconst src = $input.first().json;\nconst claims = src.claims;\nconst ents = {};\nfor (const c of claims) {\n  for (const raw of [c.actor, c.object]) {\n    if (!raw || raw.length < 3) continue;\n    const can = canonical(raw);\n    if (!ents[can]) ents[can] = { canonical_name: can, entity_type: guessType(can), aliases: new Set(), mentions: 0 };\n    ents[can].mentions++;\n    if (raw.toLowerCase() !== can) ents[can].aliases.add(String(raw).toLowerCase());\n  }\n  c.actor_canonical = canonical(c.actor);\n  c.object_canonical = canonical(c.object);\n}\nconst list = Object.entries(ents).map(([name, e]) => ({ name, type: e.entity_type, mentions: e.mentions, aliases: [...e.aliases] }));\nreturn [{ json: { claims, entities: list, corpus: src.corpus } }];"
    },
-   "id": "00000033-0000-4000-8000-000000000051",
+   "id": "00000031-0000-4000-8000-000000000049",
    "name": "\ud83e\uddec ENTITY RESOLUTION",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1091,7 +1046,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst { claims, entities, corpus } = $input.first().json;\nconst VERB = { hires: \"hires\", invests: \"invests_in\", expands: \"expands\", partners: \"partners_with\", launches: \"announces\", procures: \"procures\", publishes_research: \"appears_in\", warns_or_declines: \"contradicts_growth_of\" };\nconst edges = {};\nfor (const c of claims) {\n  if (!c.actor_canonical || !c.object_canonical || c.actor_canonical === c.object_canonical) continue;\n  const key = `${c.actor_canonical}|${VERB[c.action] || \"relates_to\"}|${c.object_canonical}`;\n  if (!edges[key]) edges[key] = { subject: c.actor_canonical, predicate: VERB[c.action] || \"relates_to\", object: c.object_canonical, weight: 0, evidence_count: 0, channels: new Set() };\n  edges[key].weight += 0.25; edges[key].evidence_count += 1; edges[key].channels.add(c.channel);\n}\nconst rels = Object.values(edges).map(e => ({ ...e, weight: Math.min(1, e.weight), channels: [...e.channels] }));\nrels.sort((a, b) => b.evidence_count - a.evidence_count);\nreturn [{ json: { claims, entities, corpus, relationships: rels.slice(0, 60) } }];"
    },
-   "id": "00000034-0000-4000-8000-000000000052",
+   "id": "00000032-0000-4000-8000-000000000050",
    "name": "\ud83d\udd17 RELATIONSHIP GRAPH",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1107,7 +1062,7 @@
     "width": 700,
     "color": 7
    },
-   "id": "s-243309478193",
+   "id": "s-770304001346",
    "name": "Note ## 6 \u00b7 DETECT CHAN",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -1122,7 +1077,7 @@
     "query": "=SELECT to_char(DATE_TRUNC('week', o.observed_at),'YYYY-MM-DD') AS week, o.channel, AVG(o.value)::numeric(10,2) AS avg_val, COUNT(*) AS n FROM observations o JOIN signals s ON s.signal_id=o.signal_id WHERE s.topic ILIKE '%{{ $('Initialize Run').first().json.topic.slice(0,24).replace(/'/g,\"''\") }}%' GROUP BY 1,2 ORDER BY 1 DESC LIMIT 60;",
     "options": {}
    },
-   "id": "00000035-0000-4000-8000-000000000053",
+   "id": "00000033-0000-4000-8000-000000000051",
    "name": "\u23f1\ufe0f TIME MACHINE \u2014 Load History",
    "type": "n8n-nodes-base.postgres",
    "typeVersion": 2.6,
@@ -1145,7 +1100,7 @@
     "query": "SELECT subject, predicate, object FROM relationships WHERE last_seen_at < now() - interval '36 hours' ORDER BY last_seen_at DESC LIMIT 300;",
     "options": {}
    },
-   "id": "00000036-0000-4000-8000-000000000054",
+   "id": "00000034-0000-4000-8000-000000000052",
    "name": "Load Known Entities",
    "type": "n8n-nodes-base.postgres",
    "typeVersion": 2.6,
@@ -1166,7 +1121,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// TIME MACHINE: compare NOW vs PAST observations.\nconst { claims, entities, relationships, corpus } = $(\"\ud83d\udd17 RELATIONSHIP GRAPH\").first().json;\nlet history = [];\ntry { history = $(\"\u23f1\ufe0f TIME MACHINE \u2014 Load History\").all().map(i => i.json).filter(h => h && h.week && h.week !== \"(no history)\" && isFinite(parseFloat(h.avg_val))); } catch (e) {}\nlet knownRels = [];\ntry { knownRels = $(\"Load Known Entities\").all().map(i => i.json).filter(r => r && r.subject); } catch (e) {}\nconst init = $(\"Initialize Run\").first().json;\n\nconst curVolume = claims.filter(c => c.action !== \"none\").length;\nconst weeklyTotals = {};\nfor (const h of history) { const w = h.week; weeklyTotals[w] = (weeklyTotals[w] || 0) + parseFloat(h.avg_val || 0); }\nconst weeks = Object.keys(weeklyTotals).sort();\nconst baseline = weeks.length ? weeks.reduce((s, w) => s + weeklyTotals[w], 0) / weeks.length : null;\nconst prevWeek = weeks.length >= 2 ? weeklyTotals[weeks[weeks.length - 2]] : baseline;\nconst velocity_pct = baseline ? ((curVolume - baseline) / Math.max(baseline, 0.001)) * 100 : (curVolume > 0 ? 100 : 0);\nconst accel_bonus = prevWeek && baseline ? (((baseline - prevWeek) / Math.max(prevWeek, 0.001)) * 20) : 0;\n\nconst knownNames = new Set();\nfor (const r of knownRels) { knownNames.add(r.subject); knownNames.add(r.object); }\nconst newEntities = entities.filter(e => !knownNames.has(e.name));\nconst novelty_score = UTIL.clamp(newEntities.length * 12 + (weeks.length === 0 ? 25 : 0), 0, 100);\n\nconst channelsNow = new Set(claims.map(c => c.channel).filter(c => c !== \"none\"));\nconst distinct_channels = channelsNow.size;\nconst newTerms = entities.filter(e => e.type === \"technology\" && !knownNames.has(e.name)).length;\n\nreturn [{ json: {\n  claims, entities, relationships, corpus,\n  probe_embedding: UTIL.embed(`${init.topic} ${(claims[0] && claims[0].statement) || \"\"}`),\n  temporal: {\n    current_volume: curVolume,\n    historical_baseline: baseline === null ? null : Math.round(baseline * 100) / 100,\n    history_weeks: weeks.length,\n    velocity_pct: Math.round(velocity_pct * 10) / 10,\n    acceleration_bonus: Math.round(accel_bonus * 10) / 10,\n    new_entity_count: newEntities.length,\n    new_entities: newEntities.slice(0, 12).map(e => e.name),\n    new_terms_count: newTerms,\n    distinct_channels,\n    novelty_score: Math.round(novelty_score)\n  },\n  init\n}}];"
    },
-   "id": "00000037-0000-4000-8000-000000000055",
+   "id": "00000035-0000-4000-8000-000000000053",
    "name": "Temporal Delta Engine",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1181,7 +1136,7 @@
     "query": "=SELECT signal_id, title, classification, status, 1 - (embedding <=> '{{ $json.probe_embedding }}'::vector) AS similarity FROM signals WHERE status IN ('DISMISSED','RESOLVED') ORDER BY embedding <=> '{{ $json.probe_embedding }}'::vector LIMIT 5;",
     "options": {}
    },
-   "id": "00000038-0000-4000-8000-000000000056",
+   "id": "00000036-0000-4000-8000-000000000054",
    "name": "\ud83e\uddec Re-emergence Radar",
    "type": "n8n-nodes-base.postgres",
    "typeVersion": 2.6,
@@ -1202,7 +1157,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// RE-EMERGENCE ENGINE: does this pattern resemble signals we previously dismissed?\n// Base context comes from the last analysis code node (postgres radar replaces item context).\nconst d = $(\"Temporal Delta Engine\").first().json;\nlet rows = [];\ntry { rows = $(\"\ud83e\uddec Re-emergence Radar\").all().map(i => i.json).filter(r => r && r.signal_id); } catch (e) {}\nconst matches = rows.map(r => ({\n  signal_id: r.signal_id, title: r.title, prior_classification: r.classification,\n  similarity_pct: Math.round(parseFloat(r.similarity || 0) * 1000) / 10\n})).sort((a, b) => b.similarity_pct - a.similarity_pct);\nconst best = matches.length ? matches[0].similarity_pct : 0;\nreturn [{ json: { ...d, reemergence: {\n  checked_against_dismissed: rows.length,\n  matches: matches.slice(0, 5),\n  best_similarity_pct: best,\n  is_reemergence: best >= 72\n} } }];"
    },
-   "id": "00000039-0000-4000-8000-000000000057",
+   "id": "00000037-0000-4000-8000-000000000055",
    "name": "Re-emergence Check",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1221,7 +1176,7 @@
      },
      "conditions": [
       {
-       "id": "c795",
+       "id": "c680",
        "leftValue": "={{ Math.abs($json.temporal.velocity_pct) > 20 || $json.temporal.new_entity_count > 0 || $json.claims.length >= 3 || $json.reemergence.is_reemergence }}",
        "rightValue": "true",
        "operator": {
@@ -1234,7 +1189,7 @@
     },
     "options": {}
    },
-   "id": "0000003a-0000-4000-8000-000000000058",
+   "id": "00000038-0000-4000-8000-000000000056",
    "name": "\u26a1 CHANGE DETECTOR \u2014 Meaningful?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.3,
@@ -1250,7 +1205,7 @@
     "width": 700,
     "color": 3
    },
-   "id": "s-451013555399",
+   "id": "s-213448658674",
    "name": "Note ## 7 \u00b7 FORM HYPOTH",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -1263,7 +1218,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst d = $input.first().json;\nconst topClaims = d.claims.filter(c => c.action !== \"none\").slice(0, 10).map(c => `[${c.channel}] ${c.actor}: ${c.statement}`);\nconst ctx = [\n  `TOPIC: ${d.init.topic}`,\n  `CURRENT SIGNAL VOLUME: ${d.temporal.current_volume} claims vs historical baseline ${d.temporal.historical_baseline}`,\n  `VELOCITY: ${d.temporal.velocity_pct}% vs baseline; ACCELERATION BONUS: ${d.temporal.acceleration_bonus}`,\n  `NEW ENTITIES (${d.temporal.new_entity_count}): ${d.temporal.new_entities.join(\", \") || \"none\"}`,\n  `CHANNELS ACTIVE (${d.temporal.distinct_channels}): ${[...new Set(d.claims.map(c => c.channel))].join(\", \")}`,\n  `TOP EVIDENCE:`,\n  topClaims.join(\"\\n\")\n].join(\"\\n\");\nreturn [{ json: { ...d, hypothesis_context: ctx + `\\n\\nGenerate exactly 3 competing hypotheses as a JSON array. Each item: {\"statement\": \"...\", \"prior_confidence\": <number 5-95>, \"reasoning\": \"one sentence citing the evidence above\"}. H1 should be the most consequential interpretation consistent with evidence; H2 a mundane alternative; H3 a skeptical/adversarial alternative. Output ONLY the JSON array.` } }];"
    },
-   "id": "0000003b-0000-4000-8000-000000000059",
+   "id": "00000039-0000-4000-8000-000000000057",
    "name": "Build Hypothesis Context",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1277,7 +1232,7 @@
     "promptType": "define",
     "text": "={{ $json.hypothesis_context }}"
    },
-   "id": "0000003c-0000-4000-8000-000000000060",
+   "id": "0000003a-0000-4000-8000-000000000058",
    "name": "\ud83e\udde0 HYPOTHESIS LAB",
    "type": "@n8n/n8n-nodes-langchain.chainLlm",
    "typeVersion": 1.9,
@@ -1291,7 +1246,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst d = $(\"Build Hypothesis Context\").first().json;\nlet hyps = null;\ntry {\n  const txt = $input.first().json.text || \"\";\n  const m = String(txt).match(/\\[[\\s\\S]*\\]/);\n  if (m) hyps = JSON.parse(m[0]);\n} catch (e) { hyps = null; }\nif (!Array.isArray(hyps) || !hyps.length) {\n  hyps = [\n    { statement: `${d.init.topic} ecosystem entering a genuine acceleration phase`, prior_confidence: 58, reasoning: \"Multiple channels active simultaneously with positive velocity.\" },\n    { statement: `Short-term spike; cyclical or seasonal noise`, prior_confidence: 34, reasoning: \"Volume alone does not establish durable change.\" },\n    { statement: `Coordinated publicity inflating perceived momentum`, prior_confidence: 26, reasoning: \"Derivative coverage can masquerade as independent confirmation.\" }\n  ];\n}\nhyps = hyps.slice(0, 3).map((h, i) => ({\n  rank: i + 1,\n  statement: String(h.statement || \"Unnamed hypothesis\").slice(0, 240),\n  prior_confidence: UTIL.clamp(parseFloat(h.prior_confidence) || 50, 5, 95),\n  reasoning: String(h.reasoning || \"\").slice(0, 400),\n  status: \"candidate\"\n}));\nreturn [{ json: { ...d, hypotheses: hyps } }];"
    },
-   "id": "0000003d-0000-4000-8000-000000000061",
+   "id": "0000003b-0000-4000-8000-000000000059",
    "name": "Parse Hypotheses",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1304,7 +1259,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Rank by prior confidence (desc), keep top 3.\nconst d = $input.first().json;\nconst hyps = (d.hypotheses || []).slice()\n  .sort((a, b) => (b.prior_confidence || 0) - (a.prior_confidence || 0))\n  .slice(0, 3)\n  .map((h, i) => ({ ...h, rank: i + 1 }));\nreturn [{ json: { ...d, hypotheses: hyps } }];"
    },
-   "id": "0000003e-0000-4000-8000-000000000062",
+   "id": "0000003c-0000-4000-8000-000000000060",
    "name": "Rank Hypotheses",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1320,7 +1275,7 @@
     "width": 900,
     "color": 4
    },
-   "id": "s-844823528137",
+   "id": "s-255545625774",
    "name": "Note ## 8 \u00b7 RED TEAM\n**",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -1333,7 +1288,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst d = $input.first().json;\nconst lead = d.hypotheses[0];\nconst t = d.init.topic;\nconst queries = [\n  `${t} slowdown`, `${t} decline`, `${t} layoffs`,\n  `${t} cancelled OR postponed`, `${t} criticism OR failure OR doubts`\n];\nreturn [{ json: { ...d, leading_hypothesis: lead, redteam_queries: queries } }];"
    },
-   "id": "0000003f-0000-4000-8000-000000000063",
+   "id": "0000003d-0000-4000-8000-000000000061",
    "name": "\ud83e\udd4a RED TEAM \u2014 Counter-Query Forge",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1346,7 +1301,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Adversarial search sweep: actively hunt disconfirming evidence.\nconst d = $input.first().json;\nasync function ddg(q) {\n  try {\n    const res = await this.helpers.httpRequest({\n      url: \"https://html.duckduckgo.com/html/?q=\" + encodeURIComponent(q),\n      method: \"GET\", headers: { \"User-Agent\": \"Mozilla/5.0 (compatible; SignalBot/1.0)\" }, json: false\n    });\n    const html = typeof res === \"string\" ? res : JSON.stringify(res);\n    const results = [];\n    const re = /<a[^>]+class=\"result__a\"[^>]*href=\"([^\"]+)\"[^>]*>([\\s\\S]*?)<\\/a>/g;\n    let m, n = 0;\n    while ((m = re.exec(html)) && n < 5) {\n      let url = m[1]; const u = url.match(/uddg=([^&]+)/); if (u) url = decodeURIComponent(u[1]);\n      const title = m[2].replace(/<[^>]+>/g, \"\").trim();\n      if (title && url.startsWith(\"http\")) { results.push({ title, url }); n++; }\n    }\n    return { query: q, ok: true, results };\n  } catch (e) { return { query: q, ok: false, error: String(e).slice(0, 120), results: [] }; }\n}\nconst sweeps = [];\nfor (const q of d.redteam_queries) sweeps.push(await ddg.call(this, q));\nreturn [{ json: { ...d, redteam_sweeps: sweeps } }];"
    },
-   "id": "00000040-0000-4000-8000-000000000064",
+   "id": "0000003e-0000-4000-8000-000000000062",
    "name": "Counter-Search Sweep",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1359,7 +1314,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst d = $input.first().json;\nconst HOSTILE = /(slowdown|decline|layoff|cancel|postpone|delay|loss|lawsuit|fraud|recall|den(y|ies)|downturn|cutback|freeze|shelv|withdraw|doubt|fail|slump|plunge)/i;\nconst SUPPORTIVE = /(growth|expand|record|surge|boost|accelerat|milestone|breakthrough|wins?|soars?)/i;\nconst contradictions = [], supporting = [], unresolved = [];\nfor (const sweep of d.redteam_sweeps) {\n  for (const r of sweep.results || []) {\n    const text = r.title;\n    if (HOSTILE.test(text)) contradictions.push({ query: sweep.query, title: text.slice(0, 220), url: r.url, strength: UTIL.clamp(0.45 + (text.match(new RegExp(HOSTILE.source, \"gi\")) || []).length * 0.12, 0, 0.9) });\n    else if (SUPPORTIVE.test(text)) supporting.push({ query: sweep.query, title: text.slice(0, 220), url: r.url });\n    else unresolved.push({ query: sweep.query, title: text.slice(0, 160), url: r.url });\n  }\n}\nconst searches_executed = d.redteam_sweeps.filter(s => s.ok).length;\nreturn [{ json: { ...d, redteam: {\n  searches_planned: d.redteam_queries.length,\n  searches_executed,\n  contradiction_count: contradictions.length,\n  supporting_count: supporting.length,\n  unresolved_count: unresolved.length,\n  contradictions: contradictions.slice(0, 8),\n  supporting: supporting.slice(0, 5),\n  unresolved: unresolved.slice(0, 5),\n  avg_hostile_strength: contradictions.length ? contradictions.reduce((s, c) => s + c.strength, 0) / contradictions.length : 0\n}}}];"
    },
-   "id": "00000041-0000-4000-8000-000000000065",
+   "id": "0000003f-0000-4000-8000-000000000063",
    "name": "Analyze Hostile Evidence",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1372,7 +1327,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst d = $input.first().json;\nconst rt = d.redteam;\nconst hyps = d.hypotheses.map((h, idx) => {\n  let posterior = h.prior_confidence;\n  if (idx === 0) {\n    posterior -= 18 * rt.avg_hostile_strength;\n    posterior -= 6 * Math.min(rt.contradiction_count, 3);\n    posterior += 4 * Math.min(rt.supporting_count, 2);\n  } else {\n    posterior += 3 * Math.min(rt.contradiction_count, 2);\n  }\n  posterior = UTIL.clamp(Math.round(posterior), 3, 97);\n  return { ...h, posterior_confidence: posterior, confidence_change: posterior - h.prior_confidence };\n});\nhyps.sort((a, b) => b.posterior_confidence - a.posterior_confidence);\nhyps.forEach((h, i) => { h.rank = i + 1; h.status = i === 0 ? \"leading\" : \"candidate\"; if (h.posterior_confidence < 22) h.status = \"disproved\"; });\nreturn [{ json: { ...d, hypotheses: hyps, redteam: { ...rt, confidence_change: hyps[0].confidence_change } } }];"
    },
-   "id": "00000042-0000-4000-8000-000000000066",
+   "id": "00000040-0000-4000-8000-000000000064",
    "name": "Confidence Adjustment",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1388,7 +1343,7 @@
     "width": 900,
     "color": 5
    },
-   "id": "s-478584977214",
+   "id": "s-499290949926",
    "name": "Note ## 9 \u00b7 VERIFY\n\ud83d\udd75\ufe0f *",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -1401,7 +1356,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Collapse derivative coverage into underlying events.\nconst d = $input.first().json;\nconst docs = (d.corpus || []).filter(c => c.title);\nconst K = 3;\nconst shingleSets = docs.map(doc => UTIL.shingles(`${doc.title} ${doc.excerpt || \"\"}`, K));\nconst parent = docs.map((_, i) => i);\nfunction find(x) { while (parent[x] !== x) { parent[x] = parent[parent[x]]; x = parent[x]; } return x; }\nfunction union(a, b) { parent[find(a)] = find(b); }\nfor (let i = 0; i < docs.length; i++) {\n  for (let j = i + 1; j < docs.length; j++) {\n    const sim = UTIL.jaccard(shingleSets[i], shingleSets[j]);\n    const di = (docs[i].source_url || \"\").split(\"/\")[2], dj = (docs[j].source_url || \"\").split(\"/\")[2];\n    const tSim = UTIL.overlapPct(UTIL.tokens(docs[i].title), UTIL.tokens(docs[j].title));\n    const near48 = Math.abs((new Date(docs[i].published_at || 0)) - (new Date(docs[j].published_at || 0))) < 48 * 36e5;\n    if (sim >= 0.55 || (di && di === dj && tSim >= 60 && near48) || tSim >= 75) union(i, j);\n  }\n}\nconst clusters = {};\ndocs.forEach((doc, i) => { const g = find(i); (clusters[g] = clusters[g] || []).push(i); });\nlet gid = 0;\nconst groupOf = {};\nconst derivative = new Set();\nconst underlyingEvents = [];\nfor (const [rootIdx, members] of Object.entries(clusters)) {\n  gid++;\n  const label = \"ev_\" + gid;\n  members.forEach(mi => { groupOf[mi] = label; });\n  if (members.length > 1) {\n    const sorted = members.slice().sort((a, b) => new Date(docs[a].published_at || 0) - new Date(docs[b].published_at || 0));\n    sorted.slice(1).forEach(mi => derivative.add(mi));\n  }\n  underlyingEvents.push({ event_group: label, articles: members.length, publishers: [...new Set(members.map(mi => docs[mi].publisher))] });\n}\ndocs.forEach((doc, i) => {\n  doc.independence_group = groupOf[i];\n  doc.derivative = derivative.has(i);\n});\nconst uniqueDomains = new Set(docs.map(d => (d.source_url || \"\").split(\"/\")[2]));\nreturn [{ json: { ...d, corpus: docs, forensics: {\n  articles_found: docs.length,\n  underlying_events: Object.keys(clusters).length,\n  independent_sources: Object.keys(clusters).length,\n  derivative_articles: derivative.size,\n  duplicates_removed: derivative.size,\n  unique_domains: uniqueDomains.size,\n  clusters: underlyingEvents.slice(0, 10)\n}}}];"
    },
-   "id": "00000043-0000-4000-8000-000000000067",
+   "id": "00000041-0000-4000-8000-000000000065",
    "name": "\ud83d\udd75\ufe0f SOURCE FORENSICS",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1437,7 +1392,7 @@
      "fallback": "aggregator_syndication"
     }
    },
-   "id": "00000044-0000-4000-8000-000000000068",
+   "id": "00000042-0000-4000-8000-000000000066",
    "name": "Source Quality Classifier",
    "type": "@n8n/n8n-nodes-langchain.textClassifier",
    "typeVersion": 1.1,
@@ -1451,7 +1406,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst d = $input.first().json;\nconst ADJ = { primary_announcement: 0.05, independent_analysis: 0.15, aggregator_syndication: -0.20, opinion_discussion: -0.10 };\nconst corpus = d.corpus.map(c => {\n  const cat = c.category || c.class || c.className || c.label || null;\n  if (cat && ADJ[cat] !== undefined) {\n    c.credibility_score = UTIL.clamp((c.credibility_base || 0.6) + ADJ[cat], 0.05, 0.98);\n    c.provenance_class = cat;\n  } else { c.credibility_score = c.credibility_base || 0.6; c.provenance_class = cat || \"unclassified\"; }\n  c.primary_or_secondary = (cat === \"primary_announcement\") ? \"primary\" : \"secondary\";\n  return c;\n});\nreturn [{ json: { ...d, corpus } }];"
    },
-   "id": "00000045-0000-4000-8000-000000000069",
+   "id": "00000043-0000-4000-8000-000000000067",
    "name": "Apply Credibility Weights",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1464,7 +1419,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Every hypothesis must trace to claim-level evidence or be marked unsupported.\nconst d = $input.first().json;\nconst claimTexts = d.claims.map(c => UTIL.tokens(c.statement));\nconst STOP = new Set([\"the\",\"and\",\"for\",\"with\",\"that\",\"this\",\"from\",\"are\",\"was\",\"were\",\"has\",\"have\",\"had\",\"not\",\"its\",\"their\",\"will\",\"would\",\"could\",\"into\",\"over\",\"under\",\"about\"]);\nconst hyps = d.hypotheses.map(h => {\n  const ht = UTIL.tokens(h.statement).filter(t => !STOP.has(t));\n  let best = 0, bestClaim = null;\n  claimTexts.forEach((ct, i) => { const o = UTIL.overlapPct(ht, ct); if (o > best) { best = o; bestClaim = d.claims[i]; } });\n  h.supported = best >= 30;\n  h.support_claim = bestClaim ? bestClaim.statement : null;\n  h.support_source = bestClaim ? bestClaim.source_url : null;\n  h.evidence_overlap_pct = Math.round(best);\n  return h;\n});\nreturn [{ json: { ...d, hypotheses: hyps } }];"
    },
-   "id": "00000046-0000-4000-8000-000000000070",
+   "id": "00000044-0000-4000-8000-000000000068",
    "name": "\u2696\ufe0f Evidence Validation",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1480,7 +1435,7 @@
     "width": 620,
     "color": 6
    },
-   "id": "s-560235851270",
+   "id": "s-561570177498",
    "name": "Note ## 10 \u00b7 SCORE\n\u2696\ufe0f *",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -1493,7 +1448,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// \u2696\ufe0f DETERMINISTIC SCORING \u2014 the LLM never invents the score.\nconst d = $input.first().json;\nlet W = { novelty: 0.15, acceleration: 0.20, source_diversity: 0.15, source_quality: 0.15, cross_domain: 0.20, independence: 0.10, contradiction: 0.05 };\ntry { if ($env.SIGNAL_SCORING_WEIGHTS) { const p = {}; $env.SIGNAL_SCORING_WEIGHTS.split(\",\").forEach(kv => { const [k, v] = kv.split(\":\"); p[k.trim()] = parseFloat(v); }); W = { ...W, ...p }; } } catch (e) {}\n\nconst f = d.forensics;\nconst avgCred = f.articles_found ? d.corpus.reduce((s, c) => s + (c.credibility_score || 0.6), 0) / f.articles_found : 0.5;\nconst source_quality_score = Math.round(avgCred * 100);\nconst independence_score = Math.round(UTIL.clamp((f.independent_sources / Math.max(f.articles_found, 1)) * 140 + f.unique_domains * 4, 0, 100));\nconst acceleration_score = Math.round(UTIL.clamp(50 + d.temporal.velocity_pct * 0.55 + d.temporal.acceleration_bonus, 0, 100));\nconst novelty_score = d.temporal.novelty_score;\nconst cross_domain_score = Math.min(100, d.temporal.distinct_channels * 22);\nconst contradiction_score = Math.round(UTIL.clamp(d.redteam.avg_hostile_strength * 100, 0, 100));\n\nconst dna = { source_quality: source_quality_score, independence: independence_score, acceleration: acceleration_score, novelty: novelty_score, cross_domain: cross_domain_score, contradiction: contradiction_score };\nconst score = Math.round(\n  W.novelty * novelty_score +\n  W.acceleration * acceleration_score +\n  W.source_diversity * Math.min(100, f.unique_domains * 12) +\n  W.source_quality * source_quality_score +\n  W.cross_domain * cross_domain_score +\n  W.independence * independence_score +\n  W.contradiction * (100 - contradiction_score)\n);\nconst finalScore = UTIL.clamp(score, 0, 100);\nconst classification = finalScore <= 30 ? \"NOISE\" : finalScore <= 50 ? \"WEAK\" : finalScore <= 70 ? \"EMERGING\" : finalScore <= 85 ? \"SIGNIFICANT\" : \"CRITICAL\";\n\nconst supportedRate = d.hypotheses.filter(h => h.supported).length / Math.max(d.hypotheses.length, 1);\nconst confidence = Math.round(UTIL.clamp(0.35 * independence_score + 0.25 * source_quality_score + 0.25 * supportedRate * 100 + 0.15 * (100 - contradiction_score), 0, 99));\n\nconst lead = d.hypotheses.find(h => h.rank === 1) || d.hypotheses[0];\nconst invalidators = [\n  `Coverage volume for \"${d.init.topic}\" returns to historical baseline within one week`,\n  `Independent outlets stop adding NEW reporting (only syndicated copies appear)`,\n  d.redteam.contradictions[0] ? `Contradicting report proves accurate: \"${d.redteam.contradictions[0].title.slice(0, 90)}\"` : `No independent confirmation emerges within the time horizon`,\n  `Key named entities issue denials or retractions`,\n  `Downstream indicators (hiring/GitHub/procurement) flatten or reverse`\n];\n\nreturn [{ json: { ...d, verdict: {\n  signal_score: finalScore, classification, confidence, dna, weights_used: W,\n  leading_hypothesis: lead ? lead.statement : null,\n  invalidators\n}}}];"
    },
-   "id": "00000047-0000-4000-8000-000000000071",
+   "id": "00000045-0000-4000-8000-000000000069",
    "name": "\u2696\ufe0f SIGNAL JUDGE \u2014 Deterministic Score",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1506,7 +1461,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst d = $input.first().json;\nconst v = d.verdict;\nconst title = (v.leading_hypothesis || `${d.init.topic} activity shift`).slice(0, 180);\nconst status = v.signal_score >= 51 ? \"EMERGING\" : \"DETECTED\";\nconst sql = `INSERT INTO signals\n (title, topic, input_mode, status, classification, signal_score, confidence, dna, velocity, acceleration,\n  articles_found, underlying_events, independent_sources, is_demo, scenario_key, embedding, metadata)\n VALUES (\n  '${UTIL.esc(title)}', '${UTIL.esc(d.init.topic)}', '${d.init.mode}', '${status}', '${v.classification}',\n  ${v.signal_score}, ${v.confidence}, '${UTIL.esc(JSON.stringify(v.dna))}'::jsonb,\n  ${d.temporal.velocity_pct}, ${d.temporal.acceleration_bonus},\n  ${f0(d)}, ${d.forensics.underlying_events}, ${d.forensics.independent_sources},\n  ${d.init.demo_mode}, ${d.init.scenario_key ? `'${UTIL.esc(d.init.scenario_key)}'` : \"NULL\"},\n  '${UTIL.embed(title + \" \" + d.init.topic)}'::vector,\n  '${UTIL.esc(JSON.stringify({ run_id: d.init.run_id, invalidators: v.invalidators }))}'::jsonb\n ) RETURNING signal_id;`;\nfunction f0(dd) { return dd.forensics.articles_found; }\nreturn [{ json: { sql, stage: \"signal_core\" } }];"
    },
-   "id": "00000048-0000-4000-8000-000000000072",
+   "id": "00000046-0000-4000-8000-000000000070",
    "name": "Build Signal Insert SQL",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1522,7 +1477,7 @@
     "width": 620,
     "color": 7
    },
-   "id": "s-716480808390",
+   "id": "s-352683753391",
    "name": "Note ## 11 \u00b7 REMEMBER\n\ud83e\uddec",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -1537,7 +1492,7 @@
     "query": "={{ $json.sql }}",
     "options": {}
    },
-   "id": "00000049-0000-4000-8000-000000000073",
+   "id": "00000047-0000-4000-8000-000000000071",
    "name": "Persist Signal Core",
    "type": "n8n-nodes-base.postgres",
    "typeVersion": 2.6,
@@ -1556,7 +1511,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Build ordered SQL statements for every memory table.\n// Context comes from the judge node (the upstream Postgres RETURNING replaces item context).\nconst d = $(\"\u2696\ufe0f SIGNAL JUDGE \u2014 Deterministic Score\").first().json;\nlet sigId = null;\ntry { sigId = $(\"Persist Signal Core\").first().json.signal_id; } catch (e) {}\nconst stmts = [];\nconst esc = UTIL.esc;\nif (sigId) {\n  // sources\n  const rows = d.corpus.slice(0, 80).map(c =>\n    `('${esc(c.source_url)}','${UTIL.hash(c.source_url)}','${esc(c.source_type)}','${esc(c.publisher)}',${c.author ? `'${esc(c.author)}'` : \"NULL\"},${c.published_at ? `'${esc(new Date(c.published_at).toISOString())}'` : \"NULL\"},'${(c.primary_or_secondary === \"primary\" ? \"primary\" : \"secondary\")}',${c.credibility_score || 0.6},'${esc(c.independence_group)}','${esc(c.title)}','${esc((c.excerpt || \"\").slice(0, 400))}','${esc(c.content_hash || UTIL.hash(String(c.title) + \"|\" + String(c.excerpt || \"\")))}','${d.init.run_id}','${esc(JSON.stringify({ derivative: !!c.derivative, is_demo: !!c.is_demo }))}'::jsonb)`);\n  for (let i = 0; i < rows.length; i += 40) {\n    stmts.push({ sql: `INSERT INTO sources (source_url,url_hash,source_type,publisher,author,published_at,primary_or_secondary,credibility_score,independence_group,title,content_excerpt,content_hash,run_id,metadata) VALUES ${rows.slice(i, i + 40).join(\",\")} ON CONFLICT (url_hash) DO NOTHING;`, stage: \"sources\" });\n  }\n  // claims + events\n  const goodClaims = d.claims.filter(c => c.action !== \"none\").slice(0, 60);\n  if (goodClaims.length) {\n    const cr = goodClaims.map(c => `('${sigId}','${d.init.run_id}','${esc(c.actor)}','${esc(c.action)}','${esc(c.object)}',${c.quantity === null ? \"NULL\" : c.quantity},${c.quantity_unit ? `'${esc(c.quantity_unit)}'` : \"NULL\"},'${esc(c.statement)}','unverified','${UTIL.embed(c.statement)}'::vector)`);\n    stmts.push({ sql: `INSERT INTO claims (signal_id,run_id,actor,action,object,quantity,quantity_unit,statement,verification,embedding) VALUES ${cr.join(\",\")};`, stage: \"claims\" });\n    const er = goodClaims.map(c => `('${sigId}','${esc(c.actor)}','${esc(c.action)}','${esc(c.object)}',${c.quantity === null ? \"NULL\" : c.quantity},${c.claimed_at ? `'${esc(new Date(c.claimed_at).toISOString())}'` : \"NULL\"},0.6,'${UTIL.embed(c.statement)}'::vector)`);\n    stmts.push({ sql: `INSERT INTO events (signal_id,actor,action,object,quantity,occurred_at,confidence,embedding) VALUES ${er.join(\",\")};`, stage: \"events\" });\n  }\n  // observations per channel\n  const byCh = {};\n  d.claims.forEach(c => { if (c.channel !== \"none\") byCh[c.channel] = (byCh[c.channel] || 0) + 1; });\n  const obs = Object.entries(byCh).map(([ch, n]) => `('${sigId}','${d.init.run_id}','${esc(ch)}','volume',${n},now(),now(),now(),'{}'::jsonb)`);\n  if (obs.length) stmts.push({ sql: `INSERT INTO observations (signal_id,run_id,channel,metric,value,observed_at,window_start,window_end,details) VALUES ${obs.join(\",\")};`, stage: \"observations\" });\n  // relationships\n  if (d.relationships.length) {\n    const rr = d.relationships.slice(0, 50).map(r => `('${sigId}','${esc(r.subject)}','${esc(r.predicate)}','${esc(r.object)}',${r.weight},${r.evidence_count},${d.temporal.new_entities.includes(r.subject)})`);\n    stmts.push({ sql: `INSERT INTO relationships (signal_id,subject,predicate,object,weight,evidence_count,is_new) VALUES ${rr.join(\",\")};`, stage: \"relationships\" });\n  }\n  // hypotheses\n  const hr = d.hypotheses.map(h => `('${sigId}',${h.rank},'${esc(h.statement)}',${h.prior_confidence},${h.posterior_confidence},'${h.status}','${esc(h.reasoning)}')`);\n  stmts.push({ sql: `INSERT INTO hypotheses (signal_id,rank,statement,prior_confidence,posterior_confidence,status,reasoning) VALUES ${hr.join(\",\")};`, stage: \"hypotheses\" });\n  // invalidators\n  const ir = d.verdict.invalidators.map(t => `('${sigId}','${esc(t)}')`);\n  stmts.push({ sql: `INSERT INTO invalidators (signal_id,condition_text) VALUES ${ir.join(\",\")};`, stage: \"invalidators\" });\n  // signal history\n  stmts.push({ sql: `INSERT INTO signal_history (signal_id,score,confidence,status,note) VALUES ('${sigId}',${d.verdict.signal_score},${d.verdict.confidence},'${d.verdict.classification}','pipeline run ${d.init.run_id.slice(0, 8)}');`, stage: \"history\" });\n  // notifications\n  let tgState = \"skipped\", tgDetail = \"TELEGRAM_BOT_TOKEN not configured\";\n  try { if ($env.TELEGRAM_BOT_TOKEN) { tgState = \"sent\"; tgDetail = \"alert dispatched via HTTP node\"; } } catch (e) {}\n  stmts.push({ sql: `INSERT INTO notifications (signal_id,channel,severity,message,status,detail,sent_at) VALUES ('${sigId}','telegram','${d.verdict.classification.toLowerCase()}','${esc(\"Signal \" + d.verdict.classification + \" (\" + d.verdict.signal_score + \"/100): \" + (d.verdict.leading_hypothesis || \"\"))}','${tgState}','${esc(tgDetail)}',${tgState === \"sent\" ? \"now()\" : \"NULL\"});`, stage: \"notifications\" });\n  // digest queue for emerging\n  if (d.verdict.signal_score >= 51 && d.verdict.signal_score <= 70) {\n    stmts.push({ sql: `INSERT INTO actions (signal_id,action_type,payload,status) VALUES ('${sigId}','digest','{\"window\":\"daily\"}'::jsonb,'pending');`, stage: \"actions\" });\n  }\n  // link the investigation to the persisted signal + close it\n  const health = {};\n  try { $(\"Unify Sensor Feeds\").all().forEach(i => { const h = i.json._health; if (h) Object.entries(h).forEach(([k, v]) => { health[k] = v.errors > 0 ? \"DEGRADED\" : (v.count > 0 ? \"AVAILABLE\" : \"EMPTY\"); }); }); } catch (e) {}\n  if (!Object.keys(health).length) {\n    const byCh = {};\n    (d.corpus || []).forEach(c => { if (c.channel && c.channel !== \"none\") byCh[c.channel] = (byCh[c.channel] || 0) + 1; });\n    Object.entries(byCh).forEach(([k, v]) => { health[k] = v > 0 ? \"AVAILABLE\" : \"EMPTY\"; });\n  }\n  stmts.push({ sql: `UPDATE investigations SET signal_id='${sigId}' WHERE run_id='${d.init.run_id}';`, stage: \"investigation_link\" });\n  stmts.push({ sql: `UPDATE investigations SET status='COMPLETED', finished_at=now(), pages_retrieved=${d.corpus.filter(c => c.crawl_ok).length}, claims_extracted=${d.claims.filter(c => c.action !== \"none\").length}, events_normalized=${d.forensics.underlying_events}, duplicates_removed=${d.forensics.duplicates_removed}, independent_sources=${d.forensics.independent_sources}, hypotheses_formed=${d.hypotheses.length}, hypotheses_disproved=${d.hypotheses.filter(h => h.status === \"disproved\").length}, redteam_searches=${d.redteam.searches_executed}, final_score=${d.verdict.signal_score}, sensor_health='${esc(JSON.stringify(health))}'::jsonb WHERE run_id='${d.init.run_id}';`, stage: \"investigation_close\" });\n}\nstmts.forEach((s, i) => s.ord = i);\nreturn stmts.map(s => ({ json: s }));"
    },
-   "id": "0000004a-0000-4000-8000-000000000074",
+   "id": "00000048-0000-4000-8000-000000000072",
    "name": "Build Memory Writes",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1571,7 +1526,7 @@
     "query": "={{ $json.sql }}",
     "options": {}
    },
-   "id": "0000004b-0000-4000-8000-000000000075",
+   "id": "00000049-0000-4000-8000-000000000073",
    "name": "\ud83e\uddec MEMORY \u2014 Persist Investigation",
    "type": "n8n-nodes-base.postgres",
    "typeVersion": 2.6,
@@ -1592,7 +1547,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Postgres nodes replace item context; restore the judge payload for downstream logic.\nreturn [{ json: $(\"\u2696\ufe0f SIGNAL JUDGE \u2014 Deterministic Score\").first().json }];"
    },
-   "id": "0000004c-0000-4000-8000-000000000076",
+   "id": "0000004a-0000-4000-8000-000000000074",
    "name": "Restore Context",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1608,7 +1563,7 @@
     "width": 900,
     "color": 2
    },
-   "id": "s-048822884024",
+   "id": "s-029474748256",
    "name": "Note ## 12 \u00b7 HUMAN LOOP",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -1627,7 +1582,7 @@
      },
      "conditions": [
       {
-       "id": "c2051",
+       "id": "c9322",
        "leftValue": "={{ $json.verdict.signal_score >= 71 }}",
        "rightValue": "true",
        "operator": {
@@ -1640,7 +1595,7 @@
     },
     "options": {}
    },
-   "id": "0000004d-0000-4000-8000-000000000077",
+   "id": "0000004b-0000-4000-8000-000000000075",
    "name": "Critical or Significant?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.3,
@@ -1659,7 +1614,7 @@
      },
      "conditions": [
       {
-       "id": "c8897",
+       "id": "c6637",
        "leftValue": "={{ $json.verdict.signal_score >= 86 }}",
        "rightValue": "true",
        "operator": {
@@ -1672,7 +1627,7 @@
     },
     "options": {}
    },
-   "id": "0000004e-0000-4000-8000-000000000078",
+   "id": "0000004c-0000-4000-8000-000000000076",
    "name": "CRITICAL? Escalate",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.3,
@@ -1690,7 +1645,7 @@
     },
     "options": {}
    },
-   "id": "0000004f-0000-4000-8000-000000000079",
+   "id": "0000004d-0000-4000-8000-000000000077",
    "name": "\ud83d\ude80 Execute Escalation Sub-flow",
    "type": "n8n-nodes-base.executeWorkflow",
    "typeVersion": 1.2,
@@ -1709,7 +1664,7 @@
      },
      "conditions": [
       {
-       "id": "c3335",
+       "id": "c2134",
        "leftValue": "={{ (($env.GITHUB_TOKEN || '') !== '' && ($env.GITHUB_REPO || '') !== '' && $('\u2696\ufe0f SIGNAL JUDGE \u2014 Deterministic Score').first().json.verdict.signal_score >= 86) ? 'yes' : 'no' }}",
        "rightValue": "true",
        "operator": {
@@ -1722,7 +1677,7 @@
     },
     "options": {}
    },
-   "id": "00000050-0000-4000-8000-000000000080",
+   "id": "0000004e-0000-4000-8000-000000000078",
    "name": "GitHub Issue?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.3,
@@ -1759,7 +1714,7 @@
      "timeout": 10000
     }
    },
-   "id": "00000051-0000-4000-8000-000000000081",
+   "id": "0000004f-0000-4000-8000-000000000079",
    "name": "\ud83d\udc19 Create GitHub Issue",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -1779,7 +1734,7 @@
      },
      "conditions": [
       {
-       "id": "c5404",
+       "id": "c1989",
        "leftValue": "={{ $env.TELEGRAM_BOT_TOKEN || '' }}",
        "rightValue": "",
        "operator": {
@@ -1792,7 +1747,7 @@
     },
     "options": {}
    },
-   "id": "00000052-0000-4000-8000-000000000082",
+   "id": "00000050-0000-4000-8000-000000000080",
    "name": "Telegram Configured?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.3,
@@ -1812,7 +1767,7 @@
      "timeout": 10000
     }
    },
-   "id": "00000053-0000-4000-8000-000000000083",
+   "id": "00000051-0000-4000-8000-000000000081",
    "name": "\ud83d\udea8 SIGNAL ALERT",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -1826,7 +1781,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nreturn [{ json: { ok: false, skipped: true, channel: \"telegram\", description: \"TELEGRAM_BOT_TOKEN not configured - notification recorded as skipped (demo fallback)\" } }];"
    },
-   "id": "00000054-0000-4000-8000-000000000084",
+   "id": "00000052-0000-4000-8000-000000000082",
    "name": "Mark Notification Skipped",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1845,7 +1800,7 @@
      },
      "conditions": [
       {
-       "id": "c8108",
+       "id": "c5214",
        "leftValue": "={{ (($env.WHATSAPP_TOKEN || '') !== '' && ($env.WHATSAPP_PHONE_ID || '') !== '' && ($env.WHATSAPP_TO || '') !== '') ? 'yes' : 'no' }}",
        "rightValue": "true",
        "operator": {
@@ -1858,7 +1813,7 @@
     },
     "options": {}
    },
-   "id": "00000055-0000-4000-8000-000000000085",
+   "id": "00000053-0000-4000-8000-000000000083",
    "name": "WhatsApp Configured?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.3,
@@ -1891,7 +1846,7 @@
      "timeout": 10000
     }
    },
-   "id": "00000056-0000-4000-8000-000000000086",
+   "id": "00000054-0000-4000-8000-000000000084",
    "name": "\ud83d\udcac WhatsApp Alert",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -1905,7 +1860,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nreturn [{ json: { ok: false, skipped: true, channel: \"whatsapp\", description: \"WHATSAPP_TOKEN/WHATSAPP_PHONE_ID/WHATSAPP_TO not configured - notification recorded as skipped\" } }];"
    },
-   "id": "00000057-0000-4000-8000-000000000087",
+   "id": "00000055-0000-4000-8000-000000000085",
    "name": "\ud83d\udeab Mark WA Skipped",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -1924,7 +1879,7 @@
      },
      "conditions": [
       {
-       "id": "c4787",
+       "id": "c9737",
        "leftValue": "={{ ($env.GOOGLE_CALENDAR_ID || '') + ($env.NOTION_DATABASE_ID || '') }}",
        "rightValue": "",
        "operator": {
@@ -1937,7 +1892,7 @@
     },
     "options": {}
    },
-   "id": "00000058-0000-4000-8000-000000000088",
+   "id": "00000056-0000-4000-8000-000000000086",
    "name": "Adapters Configured?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.3,
@@ -1962,7 +1917,7 @@
     },
     "options": {}
    },
-   "id": "00000059-0000-4000-8000-000000000089",
+   "id": "00000057-0000-4000-8000-000000000087",
    "name": "\ud83d\udcc5 Google Calendar Reminder",
    "type": "n8n-nodes-base.googleCalendar",
    "typeVersion": 1.2,
@@ -1988,7 +1943,7 @@
     },
     "options": {}
    },
-   "id": "0000005a-0000-4000-8000-000000000090",
+   "id": "00000058-0000-4000-8000-000000000088",
    "name": "\ud83d\udcdd Notion Memory Page",
    "type": "n8n-nodes-base.notion",
    "typeVersion": 2.2,
@@ -2022,7 +1977,7 @@
     },
     "options": {}
    },
-   "id": "0000005b-0000-4000-8000-000000000091",
+   "id": "00000059-0000-4000-8000-000000000089",
    "name": "Emerging? Queue Digest",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.3,
@@ -2033,7 +1988,7 @@
   },
   {
    "parameters": {},
-   "id": "0000005c-0000-4000-8000-000000000092",
+   "id": "0000005a-0000-4000-8000-000000000090",
    "name": "Log Quiet Observation",
    "type": "n8n-nodes-base.noOp",
    "typeVersion": 1,
@@ -2049,7 +2004,7 @@
     "width": 560,
     "color": 4
    },
-   "id": "s-138829893503",
+   "id": "s-010780750580",
    "name": "Note ## 13 \u00b7 OUTPUT\nFul",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -2062,7 +2017,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Path-independent assembly: pull every section from its source node when the\n// flowing item lacks it (quiet path skips judge/hypotheses/red-team/forensics).\nconst g = (n) => { try { const ref = $(n); return ref.all().length ? ref.first().json : null; } catch (e) { return null; } };\nconst ga = (n) => { try { return $(n).all().map(i => i.json); } catch (e) { return []; } };\nconst d = ($input.first() && $input.first().json) || {};\nconst init = d.init || g(\"Initialize Run\") || {};\nlet plan = d.plan || (g(\"Normalize Plan\") || {}).plan || null;\nif (!plan) {\n  const p = g(\"Parse Fallback Plan\");\n  if (p && p.topic) plan = { topic: p.topic, provider: p.provider || \"openrouter\", research_domains: p.research_domains || [], queries: p.queries || [], entities: p.entities || [], counter_queries: p.counter_queries || [] };\n}\nif (!plan) {\n  const st = g(\"\ud83e\udded AI RESEARCH STRATEGIST\") || {};\n  plan = { topic: st.topic || init.topic, provider: \"groq\", research_domains: st.research_domains || [], queries: st.queries || [], entities: st.entities || [], counter_queries: st.counter_queries || [] };\n}\nconst temporal = d.temporal || (g(\"Temporal Delta Engine\") || {}).temporal ||\n  { current_volume: 0, historical_baseline: null, history_weeks: 0, velocity_pct: 0, acceleration_bonus: 0, new_entity_count: 0, new_entities: [], new_terms_count: 0, distinct_channels: 0, novelty_score: 0 };\nconst forensics = d.forensics || (g(\"\ud83d\udd75\ufe0f SOURCE FORENSICS\") || {}).forensics ||\n  { articles_found: 0, underlying_events: 0, independent_sources: 0, duplicates_removed: 0, unique_domains: 0 };\nconst claims = d.claims || (g(\"\ud83d\udd2c EVIDENCE LAB\") || {}).claims || [];\nconst corpus = d.corpus || ga(\"Cap Corpus\");\nconst entities = d.entities || (g(\"\ud83e\uddec ENTITY RESOLUTION\") || {}).entities || [];\nconst relationships = d.relationships || (g(\"\ud83d\udd17 RELATIONSHIP GRAPH\") || {}).relationships || [];\nconst hypotheses = d.hypotheses || (g(\"\u2696\ufe0f Evidence Validation\") || {}).hypotheses || (g(\"Keep Top 3\") || {}).hypotheses || [];\nconst redteam = d.redteam || (g(\"Analyze Hostile Evidence\") || {}).redteam ||\n  { searches_planned: 0, searches_executed: 0, contradiction_count: 0, supporting_count: 0, unresolved_count: 0, contradictions: [], supporting: [], unresolved: [], avg_hostile_strength: 0 };\nconst verdict = d.verdict || (g(\"\u2696\ufe0f SIGNAL JUDGE \u2014 Deterministic Score\") || {}).verdict || null;\nconst reemergence = d.reemergence || (g(\"Re-emergence Check\") || {}).reemergence || null;\nlet sigId = null; try { sigId = $(\"Persist Signal Core\").first().json.signal_id; } catch (e) {}\nconst sensors = {};\ntry {\n  $(\"Unify Sensor Feeds\").all().forEach(i => { const h = i.json._health; if (h) Object.entries(h).forEach(([k, v]) => { sensors[k] = { state: v.errors > 0 ? \"DEGRADED\" : (v.count > 0 ? \"AVAILABLE\" : \"EMPTY\"), found: v.count }; }); });\n} catch (e) {}\nif (!Object.keys(sensors).length) {\n  const byCh = {};\n  (corpus.length ? corpus : claims).forEach(c => { const ch = c.channel; if (ch && ch !== \"none\") byCh[ch] = (byCh[ch] || 0) + 1; });\n  Object.entries(byCh).forEach(([k, v]) => { sensors[k] = { state: \"AVAILABLE\", found: v }; });\n}\nconst graphNodes = new Set(); const graphEdges = [];\nrelationships.slice(0, 25).forEach(r => { graphNodes.add(r.subject); graphNodes.add(r.object); graphEdges.push({ from: r.subject, label: r.predicate, to: r.object, weight: r.weight }); });\nconst fullAnalysis = !!verdict;\nreturn [{ json: {\n  product: \"SIGNAL \u2014 The Internet's Early Warning System\",\n  orchestrated_by: \"n8n\",\n  workflow: \"SIGNAL \u2014 Intelligence Pipeline\",\n  execution_id: $execution.id,\n  run_id: init.run_id,\n  signal_id: sigId,\n  mode: init.mode,\n  topic: init.topic,\n  demo_simulation: init.demo_mode,\n  scenario_key: init.scenario_key,\n  analysis_path: fullAnalysis ? \"full\" : \"quiet_observation\",\n  strategist_provider: plan.provider || \"groq\",\n  score: verdict ? verdict.signal_score : null,\n  classification: verdict ? verdict.classification : \"BELOW_THRESHOLD\",\n  confidence: verdict ? verdict.confidence : null,\n  dna: verdict ? verdict.dna : null,\n  velocity_pct: temporal.velocity_pct,\n  forensics: { articles_found: forensics.articles_found, underlying_events: forensics.underlying_events, independent_sources: forensics.independent_sources, duplicates_removed: forensics.duplicates_removed, unique_domains: forensics.unique_domains },\n  sensors,\n  plan: { domains: plan.research_domains || [], queries: plan.queries || [], counter_queries: plan.counter_queries || [] },\n  hypotheses: hypotheses.map(h => ({ statement: h.statement, prior: h.prior_confidence, posterior: h.posterior_confidence, change: h.confidence_change, status: h.status, supported: h.supported, evidence: h.support_claim })),\n  red_team: { searches_executed: redteam.searches_executed, contradictions: redteam.contradictions, supporting_count: redteam.supporting_count, unresolved_count: redteam.unresolved_count, confidence_change: redteam.confidence_change },\n  evidence: { claims_extracted: claims.filter(c => c.action !== \"none\").length, top_claims: claims.filter(c => c.action !== \"none\").slice(0, 8).map(c => ({ statement: c.statement, actor: c.actor, action: c.action, source: c.source_url, channel: c.channel, demo: c.is_demo })) },\n  graph: { nodes: [...graphNodes].map(n => ({ id: n })), edges: graphEdges },\n  reemergence,\n  invalidators: verdict ? verdict.invalidators : [],\n  timeline: [\n    { stage: \"INPUT\", detail: `${init.mode} request received` },\n    { stage: \"THINK\", detail: `strategist via ${plan.provider || \"groq\"}: ${(plan.queries || []).length} queries, ${(plan.counter_queries || []).length} counter-queries` },\n    { stage: \"SENSE\", detail: `${Object.keys(sensors).length} radar channels activated` },\n    { stage: \"INVESTIGATE\", detail: `${forensics.articles_found} articles, ${corpus.filter(c => c.crawl_ok).length} deep-crawled` },\n    { stage: \"CONNECT\", detail: `${entities.length} entities resolved, ${relationships.length} relationships mapped` },\n    { stage: \"DETECT CHANGE\", detail: `velocity ${temporal.velocity_pct}% vs baseline${reemergence && reemergence.is_reemergence ? \" \u00b7 RE-EMERGENCE of a previously dismissed pattern (\" + reemergence.best_similarity_pct + \"% match)\" : \"\"}` },\n    ...(fullAnalysis ? [\n      { stage: \"FORM HYPOTHESES\", detail: `${hypotheses.length} competing hypotheses` },\n      { stage: \"RED TEAM\", detail: `${redteam.searches_executed} adversarial searches, ${redteam.contradiction_count} contradictions found` },\n      { stage: \"VERIFY\", detail: `forensics collapsed ${forensics.articles_found} articles \u2192 ${forensics.underlying_events} events` },\n      { stage: \"SCORE\", detail: `deterministic score ${verdict.signal_score}/100 ${verdict.classification}` },\n      { stage: \"REMEMBER\", detail: `persisted to PostgreSQL memory` }\n    ] : [\n      { stage: \"THRESHOLD\", detail: `change below meaningfulness threshold \u2014 logged as quiet observation, no alert fatigue` }\n    ]),\n    { stage: \"HUMAN LOOP\", detail: `notification ${init.demo_mode ? \"(demo)\" : \"\"} dispatched; review requested` }\n  ],\n  next_steps: [\"Review the signal in the Command Center\", \"INVESTIGATE / WATCH / DISMISS via UI or Telegram buttons\", \"Monitor evolution on the Timeline page\"]\n}}];"
    },
-   "id": "0000005d-0000-4000-8000-000000000093",
+   "id": "0000005b-0000-4000-8000-000000000091",
    "name": "Assemble Final Report",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -2073,12 +2028,12 @@
   },
   {
    "parameters": {
-    "content": "## 14 \u00b7 REPORT ARTIFACT\n**\ud83d\udcc4 PDF FACTORY \u2192 GITHUB**\nEvery execution compiles a timestamped multi-page PDF of everything inferred and collected \u2014 verdict, DNA, temporal, forensics, sensors, red team, hypotheses, claims, graph, timeline and **every source URL examined** \u2014 then pushes it to GitHub via the Contents API.\nEnv-gated on `GITHUB_TOKEN` + `GITHUB_REPO`. Always saved to the mounted reports volume.",
+    "content": "## 14 \u00b7 REPORT ARTIFACTS\n**\ud83d\udcc4 PDF FACTORY + \ud83d\udcdd MARKDOWN TWIN \u2192 GITHUB**\nEvery execution compiles two timestamped artifacts of everything inferred and collected \u2014 verdict, DNA, temporal, forensics, sensors, red team, hypotheses, claims, graph, timeline and **every source URL examined**:\n\u00b7 a multi-page PDF (pure-JS writer)\n\u00b7 a GitHub-flavored Markdown report\nBoth are pushed to GitHub via the Contents API. Env-gated on `GITHUB_TOKEN` + `GITHUB_REPO`; always saved to the mounted reports volume.",
     "height": 480,
     "width": 940,
     "color": 6
    },
-   "id": "s-180958231603",
+   "id": "s-625744735069",
    "name": "Note ## 14 \u00b7 REPORT ART",
    "type": "n8n-nodes-base.stickyNote",
    "typeVersion": 1,
@@ -2091,12 +2046,25 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// \ud83d\udcc4 REPORT ARTIFACT \u2014 compile the full investigation into a real, downloadable PDF.\n// Zero-dependency PDF writer (valid xref table, Helvetica core fonts, multi-page).\n// Saves to /home/node/reports (mounted volume) when fs access is allowed, always\n// embeds base64 so downstream nodes can push it anywhere.\nconst g = (n) => { try { const r = $(n); return r.all().length ? r.first().json : null; } catch (e) { return null; } };\nconst R = g(\"Assemble Final Report\") || {};\n// ---- text hygiene ------------------------------------------------------\nfunction A(s) { return String(s === null || s === undefined ? \"\" : s)\n  .replace(/[\\u2013\\u2014]/g, \"-\").replace(/[\\u2018\\u2019\\u201B]/g, \"'\")\n  .replace(/[\\u201C\\u201D]/g, '\"').replace(/[\\u2022\\u25CF]/g, \"*\")\n  .replace(/\\u2026/g, \"...\").replace(/\\u2192/g, \"->\")\n  .replace(/\\u2713/g, \"[OK]\").replace(/[\\u2717\\u2714]/g, \"[x]\")\n  .replace(/\\u2264/g, \"<=\").replace(/\\u2265/g, \">=\")\n  .replace(/[^\\x20-\\x7E]/g, \"\"); }\nfunction esc(s) { return A(s).replace(/\\\\\\\\/g, \"\\\\\\\\\\\\\\\\\").replace(/\\(/g, \"\\\\\\\\(\").replace(/\\)/g, \"\\\\\\\\)\"); }\nfunction wrap(text, width) {\n  const words = A(text).split(/\\s+/); const out = []; let cur = \"\";\n  for (const w of words) {\n    if ((cur + \" \" + w).trim().length <= width) cur = (cur ? cur + \" \" : \"\") + w;\n    else { if (cur) out.push(cur); if (w.length > width) { for (let i = 0; i < w.length; i += width) out.push(w.slice(i, i + width)); cur = \"\"; } else cur = w; }\n  }\n  if (cur) out.push(cur); return out.length ? out : [\"\"];\n}\n// ---- collect sections --------------------------------------------------\nconst L = []; // {f,s,t}\nconst H = (t) => L.push({ f: \"F2\", s: 12, t: \"\" }, { f: \"F2\", s: 12, t: t });\nconst rule = () => L.push({ f: \"F1\", s: 9, t: \"-\".repeat(98) });\nconst kv = (k, v) => wrap(k + \": \" + (v === null || v === undefined || v === \"\" ? \"-\" : v), 98).forEach(t => L.push({ f: \"F1\", s: 9, t }));\nL.push({ f: \"F2\", s: 15, t: \"SIGNAL INTELLIGENCE REPORT\" });\nL.push({ f: \"F1\", s: 9, t: A(R.product || \"SIGNAL\") + \"  |  orchestrated by n8n\" });\nrule();\nkv(\"Topic\", R.topic); kv(\"Run ID\", R.run_id); kv(\"Signal ID\", R.signal_id);\nconst NOW = new Date(); const p2 = n => String(n).padStart(2, \"0\");\nconst STAMP = `${NOW.getUTCFullYear()}${p2(NOW.getUTCMonth() + 1)}${p2(NOW.getUTCDate())}-${p2(NOW.getUTCHours())}${p2(NOW.getUTCMinutes())}${p2(NOW.getUTCSeconds())}`;\nkv(\"Generated (UTC)\", NOW.toISOString()); kv(\"Input mode\", `${R.mode || \"-\"}${R.demo_simulation ? \" (DEMO SIMULATION)\" : \" (LIVE)\"}`);\nkv(\"Analysis path\", R.analysis_path);\nH(\"1. VERDICT & SCORE\");\nif (R.score === null || R.score === undefined) kv(\"Result\", \"BELOW THRESHOLD - quiet observation logged, no alert raised\");\nelse {\n  kv(\"Signal score\", `${R.score}/100  (${R.classification})`);\n  kv(\"Confidence\", (R.confidence !== null && R.confidence !== undefined) ? R.confidence + \"%\" : \"-\");\n  const hyp = (R.hypotheses || []).find(h => h.status === \"leading\") || (R.hypotheses || [])[0];\n  kv(\"Leading hypothesis\", hyp ? hyp.statement : \"-\");\n}\nif (R.dna) { H(\"2. SIGNAL DNA\"); Object.entries(R.dna).forEach(([k, v]) => L.push({ f: \"F1\", s: 9, t: `  ${A(k).padEnd(18, \".\")} ${v}/100` })); }\nH((R.dna ? \"3\" : \"2\") + \". TEMPORAL ANALYSIS\");\nkv(\"Velocity vs baseline\", (R.velocity_pct !== undefined ? R.velocity_pct : \"-\") + \"%\");\nif (R.reemergence) { kv(\"Re-emergence\", R.reemergence.is_reemergence ? `YES - ${R.reemergence.best_similarity_pct}% match with previously dismissed pattern` : \"no match with dismissed history\"); }\nH((R.dna ? \"4\" : \"3\") + \". SOURCE FORENSICS\");\nconst fo = R.forensics || {};\nkv(\"Articles found\", fo.articles_found); kv(\"Underlying events collapsed\", fo.underlying_events);\nkv(\"Independent sources\", fo.independent_sources); kv(\"Unique domains\", fo.unique_domains);\nkv(\"Duplicates removed\", fo.duplicates_removed);\nconst sensors = R.sensors || {};\nif (Object.keys(sensors).length) { H((R.dna ? \"5\" : \"4\") + \". SENSOR SWEEP\"); Object.entries(sensors).forEach(([k, v]) => L.push({ f: \"F1\", s: 9, t: `  ${A(k).padEnd(14, \".\")} ${v.state} (${v.found} items)` })); }\nconst rt = R.red_team;\nif (rt) {\n  H((R.dna ? \"6\" : \"5\") + \". RED TEAM\");\n  kv(\"Adversarial searches executed\", rt.searches_executed);\n  kv(\"Contradictions surfaced\", (rt.contradictions || []).length);\n  (rt.contradictions || []).slice(0, 4).forEach(c => wrap(`  ! ${c.title || c.statement || \"\"}${c.url ? \" - \" + c.url : \"\"}`, 98).forEach(t => L.push({ f: \"F1\", s: 9, t })));\n}\nconst hyps = R.hypotheses || [];\nif (hyps.length) {\n  H((R.dna ? \"7\" : \"6\") + \". COMPETING HYPOTHESES\");\n  hyps.forEach((h, i) => {\n    L.push({ f: \"F2\", s: 10, t: `  #${i + 1} [${A(h.status || \"\").toUpperCase()}] prior ${h.prior}% -> posterior ${h.posterior}%` });\n    wrap(\"     \" + h.statement, 94).forEach(t => L.push({ f: \"F1\", s: 9, t }));\n  });\n}\nconst inv = R.invalidators || [];\nif (inv.length) { H((R.dna ? \"8\" : \"7\") + \". INVALIDATORS (what would kill this signal)\"); inv.forEach(v => wrap(\"  [ ] \" + v, 96).forEach(t => L.push({ f: \"F1\", s: 9, t }))); }\nconst ev = R.evidence || {};\nif ((ev.top_claims || []).length) {\n  H((R.dna ? \"9\" : \"8\") + \". EXTRACTED CLAIMS\");\n  ev.top_claims.forEach((c, i) => {\n    L.push({ f: \"F2\", s: 10, t: `  C${i + 1}. [${A(c.action)}] ${A(c.actor || \"?\")}` });\n    wrap(\"     \" + c.statement, 94).forEach(t => L.push({ f: \"F1\", s: 9, t }));\n  });\n}\nconst gr = R.graph || {};\nif ((gr.edges || []).length) {\n  H((R.dna ? \"10\" : \"9\") + \". ENTITY GRAPH\");\n  kv(\"Entities / relationships\", `${(gr.nodes || []).length} entities, ${(gr.edges || []).length} relationships`);\n  gr.edges.slice(0, 12).forEach(e => L.push({ f: \"F1\", s: 9, t: `    ${A(e.from)} --${A(e.label)}--> ${A(e.to)} (w=${e.weight})` }));\n}\nconst tl = R.timeline || [];\nif (tl.length) { H((R.dna ? \"11\" : \"10\") + \". PIPELINE TIMELINE\"); tl.forEach(s => L.push({ f: \"F1\", s: 9, t: `  [${A(s.stage)}] ${A(s.detail)}` })); }\n// ---- RESOURCES: every source examined ----------------------------------\nlet corpus = [];\ntry { corpus = $(\"Cap Corpus\").all().map(i => i.json).filter(c => c.source_url); } catch (e) {}\nif (!corpus.length) { try { corpus = ($(\"\u2696\ufe0f SIGNAL JUDGE \u2014 Deterministic Score\").first().json.corpus || []).filter(c => c.source_url); } catch (e) {} }\nH((R.dna ? \"12\" : \"11\") + `. RESOURCES EXAMINED (${corpus.length})`);\nif (!corpus.length) L.push({ f: \"F1\", s: 9, t: \"  (no external sources captured this run)\" });\ncorpus.forEach((c, i) => {\n  L.push({ f: \"F2\", s: 9, t: `  [${i + 1}] ${A(c.publisher || c.domain || \"unknown\")} (${A(c.channel || \"-\")}${c.published_at ? \", \" + String(c.published_at).slice(0, 10) : \"\"})` });\n  wrap(\"      \" + (c.title || \"(untitled)\"), 94).forEach(t => L.push({ f: \"F1\", s: 9, t }));\n  wrap(\"      \" + c.source_url, 94).forEach(t => L.push({ f: \"F1\", s: 8, t }));\n});\nL.push({ f: \"F2\", s: 12, t: \"\" }); rule();\nL.push({ f: \"F1\", s: 8, t: `Generated automatically by SIGNAL - The Internet's Early Warning System | n8n orchestration | ${STAMP}` });\n// ---- paginate & render PDF ---------------------------------------------\nconst PAGE_W = 612, PAGE_H = 792, MARGIN = 54;\nconst pages = []; let cur = [], y = PAGE_H - MARGIN;\nfor (const ln of L) {\n  const lead = Math.round(ln.s * 1.45);\n  if (y - lead < MARGIN) { pages.push(cur); cur = []; y = PAGE_H - MARGIN; }\n  cur.push({ ...ln, y }); y -= lead;\n}\nif (cur.length) pages.push(cur); if (!pages.length) pages.push([]);\nconst objs = [];\nobjs.push({ body: \"<< /Type /Catalog /Pages 2 0 R >>\" });\nconst kids = pages.map((_, i) => `${5 + i * 2} 0 R`).join(\" \");\nobjs.push({ body: `<< /Type /Pages /Kids [${kids}] /Count ${pages.length} >>` });\nobjs.push({ body: \"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>\" });\nobjs.push({ body: \"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>\" });\npages.forEach((pg, i) => {\n  let s = \"\";\n  for (const ln of pg) s += `BT /${ln.f} ${ln.s} Tf ${MARGIN} ${ln.y} Td (${esc(ln.t)}) Tj ET\\n`;\n  const cnum = 6 + i * 2;\n  objs.push({ body: `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${PAGE_W} ${PAGE_H}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${cnum} 0 R >>` });\n  objs.push({ num: cnum, body: `<< /Length ${Buffer.byteLength(s, \"latin1\")} >>\\nstream\\n${s}endstream` });\n});\nobjs.forEach((o, i) => { o.num = o.num || (i + 1); });\nobjs.sort((a, b) => a.num - b.num);\nlet pdf = \"%PDF-1.4\\n\"; const offs = [];\nfor (const o of objs) { offs[o.num] = Buffer.byteLength(pdf, \"latin1\"); pdf += `${o.num} 0 obj\\n${o.body}\\nendobj\\n`; }\nconst xref = Buffer.byteLength(pdf, \"latin1\");\npdf += `xref\\n0 ${objs.length + 1}\\n0000000000 65535 f \\n`;\nfor (let i = 1; i <= objs.length; i++) pdf += `${String(offs[i]).padStart(10, \"0\")} 00000 n \\n`;\npdf += `trailer\\n<< /Size ${objs.length + 1} /Root 1 0 R >>\\nstartxref\\n${xref}\\n%%EOF`;\nconst buf = Buffer.from(pdf, \"latin1\");\n// ---- persist + hand off ------------------------------------------------\nconst base = `signal-${String(R.run_id || \"adhoc\").slice(0, 8)}-${STAMP}`;\nconst filename = `reports/${base}.pdf`;\nlet saved = false;\ntry { const fs = require(\"fs\"); fs.mkdirSync(\"/home/node/reports\", { recursive: true }); fs.writeFileSync(`/home/node/reports/${base}.pdf`, buf); saved = true; } catch (e) {}\nreturn [{ json: {\n  report_name: `${base}.pdf`, report_filename: filename,\n  report_size_bytes: buf.length, report_pages: pages.length,\n  report_generated_at: NOW.toISOString(), report_saved_locally: saved,\n  report_commit_message: A(`SIGNAL report: ${R.topic || \"unknown topic\"} (${R.classification || \"?\"} ${R.score !== null && R.score !== undefined ? R.score + \"/100\" : \"below-threshold\"})`).replace(/[\"\\\\\\\\]/g, \"\"),\n  pdf_base64: buf.toString(\"base64\"),\n  report_meta: { topic: R.topic, score: R.score, classification: R.classification, signal_id: R.signal_id }\n} }];"
    },
-   "id": "0000005e-0000-4000-8000-000000000094",
+   "id": "0000005c-0000-4000-8000-000000000092",
    "name": "\ud83d\udcc4 BUILD REPORT PDF",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
     15610,
+    120
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "\n// \ud83d\udcdd MARKDOWN ARTIFACT \u2014 human-readable twin of the PDF. Emits TWO items:\n// [0] pdf passthrough for the GitHub push node, [1] the markdown artifact.\nconst R = $(\"Assemble Final Report\").first().json;\nconst rep = $(\"\ud83d\udcc4 BUILD REPORT PDF\").first().json;\nconst esc = (x) => String(x === null || x === undefined ? \"\" : x).replace(/\\|/g, \"\\\\|\").replace(/[\\r\\n]+/g, \" \");\nconst md = [];\nmd.push(`# \ud83d\udef0\ufe0f SIGNAL Intelligence Report`, \"\");\nmd.push(`> **${esc(R.topic || \"Untitled topic\")}**`, \"\");\nmd.push(`| Field | Value |`, `|---|---|`);\nmd.push(`| Signal score | **${R.score !== null && R.score !== undefined ? R.score + \"/100 \u2014 \" + R.classification : \"below threshold\"}** |`);\nmd.push(`| Confidence | ${R.confidence !== null && R.confidence !== undefined ? R.confidence + \"%\" : \"-\"} |`);\nmd.push(`| Signal ID | ${esc(R.signal_id || \"-\")} |`);\nmd.push(`| Run ID | ${esc(R.run_id || \"-\")} |`);\nmd.push(`| Generated (UTC) | ${rep.report_generated_at} |`);\nmd.push(`| Mode | ${R.mode || \"-\"}${R.demo_simulation ? \" (DEMO SIMULATION)\" : \" (LIVE)\"} |`);\nmd.push(`| Analysis path | ${esc(R.analysis_path || \"-\")} |`);\nif (R.dna) {\n  md.push(\"\", `## \ud83e\uddec Signal DNA`, \"\", `| Dimension | Score |`, `|---|---|`);\n  Object.entries(R.dna).forEach(([k, v]) => md.push(`| ${esc(k)} | ${v}/100 |`));\n}\nmd.push(\"\", `## \u23f1\ufe0f Temporal Analysis`, \"\");\nmd.push(`- Velocity vs baseline: **${R.velocity_pct !== undefined ? R.velocity_pct : \"-\"}%**`);\nif (R.reemergence) md.push(`- Re-emergence: ${R.reemergence.is_reemergence ? `\u267b\ufe0f YES (${R.reemergence.best_similarity_pct}% match with a previously dismissed pattern)` : \"no match with dismissed history\"}`);\nconst fo = R.forensics || {};\nmd.push(\"\", `## \ud83d\udd0d Source Forensics`, \"\");\nmd.push(`- Articles found: **${fo.articles_found !== undefined ? fo.articles_found : \"-\"}** \u2192 collapsed to **${fo.underlying_events !== undefined ? fo.underlying_events : \"-\"}** underlying events`);\nmd.push(`- Independent sources: **${fo.independent_sources !== undefined ? fo.independent_sources : \"-\"}** \u00b7 Unique domains: **${fo.unique_domains !== undefined ? fo.unique_domains : \"-\"}** \u00b7 Duplicates removed: **${fo.duplicates_removed !== undefined ? fo.duplicates_removed : \"-\"}**`);\nconst sensors = R.sensors || {};\nif (Object.keys(sensors).length) {\n  md.push(\"\", `## \ud83d\udce1 Sensor Sweep`, \"\", `| Channel | State | Items |`, `|---|---|---|`);\n  Object.entries(sensors).forEach(([k, v]) => md.push(`| ${esc(k)} | ${v.state} | ${v.found} |`));\n}\nif (R.red_team) {\n  md.push(\"\", `## \ud83e\udd4a Red Team`, \"\");\n  md.push(`- Adversarial searches executed: **${R.red_team.searches_executed}** \u00b7 Supporting: **${R.red_team.supporting_count}** \u00b7 Unresolved: **${R.red_team.unresolved_count}**`);\n  (R.red_team.contradictions || []).slice(0, 5).forEach(c => md.push(`- \u2757 Contradiction: ${esc(c.title || c.statement || \"\")}${c.url ? ` \u2014 <${c.url}>` : \"\"}`));\n}\nconst hyps = R.hypotheses || [];\nif (hyps.length) {\n  md.push(\"\", `## \ud83e\udde0 Competing Hypotheses`, \"\");\n  hyps.forEach((h, i) => md.push(`${i + 1}. **[${esc((h.status || \"\").toUpperCase())}]** prior ${h.prior}% \u2192 posterior ${h.posterior}% \u2014 ${esc(h.statement)}`));\n}\nconst inv = R.invalidators || [];\nif (inv.length) {\n  md.push(\"\", `## \ud83d\udc80 Invalidators (what would kill this signal)`, \"\");\n  inv.forEach(v => md.push(`- [ ] ${esc(v)}`));\n}\nconst ev = R.evidence || {};\nif ((ev.top_claims || []).length) {\n  md.push(\"\", `## \ud83d\udccc Extracted Claims (${ev.claims_extracted} total)`, \"\");\n  ev.top_claims.forEach(c => md.push(`- **[${esc(c.action)}]** ${esc(c.actor || \"?\")}: ${esc(c.statement)}${c.source ? ` \u2014 <${c.source}>` : \"\"}`));\n}\nconst gr = R.graph || {};\nif ((gr.edges || []).length) {\n  md.push(\"\", `## \ud83d\udd17 Entity Graph (${(gr.nodes || []).length} entities / ${(gr.edges || []).length} relationships)`, \"\");\n  gr.edges.slice(0, 15).forEach(e => md.push(`- \\`${esc(e.from)}\\` **--${esc(e.label)}-->** \\`${esc(e.to)}\\` (weight ${e.weight})`));\n}\nconst tl = R.timeline || [];\nif (tl.length) {\n  md.push(\"\", `## \ud83e\uddf5 Pipeline Timeline`, \"\", `| Stage | Detail |`, `|---|---|`);\n  tl.forEach(x => md.push(`| ${esc(x.stage)} | ${esc(x.detail)} |`));\n}\nlet corpus = [];\ntry { corpus = $(\"Cap Corpus\").all().map(i => i.json).filter(c => c.source_url); } catch (e) {}\nif (!corpus.length) { try { corpus = ($(\"\u2696\ufe0f SIGNAL JUDGE \u2014 Deterministic Score\").first().json.corpus || []).filter(c => c.source_url); } catch (e) {} }\nmd.push(\"\", `## \ud83c\udf10 Resources Examined (${corpus.length})`, \"\");\ncorpus.forEach((c, i) => md.push(`${i + 1}. **${esc(c.publisher || c.domain || \"unknown\")}** (${esc(c.channel || \"-\")}${c.published_at ? `, ${String(c.published_at).slice(0, 10)}` : \"\"}) \u2014 [${esc(c.title || \"(untitled)\")}](${c.source_url})`));\nif (!corpus.length) md.push(`_No external sources captured this run._`);\nmd.push(\"\", \"---\", `_Generated automatically by **SIGNAL \u2014 The Internet's Early Warning System** \u00b7 orchestrated by n8n \u00b7 ${rep.report_generated_at}_`);\nconst mdText = md.join(\"\\n\");\nconst base = rep.report_name.replace(/\\.pdf$/, \"\");\ntry { const fs = require(\"fs\"); fs.writeFileSync(`/home/node/reports/${base}.md`, mdText, \"utf8\"); } catch (e) {}\nreturn [\n  { json: { artifact: \"pdf\", report_filename: rep.report_filename, content_base64: rep.pdf_base64, commit_message: rep.report_commit_message } },\n  { json: { artifact: \"markdown\", report_name: `${base}.md`, report_filename: `reports/${base}.md`, content_base64: Buffer.from(mdText, \"utf8\").toString(\"base64\"), commit_message: rep.report_commit_message } }\n];"
+   },
+   "id": "0000005d-0000-4000-8000-000000000093",
+   "name": "\ud83d\udcdd BUILD REPORT MD",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    15830,
     120
    ]
   },
@@ -2110,7 +2078,7 @@
      },
      "conditions": [
       {
-       "id": "c6931",
+       "id": "c7987",
        "leftValue": "={{ (($env.GITHUB_TOKEN || '') !== '' && ($env.GITHUB_REPO || '') !== '') ? 'yes' : 'no' }}",
        "rightValue": "true",
        "operator": {
@@ -2123,12 +2091,12 @@
     },
     "options": {}
    },
-   "id": "0000005f-0000-4000-8000-000000000095",
+   "id": "0000005e-0000-4000-8000-000000000094",
    "name": "GitHub Report Push?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.3,
    "position": [
-    15830,
+    16050,
     20
    ]
   },
@@ -2159,44 +2127,44 @@
     },
     "sendBody": true,
     "specifyBody": "json",
-    "jsonBody": "={{ JSON.stringify({ message: $json.report_commit_message, content: $json.pdf_base64 }) }}",
+    "jsonBody": "={{ JSON.stringify({ message: $json.commit_message, content: $json.content_base64 }) }}",
     "options": {
      "timeout": 20000
     }
    },
-   "id": "00000060-0000-4000-8000-000000000096",
-   "name": "\ud83d\udc19 PUSH REPORT TO GITHUB",
+   "id": "0000005f-0000-4000-8000-000000000095",
+   "name": "\ud83d\udc19 PUSH ARTIFACTS TO GITHUB",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
    "position": [
-    16050,
+    16270,
     -80
    ],
    "onError": "continueRegularOutput"
   },
   {
    "parameters": {
-    "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nreturn [{ json: { report_push_skipped: true, description: \"GITHUB_TOKEN/GITHUB_REPO not configured - PDF artifact still embedded in execution data and saved to the reports volume\" } }];"
+    "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst DESC = \"GITHUB_TOKEN/GITHUB_REPO not configured - artifacts saved to the reports volume; FastAPI auto-pushes them via git\";\nconst items = $input.all();\nif (!items.length) return [{ json: { report_push_skipped: true, description: DESC } }];\nreturn items.map(i => ({ json: { ...(i.json || {}), report_push_skipped: true, description: DESC } }));"
    },
-   "id": "00000061-0000-4000-8000-000000000097",
+   "id": "00000060-0000-4000-8000-000000000096",
    "name": "\ud83d\udeab Mark Report Push Skipped",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    16050,
+    16270,
     120
    ]
   },
   {
    "parameters": {
-    "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Reassemble the full intelligence package + report metadata as the final response.\nconst pkg = $(\"Assemble Final Report\").first().json;\nconst rep = $(\"\ud83d\udcc4 BUILD REPORT PDF\").first().json;\nconst inp = ($input.first() && $input.first().json) || {};\nlet push = { pushed: false, detail: null, url: null };\nif (inp.report_push_skipped) push.detail = inp.description;\nelse if (inp.commit && inp.commit.sha) { push.pushed = true; push.url = (inp.content && inp.content.html_url) || null; push.sha = inp.commit.sha; }\nelse push.detail = \"GitHub API returned no commit (check token scopes / repo permissions)\";\nreturn [{ json: { ...pkg,\n  report: {\n    filename: rep.report_name, path: rep.report_filename,\n    generated_at: rep.report_generated_at, pages: rep.report_pages,\n    size_bytes: rep.report_size_bytes, saved_locally: rep.report_saved_locally,\n    download_url: `http://localhost:${$env.SIGNAL_API_PORT || 8000}/reports/${rep.report_name}`,\n    github_pushed: push.pushed, github_url: push.url, github_note: push.detail,\n    sha256_prefix: String(rep.pdf_base64 || \"\").length\n  }\n} }];"
+    "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\n// Reassemble the full intelligence package + both artifact records as the final response.\nconst pkg = $(\"Assemble Final Report\").first().json;\nconst pdfRep = $(\"\ud83d\udcc4 BUILD REPORT PDF\").first().json;\nlet mdItem = null;\ntry { mdItem = $(\"\ud83d\udcdd BUILD REPORT MD\").all().map(i => i.json).find(j => j.artifact === \"markdown\") || null; } catch (e) {}\nconst inp = $input.all().map(i => (i.json || {}));\nlet files = [], note = null;\nif (inp.length && inp[0].report_push_skipped) note = inp[0].description;\nelse {\n  for (const j of inp) {\n    if (j.commit && j.commit.sha) files.push({ path: j.content && j.content.path, url: j.content && j.content.html_url });\n    else if (!note && j.message) note = String(j.message).slice(0, 160);\n  }\n  if (!files.length && !note) note = \"GitHub API returned no commit (check token scopes / repo permissions)\";\n}\nconst api = `http://localhost:${$env.SIGNAL_API_PORT || 8000}`;\nreturn [{ json: { ...pkg,\n  report: {\n    generated_at: pdfRep.report_generated_at,\n    saved_locally: pdfRep.report_saved_locally,\n    artifacts: [\n      { type: \"pdf\", filename: pdfRep.report_name, pages: pdfRep.report_pages, size_bytes: pdfRep.report_size_bytes, download_url: `${api}/reports/${pdfRep.report_name}` },\n      ...(mdItem ? [{ type: \"markdown\", filename: mdItem.report_name, download_url: `${api}/reports/${mdItem.report_name}` }] : [])\n    ],\n    github_pushed_count: files.length,\n    github_files: files,\n    github_note: files.length ? `pushed ${files.length} artifact(s)` : note\n  }\n} }];"
    },
-   "id": "00000062-0000-4000-8000-000000000098",
+   "id": "00000061-0000-4000-8000-000000000097",
    "name": "\ud83d\udcce MERGE REPORT METADATA",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
    "position": [
-    16270,
+    16490,
     20
    ]
   },
@@ -2205,12 +2173,12 @@
     "respondWith": "firstIncomingItem",
     "options": {}
    },
-   "id": "00000063-0000-4000-8000-000000000099",
+   "id": "00000062-0000-4000-8000-000000000098",
    "name": "Return Intelligence Package",
    "type": "n8n-nodes-base.respondToWebhook",
    "typeVersion": 1.5,
    "position": [
-    16490,
+    16710,
     20
    ]
   }
@@ -2557,24 +2525,6 @@
    "main": [
     [
      {
-      "node": "Demo Scenario?",
-      "type": "main",
-      "index": 0
-     }
-    ]
-   ]
-  },
-  "Demo Scenario?": {
-   "main": [
-    [
-     {
-      "node": "Demo Sensor Fixtures",
-      "type": "main",
-      "index": 0
-     }
-    ],
-    [
-     {
       "node": "Normalize Plan",
       "type": "main",
       "index": 0
@@ -2617,17 +2567,6 @@
      },
      {
       "node": "\ud83d\udcac COMMUNITY RADAR",
-      "type": "main",
-      "index": 0
-     }
-    ]
-   ]
-  },
-  "Demo Sensor Fixtures": {
-   "main": [
-    [
-     {
-      "node": "Dedup by URL",
       "type": "main",
       "index": 0
      }
@@ -3350,6 +3289,17 @@
    "main": [
     [
      {
+      "node": "\ud83d\udcdd BUILD REPORT MD",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "\ud83d\udcdd BUILD REPORT MD": {
+   "main": [
+    [
+     {
       "node": "GitHub Report Push?",
       "type": "main",
       "index": 0
@@ -3361,7 +3311,7 @@
    "main": [
     [
      {
-      "node": "\ud83d\udc19 PUSH REPORT TO GITHUB",
+      "node": "\ud83d\udc19 PUSH ARTIFACTS TO GITHUB",
       "type": "main",
       "index": 0
      }
@@ -3375,7 +3325,7 @@
     ]
    ]
   },
-  "\ud83d\udc19 PUSH REPORT TO GITHUB": {
+  "\ud83d\udc19 PUSH ARTIFACTS TO GITHUB": {
    "main": [
     [
      {

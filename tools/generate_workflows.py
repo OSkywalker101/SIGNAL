@@ -133,8 +133,6 @@ wf.add(node("Plan Ready", "n8n-nodes-base.merge", 2.1, [1980, 0], {"mode": "appe
 
 # ---- 3 SENSE ----
 wf.add(sticky("## 3 · SENSE\nSeven independent radar channels sweep the public internet in parallel:\n🌐 web(DDG) · 📰 news(GoogleNews RSS) · 💻 GitHub API · 💼 jobs(HN Algolia) · 🏛️ policy(Federal Register) · 🔬 arXiv · 💬 Reddit\nEach sensor degrades independently — one failure never stops the investigation.", [2180, -700], 1560, 1560, 5))
-wf.add(iff("Demo Scenario?", [2200, 0], "={{ $('Initialize Run').first().json.scenario_key || '' }}", "notEmpty", ""))
-wf.add(node("Demo Sensor Fixtures", "n8n-nodes-base.code", 2, [2420, -320], {"jsCode": C.DEMO_FIXTURES}))
 wf.add(node("Normalize Plan", "n8n-nodes-base.code", 2, [2420, 100], {"jsCode": C.NORMALIZE_PLAN}))
 
 RADARS = [
@@ -384,12 +382,13 @@ wf.add(node("Log Quiet Observation", "n8n-nodes-base.noOp", 1, [13400, 420], {})
 wf.add(sticky("## 13 · OUTPUT\nFull intelligence package returned to the caller:\nscore · DNA · forensics · hypotheses · red-team deltas · graph · re-emergence · invalidators · timeline.", [15150, -140], 560, 400, 4))
 wf.add(node("Assemble Final Report", "n8n-nodes-base.code", 2, [15170, 120], {"jsCode": C.ASSEMBLE_REPORT}))
 
-# ---- 14 REPORT ARTIFACT (PDF -> GITHUB) ----
-wf.add(sticky("## 14 · REPORT ARTIFACT\n**📄 PDF FACTORY → GITHUB**\nEvery execution compiles a timestamped multi-page PDF of everything inferred and collected — verdict, DNA, temporal, forensics, sensors, red team, hypotheses, claims, graph, timeline and **every source URL examined** — then pushes it to GitHub via the Contents API.\nEnv-gated on `GITHUB_TOKEN` + `GITHUB_REPO`. Always saved to the mounted reports volume.", [15560, -220], 940, 480, 6))
+# ---- 14 REPORT ARTIFACTS (PDF + MARKDOWN -> GITHUB) ----
+wf.add(sticky("## 14 · REPORT ARTIFACTS\n**📄 PDF FACTORY + 📝 MARKDOWN TWIN → GITHUB**\nEvery execution compiles two timestamped artifacts of everything inferred and collected — verdict, DNA, temporal, forensics, sensors, red team, hypotheses, claims, graph, timeline and **every source URL examined**:\n· a multi-page PDF (pure-JS writer)\n· a GitHub-flavored Markdown report\nBoth are pushed to GitHub via the Contents API. Env-gated on `GITHUB_TOKEN` + `GITHUB_REPO`; always saved to the mounted reports volume.", [15560, -220], 940, 480, 6))
 wf.add(node("📄 BUILD REPORT PDF", "n8n-nodes-base.code", 2, [15610, 120], {"jsCode": C.BUILD_PDF_REPORT}))
-wf.add(iff("GitHub Report Push?", [15830, 20],
+wf.add(node("📝 BUILD REPORT MD", "n8n-nodes-base.code", 2, [15830, 120], {"jsCode": C.BUILD_MD_REPORT}))
+wf.add(iff("GitHub Report Push?", [16050, 20],
            "={{ (($env.GITHUB_TOKEN || '') !== '' && ($env.GITHUB_REPO || '') !== '') ? 'yes' : 'no' }}"))
-wf.add(node("🐙 PUSH REPORT TO GITHUB", "n8n-nodes-base.httpRequest", 4.2, [16050, -80],
+wf.add(node("🐙 PUSH ARTIFACTS TO GITHUB", "n8n-nodes-base.httpRequest", 4.2, [16270, -80],
             {"method": "PUT",
              "url": "=https://api.github.com/repos/{{ $env.GITHUB_REPO }}/contents/{{ $json.report_filename }}",
              "sendHeaders": True,
@@ -399,12 +398,12 @@ wf.add(node("🐙 PUSH REPORT TO GITHUB", "n8n-nodes-base.httpRequest", 4.2, [16
                  {"name": "X-GitHub-Api-Version", "value": "2022-11-28"},
                  {"name": "User-Agent", "value": "signal-early-warning"}]},
              "sendBody": True, "specifyBody": "json",
-             "jsonBody": "={{ JSON.stringify({ message: $json.report_commit_message, content: $json.pdf_base64 }) }}",
+             "jsonBody": "={{ JSON.stringify({ message: $json.commit_message, content: $json.content_base64 }) }}",
              "options": {"timeout": 20000}},
             on_error="continueRegularOutput"))
-wf.add(node("🚫 Mark Report Push Skipped", "n8n-nodes-base.code", 2, [16050, 120], {"jsCode": C.MARK_REPORT_SKIPPED}))
-wf.add(node("📎 MERGE REPORT METADATA", "n8n-nodes-base.code", 2, [16270, 20], {"jsCode": C.MERGE_REPORT}))
-wf.add(node("Return Intelligence Package", "n8n-nodes-base.respondToWebhook", 1.5, [16490, 20],
+wf.add(node("🚫 Mark Report Push Skipped", "n8n-nodes-base.code", 2, [16270, 120], {"jsCode": C.MARK_REPORT_SKIPPED}))
+wf.add(node("📎 MERGE REPORT METADATA", "n8n-nodes-base.code", 2, [16490, 20], {"jsCode": C.MERGE_REPORT}))
+wf.add(node("Return Intelligence Package", "n8n-nodes-base.respondToWebhook", 1.5, [16710, 20],
             {"respondWith": "firstIncomingItem", "options": {}}))
 
 # ---- WIRING ----
@@ -421,14 +420,11 @@ wf.link("Strategist OK?", "Plan Ready", 0, 0)
 wf.link("Strategist OK?", "OpenRouter Fallback Strategist", 1)
 wf.link("OpenRouter Fallback Strategist", "Parse Fallback Plan")
 wf.link("Parse Fallback Plan", "Plan Ready", 0, 1)
-wf.link("Plan Ready", "Demo Scenario?")
-wf.link("Demo Scenario?", "Demo Sensor Fixtures", 0)
-wf.link("Demo Scenario?", "Normalize Plan", 1)
+wf.link("Plan Ready", "Normalize Plan")
 wf.link("Normalize Plan", "🌐 WEB RADAR"); wf.link("Normalize Plan", "📰 NEWS RADAR")
 wf.link("Normalize Plan", "💻 GITHUB RADAR"); wf.link("Normalize Plan", "💼 WORKFORCE RADAR")
 wf.link("Normalize Plan", "🏛️ POLICY RADAR"); wf.link("Normalize Plan", "🔬 RESEARCH RADAR")
 wf.link("Normalize Plan", "💬 COMMUNITY RADAR")
-wf.link("Demo Sensor Fixtures", "Dedup by URL")
 wf.link("Unify Sensor Feeds", "Dedup by URL")
 wf.link("Dedup by URL", "Fingerprint Content")
 wf.link("Fingerprint Content", "Dedup by Hash")
@@ -497,10 +493,11 @@ wf.link("Emerging? Queue Digest", "Assemble Final Report", 0)
 wf.link("Emerging? Queue Digest", "Log Quiet Observation", 1)
 wf.link("Log Quiet Observation", "Assemble Final Report")
 wf.link("Assemble Final Report", "📄 BUILD REPORT PDF")
-wf.link("📄 BUILD REPORT PDF", "GitHub Report Push?")
-wf.link("GitHub Report Push?", "🐙 PUSH REPORT TO GITHUB", 0)
+wf.link("📄 BUILD REPORT PDF", "📝 BUILD REPORT MD")
+wf.link("📝 BUILD REPORT MD", "GitHub Report Push?")
+wf.link("GitHub Report Push?", "🐙 PUSH ARTIFACTS TO GITHUB", 0)
 wf.link("GitHub Report Push?", "🚫 Mark Report Push Skipped", 1)
-wf.link("🐙 PUSH REPORT TO GITHUB", "📎 MERGE REPORT METADATA")
+wf.link("🐙 PUSH ARTIFACTS TO GITHUB", "📎 MERGE REPORT METADATA")
 wf.link("🚫 Mark Report Push Skipped", "📎 MERGE REPORT METADATA")
 wf.link("📎 MERGE REPORT METADATA", "Return Intelligence Package")
 

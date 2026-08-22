@@ -35,7 +35,7 @@ return [{ json: {
   topic: String(body.topic || body.query || body.text || "Untitled topic").slice(0, 200),
   url: body.url || null,
   scenario_key: body.scenario_key || null,
-  demo_mode: ($env.DEMO_MODE === "true") || !!body.scenario_key,
+  demo_mode: $env.DEMO_MODE === "true",
   sensitivity: body.sensitivity || "standard",
   time_horizon_days: parseInt(body.time_horizon_days || "28", 10),
   requested_at: new Date().toISOString(),
@@ -1075,24 +1075,117 @@ return [{ json: {
 } }];"""
 
 MARK_REPORT_SKIPPED = UTILS + r"""
-return [{ json: { report_push_skipped: true, description: "GITHUB_TOKEN/GITHUB_REPO not configured - PDF artifact still embedded in execution data and saved to the reports volume" } }];"""
+const DESC = "GITHUB_TOKEN/GITHUB_REPO not configured - artifacts saved to the reports volume; FastAPI auto-pushes them via git";
+const items = $input.all();
+if (!items.length) return [{ json: { report_push_skipped: true, description: DESC } }];
+return items.map(i => ({ json: { ...(i.json || {}), report_push_skipped: true, description: DESC } }));"""
 
 MERGE_REPORT = UTILS + r"""
-// Reassemble the full intelligence package + report metadata as the final response.
+// Reassemble the full intelligence package + both artifact records as the final response.
 const pkg = $("Assemble Final Report").first().json;
-const rep = $("📄 BUILD REPORT PDF").first().json;
-const inp = ($input.first() && $input.first().json) || {};
-let push = { pushed: false, detail: null, url: null };
-if (inp.report_push_skipped) push.detail = inp.description;
-else if (inp.commit && inp.commit.sha) { push.pushed = true; push.url = (inp.content && inp.content.html_url) || null; push.sha = inp.commit.sha; }
-else push.detail = "GitHub API returned no commit (check token scopes / repo permissions)";
+const pdfRep = $("📄 BUILD REPORT PDF").first().json;
+let mdItem = null;
+try { mdItem = $("📝 BUILD REPORT MD").all().map(i => i.json).find(j => j.artifact === "markdown") || null; } catch (e) {}
+const inp = $input.all().map(i => (i.json || {}));
+let files = [], note = null;
+if (inp.length && inp[0].report_push_skipped) note = inp[0].description;
+else {
+  for (const j of inp) {
+    if (j.commit && j.commit.sha) files.push({ path: j.content && j.content.path, url: j.content && j.content.html_url });
+    else if (!note && j.message) note = String(j.message).slice(0, 160);
+  }
+  if (!files.length && !note) note = "GitHub API returned no commit (check token scopes / repo permissions)";
+}
+const api = `http://localhost:${$env.SIGNAL_API_PORT || 8000}`;
 return [{ json: { ...pkg,
   report: {
-    filename: rep.report_name, path: rep.report_filename,
-    generated_at: rep.report_generated_at, pages: rep.report_pages,
-    size_bytes: rep.report_size_bytes, saved_locally: rep.report_saved_locally,
-    download_url: `http://localhost:${$env.SIGNAL_API_PORT || 8000}/reports/${rep.report_name}`,
-    github_pushed: push.pushed, github_url: push.url, github_note: push.detail,
-    sha256_prefix: String(rep.pdf_base64 || "").length
+    generated_at: pdfRep.report_generated_at,
+    saved_locally: pdfRep.report_saved_locally,
+    artifacts: [
+      { type: "pdf", filename: pdfRep.report_name, pages: pdfRep.report_pages, size_bytes: pdfRep.report_size_bytes, download_url: `${api}/reports/${pdfRep.report_name}` },
+      ...(mdItem ? [{ type: "markdown", filename: mdItem.report_name, download_url: `${api}/reports/${mdItem.report_name}` }] : [])
+    ],
+    github_pushed_count: files.length,
+    github_files: files,
+    github_note: files.length ? `pushed ${files.length} artifact(s)` : note
   }
 } }];"""
+
+
+BUILD_MD_REPORT = r"""
+// 📝 MARKDOWN ARTIFACT — human-readable twin of the PDF. Emits TWO items:
+// [0] pdf passthrough for the GitHub push node, [1] the markdown artifact.
+const R = $("Assemble Final Report").first().json;
+const rep = $("📄 BUILD REPORT PDF").first().json;
+const esc = (x) => String(x === null || x === undefined ? "" : x).replace(/\|/g, "\\|").replace(/[\r\n]+/g, " ");
+const md = [];
+md.push(`# 🛰️ SIGNAL Intelligence Report`, "");
+md.push(`> **${esc(R.topic || "Untitled topic")}**`, "");
+md.push(`| Field | Value |`, `|---|---|`);
+md.push(`| Signal score | **${R.score !== null && R.score !== undefined ? R.score + "/100 — " + R.classification : "below threshold"}** |`);
+md.push(`| Confidence | ${R.confidence !== null && R.confidence !== undefined ? R.confidence + "%" : "-"} |`);
+md.push(`| Signal ID | ${esc(R.signal_id || "-")} |`);
+md.push(`| Run ID | ${esc(R.run_id || "-")} |`);
+md.push(`| Generated (UTC) | ${rep.report_generated_at} |`);
+md.push(`| Mode | ${R.mode || "-"}${R.demo_simulation ? " (DEMO SIMULATION)" : " (LIVE)"} |`);
+md.push(`| Analysis path | ${esc(R.analysis_path || "-")} |`);
+if (R.dna) {
+  md.push("", `## 🧬 Signal DNA`, "", `| Dimension | Score |`, `|---|---|`);
+  Object.entries(R.dna).forEach(([k, v]) => md.push(`| ${esc(k)} | ${v}/100 |`));
+}
+md.push("", `## ⏱️ Temporal Analysis`, "");
+md.push(`- Velocity vs baseline: **${R.velocity_pct !== undefined ? R.velocity_pct : "-"}%**`);
+if (R.reemergence) md.push(`- Re-emergence: ${R.reemergence.is_reemergence ? `♻️ YES (${R.reemergence.best_similarity_pct}% match with a previously dismissed pattern)` : "no match with dismissed history"}`);
+const fo = R.forensics || {};
+md.push("", `## 🔍 Source Forensics`, "");
+md.push(`- Articles found: **${fo.articles_found !== undefined ? fo.articles_found : "-"}** → collapsed to **${fo.underlying_events !== undefined ? fo.underlying_events : "-"}** underlying events`);
+md.push(`- Independent sources: **${fo.independent_sources !== undefined ? fo.independent_sources : "-"}** · Unique domains: **${fo.unique_domains !== undefined ? fo.unique_domains : "-"}** · Duplicates removed: **${fo.duplicates_removed !== undefined ? fo.duplicates_removed : "-"}**`);
+const sensors = R.sensors || {};
+if (Object.keys(sensors).length) {
+  md.push("", `## 📡 Sensor Sweep`, "", `| Channel | State | Items |`, `|---|---|---|`);
+  Object.entries(sensors).forEach(([k, v]) => md.push(`| ${esc(k)} | ${v.state} | ${v.found} |`));
+}
+if (R.red_team) {
+  md.push("", `## 🥊 Red Team`, "");
+  md.push(`- Adversarial searches executed: **${R.red_team.searches_executed}** · Supporting: **${R.red_team.supporting_count}** · Unresolved: **${R.red_team.unresolved_count}**`);
+  (R.red_team.contradictions || []).slice(0, 5).forEach(c => md.push(`- ❗ Contradiction: ${esc(c.title || c.statement || "")}${c.url ? ` — <${c.url}>` : ""}`));
+}
+const hyps = R.hypotheses || [];
+if (hyps.length) {
+  md.push("", `## 🧠 Competing Hypotheses`, "");
+  hyps.forEach((h, i) => md.push(`${i + 1}. **[${esc((h.status || "").toUpperCase())}]** prior ${h.prior}% → posterior ${h.posterior}% — ${esc(h.statement)}`));
+}
+const inv = R.invalidators || [];
+if (inv.length) {
+  md.push("", `## 💀 Invalidators (what would kill this signal)`, "");
+  inv.forEach(v => md.push(`- [ ] ${esc(v)}`));
+}
+const ev = R.evidence || {};
+if ((ev.top_claims || []).length) {
+  md.push("", `## 📌 Extracted Claims (${ev.claims_extracted} total)`, "");
+  ev.top_claims.forEach(c => md.push(`- **[${esc(c.action)}]** ${esc(c.actor || "?")}: ${esc(c.statement)}${c.source ? ` — <${c.source}>` : ""}`));
+}
+const gr = R.graph || {};
+if ((gr.edges || []).length) {
+  md.push("", `## 🔗 Entity Graph (${(gr.nodes || []).length} entities / ${(gr.edges || []).length} relationships)`, "");
+  gr.edges.slice(0, 15).forEach(e => md.push(`- \`${esc(e.from)}\` **--${esc(e.label)}-->** \`${esc(e.to)}\` (weight ${e.weight})`));
+}
+const tl = R.timeline || [];
+if (tl.length) {
+  md.push("", `## 🧵 Pipeline Timeline`, "", `| Stage | Detail |`, `|---|---|`);
+  tl.forEach(x => md.push(`| ${esc(x.stage)} | ${esc(x.detail)} |`));
+}
+let corpus = [];
+try { corpus = $("Cap Corpus").all().map(i => i.json).filter(c => c.source_url); } catch (e) {}
+if (!corpus.length) { try { corpus = ($("⚖️ SIGNAL JUDGE — Deterministic Score").first().json.corpus || []).filter(c => c.source_url); } catch (e) {} }
+md.push("", `## 🌐 Resources Examined (${corpus.length})`, "");
+corpus.forEach((c, i) => md.push(`${i + 1}. **${esc(c.publisher || c.domain || "unknown")}** (${esc(c.channel || "-")}${c.published_at ? `, ${String(c.published_at).slice(0, 10)}` : ""}) — [${esc(c.title || "(untitled)")}](${c.source_url})`));
+if (!corpus.length) md.push(`_No external sources captured this run._`);
+md.push("", "---", `_Generated automatically by **SIGNAL — The Internet's Early Warning System** · orchestrated by n8n · ${rep.report_generated_at}_`);
+const mdText = md.join("\n");
+const base = rep.report_name.replace(/\.pdf$/, "");
+try { const fs = require("fs"); fs.writeFileSync(`/home/node/reports/${base}.md`, mdText, "utf8"); } catch (e) {}
+return [
+  { json: { artifact: "pdf", report_filename: rep.report_filename, content_base64: rep.pdf_base64, commit_message: rep.report_commit_message } },
+  { json: { artifact: "markdown", report_name: `${base}.md`, report_filename: `reports/${base}.md`, content_base64: Buffer.from(mdText, "utf8").toString("base64"), commit_message: rep.report_commit_message } }
+];"""
