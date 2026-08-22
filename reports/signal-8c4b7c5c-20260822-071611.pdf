@@ -1,0 +1,569 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R 21 0 R] /Count 9 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 2830 >>
+stream
+BT /F2 15 Tf 54 738 Td (SIGNAL INTELLIGENCE REPORT) Tj ET
+BT /F1 9 Tf 54 716 Td (SIGNAL - The Internet's Early Warning System  |  orchestrated by n8n) Tj ET
+BT /F1 9 Tf 54 703 Td (--------------------------------------------------------------------------------------------------) Tj ET
+BT /F1 9 Tf 54 690 Td (Topic: solid state battery manufacturing scale-up) Tj ET
+BT /F1 9 Tf 54 677 Td (Run ID: 8c4b7c5c-25c1-4580-b291-463f56930130) Tj ET
+BT /F1 9 Tf 54 664 Td (Signal ID: ad4536df-6c9d-4270-b036-6b0ef8c80ca5) Tj ET
+BT /F1 9 Tf 54 651 Td (Generated \\(UTC\\): 2026-08-22T07:16:11.646Z) Tj ET
+BT /F1 9 Tf 54 638 Td (Input mode: natural \\(LIVE\\)) Tj ET
+BT /F1 9 Tf 54 625 Td (Analysis path: full) Tj ET
+BT /F2 12 Tf 54 612 Td () Tj ET
+BT /F2 12 Tf 54 595 Td (1. VERDICT & SCORE) Tj ET
+BT /F1 9 Tf 54 578 Td (Signal score: 68/100 \\(EMERGING\\)) Tj ET
+BT /F1 9 Tf 54 565 Td (Confidence: 77%) Tj ET
+BT /F1 9 Tf 54 552 Td (Leading hypothesis: solid state battery manufacturing scale-up ecosystem entering a genuine) Tj ET
+BT /F1 9 Tf 54 539 Td (acceleration phase) Tj ET
+BT /F2 12 Tf 54 526 Td () Tj ET
+BT /F2 12 Tf 54 509 Td (2. SIGNAL DNA) Tj ET
+BT /F1 9 Tf 54 492 Td (  source_quality.... 75/100) Tj ET
+BT /F1 9 Tf 54 479 Td (  independence...... 100/100) Tj ET
+BT /F1 9 Tf 54 466 Td (  acceleration...... 37/100) Tj ET
+BT /F1 9 Tf 54 453 Td (  novelty........... 100/100) Tj ET
+BT /F1 9 Tf 54 440 Td (  cross_domain...... 22/100) Tj ET
+BT /F1 9 Tf 54 427 Td (  contradiction..... 0/100) Tj ET
+BT /F2 12 Tf 54 414 Td () Tj ET
+BT /F2 12 Tf 54 397 Td (3. TEMPORAL ANALYSIS) Tj ET
+BT /F1 9 Tf 54 380 Td (Velocity vs baseline: -23.1%) Tj ET
+BT /F1 9 Tf 54 367 Td (Re-emergence: no match with dismissed history) Tj ET
+BT /F2 12 Tf 54 354 Td () Tj ET
+BT /F2 12 Tf 54 337 Td (4. SOURCE FORENSICS) Tj ET
+BT /F1 9 Tf 54 320 Td (Articles found: 60) Tj ET
+BT /F1 9 Tf 54 307 Td (Underlying events collapsed: 56) Tj ET
+BT /F1 9 Tf 54 294 Td (Independent sources: 56) Tj ET
+BT /F1 9 Tf 54 281 Td (Unique domains: 11) Tj ET
+BT /F1 9 Tf 54 268 Td (Duplicates removed: 4) Tj ET
+BT /F2 12 Tf 54 255 Td () Tj ET
+BT /F2 12 Tf 54 238 Td (5. SENSOR SWEEP) Tj ET
+BT /F1 9 Tf 54 221 Td (  web........... AVAILABLE \\(10 items\\)) Tj ET
+BT /F1 9 Tf 54 208 Td (  news.......... AVAILABLE \\(100 items\\)) Tj ET
+BT /F1 9 Tf 54 195 Td (  community..... DEGRADED \\(0 items\\)) Tj ET
+BT /F1 9 Tf 54 182 Td (  policy........ AVAILABLE \\(10 items\\)) Tj ET
+BT /F1 9 Tf 54 169 Td (  research...... AVAILABLE \\(10 items\\)) Tj ET
+BT /F1 9 Tf 54 156 Td (  github........ EMPTY \\(0 items\\)) Tj ET
+BT /F1 9 Tf 54 143 Td (  jobs.......... EMPTY \\(0 items\\)) Tj ET
+BT /F2 12 Tf 54 130 Td () Tj ET
+BT /F2 12 Tf 54 113 Td (6. RED TEAM) Tj ET
+BT /F1 9 Tf 54 96 Td (Adversarial searches executed: 5) Tj ET
+BT /F1 9 Tf 54 83 Td (Contradictions surfaced: 0) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 4234 >>
+stream
+BT /F2 12 Tf 54 738 Td () Tj ET
+BT /F2 12 Tf 54 721 Td (7. COMPETING HYPOTHESES) Tj ET
+BT /F2 10 Tf 54 704 Td (  #1 [LEADING] prior 58% -> posterior 58%) Tj ET
+BT /F1 9 Tf 54 689 Td (solid state battery manufacturing scale-up ecosystem entering a genuine acceleration phase) Tj ET
+BT /F2 10 Tf 54 676 Td (  #2 [CANDIDATE] prior 34% -> posterior 34%) Tj ET
+BT /F1 9 Tf 54 661 Td (Short-term spike; cyclical or seasonal noise) Tj ET
+BT /F2 10 Tf 54 648 Td (  #3 [CANDIDATE] prior 26% -> posterior 26%) Tj ET
+BT /F1 9 Tf 54 633 Td (Coordinated publicity inflating perceived momentum) Tj ET
+BT /F2 12 Tf 54 620 Td () Tj ET
+BT /F2 12 Tf 54 603 Td (8. INVALIDATORS \\(what would kill this signal\\)) Tj ET
+BT /F1 9 Tf 54 586 Td ([ ] Coverage volume for "solid state battery manufacturing scale-up" returns to historical) Tj ET
+BT /F1 9 Tf 54 573 Td (baseline within one week) Tj ET
+BT /F1 9 Tf 54 560 Td ([ ] Independent outlets stop adding NEW reporting \\(only syndicated copies appear\\)) Tj ET
+BT /F1 9 Tf 54 547 Td ([ ] No independent confirmation emerges within the time horizon) Tj ET
+BT /F1 9 Tf 54 534 Td ([ ] Key named entities issue denials or retractions) Tj ET
+BT /F1 9 Tf 54 521 Td ([ ] Downstream indicators \\(hiring/GitHub/procurement\\) flatten or reverse) Tj ET
+BT /F2 12 Tf 54 508 Td () Tj ET
+BT /F2 12 Tf 54 491 Td (9. EXTRACTED CLAIMS) Tj ET
+BT /F2 10 Tf 54 474 Td (  C1. [partners] Factorial) Tj ET
+BT /F1 9 Tf 54 459 Td (Factorial and SK On Sign MoU to Explore Solid-State Battery Manufacturing - GlobeNewswire) Tj ET
+BT /F2 10 Tf 54 446 Td (  C2. [partners] Factorial) Tj ET
+BT /F1 9 Tf 54 431 Td (Factorial and SK On Sign MoU to Explore Solid-State Battery Manufacturing - Batteries News) Tj ET
+BT /F2 10 Tf 54 418 Td (  C3. [invests] Solid Power) Tj ET
+BT /F1 9 Tf 54 403 Td (Solid Power at J.P. Morgan Automotive Conference: scale-up and shift - Investing.com) Tj ET
+BT /F2 10 Tf 54 390 Td (  C4. [launches] Blue Solutions) Tj ET
+BT /F1 9 Tf 54 375 Td (Blue Solutions and AVL Launch Complete Joint Safety Program to Prepare Next Generation) Tj ET
+BT /F1 9 Tf 54 362 Td (Solid-State Cell Technology Scale Up - Batteries News) Tj ET
+BT /F2 10 Tf 54 349 Td (  C5. [partners] Factorial) Tj ET
+BT /F1 9 Tf 54 334 Td (Factorial and Philenergy Sign MOU to Accelerate All-Solid-State Battery Manufacturing -) Tj ET
+BT /F1 9 Tf 54 321 Td (Business Wire) Tj ET
+BT /F2 10 Tf 54 308 Td (  C6. [invests] Axon Partners Group) Tj ET
+BT /F1 9 Tf 54 293 Td (Axon Partners Group invests in Basquevolt to advance solid-state electrolyte scale-up -) Tj ET
+BT /F1 9 Tf 54 280 Td (Electric & Hybrid Vehicle Technology International) Tj ET
+BT /F2 10 Tf 54 267 Td (  C7. [hires] The) Tj ET
+BT /F1 9 Tf 54 252 Td (The latest developments moving solid-state batteries closer to commercial reality - Engineer) Tj ET
+BT /F1 9 Tf 54 239 Td (Live) Tj ET
+BT /F2 10 Tf 54 226 Td (  C8. [partners] Honda Has) Tj ET
+BT /F1 9 Tf 54 211 Td (Honda Has A New Partner For Solid-State EV Batteries - InsideEVs) Tj ET
+BT /F2 12 Tf 54 198 Td () Tj ET
+BT /F2 12 Tf 54 181 Td (10. ENTITY GRAPH) Tj ET
+BT /F1 9 Tf 54 164 Td (Entities / relationships: 18 entities, 10 relationships) Tj ET
+BT /F1 9 Tf 54 151 Td (    factorial --partners_with--> factorial and sk on sign mou to explore solid state battery manufacturing glob \\(w=0.25\\)) Tj ET
+BT /F1 9 Tf 54 138 Td (    factorial --partners_with--> factorial and sk on sign mou to explore solid state battery manufacturing batt \\(w=0.25\\)) Tj ET
+BT /F1 9 Tf 54 125 Td (    solid power --invests_in--> solid power at j p morgan automotive conference scale up and shift investing \\(w=0.25\\)) Tj ET
+BT /F1 9 Tf 54 112 Td (    blue solutions --announces--> blue solutions and avl launch complete joint safety program to prepare next gene \\(w=0.25\\)) Tj ET
+BT /F1 9 Tf 54 99 Td (    factorial --partners_with--> factorial and philenergy sign mou to accelerate all solid state battery manufact \\(w=0.25\\)) Tj ET
+BT /F1 9 Tf 54 86 Td (    axon partners --invests_in--> axon partners invests in basquevolt to advance solid state electrolyte sca \\(w=0.25\\)) Tj ET
+BT /F1 9 Tf 54 73 Td (    the --hires--> the latest developments moving solid state batteries closer to commercial realit \\(w=0.25\\)) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 10 0 R >>
+endobj
+10 0 obj
+<< /Length 4446 >>
+stream
+BT /F1 9 Tf 54 738 Td (    honda has --partners_with--> honda has a new partner for solid state ev batteries insideevs \\(w=0.25\\)) Tj ET
+BT /F1 9 Tf 54 725 Td (    solid state battery product launches --announces--> solid state battery product launches by major manufacturers had already material \\(w=0.25\\)) Tj ET
+BT /F1 9 Tf 54 712 Td (    china --expands--> china ignites solid state battery race production expands in 2026 vehicle demo \\(w=0.25\\)) Tj ET
+BT /F2 12 Tf 54 699 Td () Tj ET
+BT /F2 12 Tf 54 682 Td (11. PIPELINE TIMELINE) Tj ET
+BT /F1 9 Tf 54 665 Td (  [INPUT] natural request received) Tj ET
+BT /F1 9 Tf 54 652 Td (  [THINK] strategist via openrouter: 6 queries, 3 counter-queries) Tj ET
+BT /F1 9 Tf 54 639 Td (  [SENSE] 7 radar channels activated) Tj ET
+BT /F1 9 Tf 54 626 Td (  [INVESTIGATE] 60 articles, 0 deep-crawled) Tj ET
+BT /F1 9 Tf 54 613 Td (  [CONNECT] 18 entities resolved, 10 relationships mapped) Tj ET
+BT /F1 9 Tf 54 600 Td (  [DETECT CHANGE] velocity -23.1% vs baseline) Tj ET
+BT /F1 9 Tf 54 587 Td (  [FORM HYPOTHESES] 3 competing hypotheses) Tj ET
+BT /F1 9 Tf 54 574 Td (  [RED TEAM] 5 adversarial searches, 0 contradictions found) Tj ET
+BT /F1 9 Tf 54 561 Td (  [VERIFY] forensics collapsed 60 articles -> 56 events) Tj ET
+BT /F1 9 Tf 54 548 Td (  [SCORE] deterministic score 68/100 EMERGING) Tj ET
+BT /F1 9 Tf 54 535 Td (  [REMEMBER] persisted to PostgreSQL memory) Tj ET
+BT /F1 9 Tf 54 522 Td (  [HUMAN LOOP] notification  dispatched; review requested) Tj ET
+BT /F2 12 Tf 54 509 Td () Tj ET
+BT /F2 12 Tf 54 492 Td (12. RESOURCES EXAMINED \\(60\\)) Tj ET
+BT /F2 9 Tf 54 475 Td (  [1] electrek.co \\(web\\)) Tj ET
+BT /F1 9 Tf 54 462 Td (Solid-state EV battery leaders team up to scale the new tech) Tj ET
+BT /F1 8 Tf 54 449 Td (https://electrek.co/2026/07/29/solid-state-ev-battery-leaders-team-up/) Tj ET
+BT /F2 9 Tf 54 437 Td (  [2] beyondtmrw.org \\(web\\)) Tj ET
+BT /F1 9 Tf 54 424 Td (Solid State Battery Manufacturing 2026: | Oem Timelines) Tj ET
+BT /F1 8 Tf 54 411 Td (https://beyondtmrw.org/article/solid-state-batteries-manufacturing-roadblocks-and-2026-pilot-l) Tj ET
+BT /F1 8 Tf 54 399 Td (ines) Tj ET
+BT /F2 9 Tf 54 387 Td (  [3] evcube.net \\(web\\)) Tj ET
+BT /F1 9 Tf 54 374 Td (Toyota&#x27;s Solid-State Battery Is the Real Deal - But It Won&#x27;t Reach Your ...) Tj ET
+BT /F1 8 Tf 54 361 Td (https://evcube.net/toyota-solid-state-battery-2027-production-reality/) Tj ET
+BT /F2 9 Tf 54 349 Td (  [4] linkedin.com \\(web\\)) Tj ET
+BT /F1 9 Tf 54 336 Td (CIBF 2026: 300Wh/kg->400Wh/kg->500Wh/kg: The Solid-State ... - LinkedIn) Tj ET
+BT /F1 8 Tf 54 323 Td (https://www.linkedin.com/pulse/cibf-2026-300whkg400whkg500whkg-solid-state-battery-roadmap-leo) Tj ET
+BT /F1 8 Tf 54 311 Td (-gao-wb2pc) Tj ET
+BT /F2 9 Tf 54 299 Td (  [5] intelligentliving.co \\(web\\)) Tj ET
+BT /F1 9 Tf 54 286 Td (Solid-State Battery Scoreboard 2025-2026: Who is Scaling) Tj ET
+BT /F1 8 Tf 54 273 Td (https://www.intelligentliving.co/solid-state-battery-scoreboard-2025-2026/) Tj ET
+BT /F2 9 Tf 54 261 Td (  [6] frontiersin.org \\(web\\)) Tj ET
+BT /F1 9 Tf 54 248 Td (The scale-up gap in solid-state batteries: from coin-cell ... - Frontiers) Tj ET
+BT /F1 8 Tf 54 235 Td (https://www.frontiersin.org/journals/energy-research/articles/10.3389/fenrg.2026.1798886/full) Tj ET
+BT /F2 9 Tf 54 223 Td (  [7] vikramsolar.com \\(web\\)) Tj ET
+BT /F1 9 Tf 54 210 Td (Vikram Solar to Establish 1 GWh Solid-State Battery Facility) Tj ET
+BT /F1 8 Tf 54 197 Td (https://www.vikramsolar.com/press-releases/vikram-solar-to-venture-into-fully-integrated-solid) Tj ET
+BT /F1 8 Tf 54 185 Td (-state-cell-and-battery-manufacturing/) Tj ET
+BT /F2 9 Tf 54 173 Td (  [8] futuregreentech.com \\(web\\)) Tj ET
+BT /F1 9 Tf 54 160 Td (Inside the Race to Build the World&#x27;s First Commercial Solid-State ...) Tj ET
+BT /F1 8 Tf 54 147 Td (https://futuregreentech.com/articles/solid-state-battery-race) Tj ET
+BT /F2 9 Tf 54 135 Td (  [9] notebookcheck.net \\(web\\)) Tj ET
+BT /F1 9 Tf 54 122 Td (CATL confirms solid-state battery production in 2027 as ... - Notebookcheck) Tj ET
+BT /F1 8 Tf 54 109 Td (https://www.notebookcheck.net/CATL-confirms-solid-state-battery-production-in-2027-as-it-warns) Tj ET
+BT /F1 8 Tf 54 97 Td (-about-manufacturing-scale.1134947.0.html) Tj ET
+BT /F2 9 Tf 54 85 Td (  [10] trendforce.com \\(web\\)) Tj ET
+BT /F1 9 Tf 54 72 Td (Solid-State Batteries Enter Pilot Production, Costs Expected to Drop to ...) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 12 0 R >>
+endobj
+12 0 obj
+<< /Length 5776 >>
+stream
+BT /F1 8 Tf 54 738 Td (https://www.trendforce.com/presscenter/news/20241031-12346.html) Tj ET
+BT /F2 9 Tf 54 726 Td (  [11] https://news.google.com/rss/articles/CBMimgFBVV95cUxOeVdZUV9 \\(news, Mon, 17 Au\\)) Tj ET
+BT /F1 9 Tf 54 713 Td (Solid Power Eyes 2027 Electrolyte Output, Korea JV to Scale Solid-State Batteries - Yahoo) Tj ET
+BT /F1 9 Tf 54 700 Td (Finance) Tj ET
+BT /F1 8 Tf 54 687 Td (https://news.google.com/rss/articles/CBMimgFBVV95cUxOeVdZUV9nc0h0clVtVzVwU2FaekdKcXlRNWFyZlBCa) Tj ET
+BT /F1 8 Tf 54 675 Td (kM1UEJLT3REbWQzbjI3akVvNmxFWWVVY2JTS0VnRjl0d0UtR2JRak1QU2FYcDdENEY4V0d2VlVJMEd2WVNNT3ItaEJWWGE) Tj ET
+BT /F1 8 Tf 54 663 Td (wSlRDV3hlUXRURElQdTdkcjd1SVBSY2VRbm5fQUdiNmZXcHN5anFVRzhMSGd3?oc=5) Tj ET
+BT /F2 9 Tf 54 651 Td (  [12] https://news.google.com/rss/articles/CBMifkFVX3lxTE50M0tBUmE \\(news, Sun, 16 Au\\)) Tj ET
+BT /F1 9 Tf 54 638 Td (BYD Solid-State Battery Production to Begin in 2027: Dual-Electrolyte Design, 400 Wh/kg, and) Tj ET
+BT /F1 9 Tf 54 625 Td (the Road to $70/kWh - Intelligent Living) Tj ET
+BT /F1 8 Tf 54 612 Td (https://news.google.com/rss/articles/CBMifkFVX3lxTE50M0tBUmE2Y3Y0YkF0RUFvRExQVUgySFl1Ui1WRGFQX) Tj ET
+BT /F1 8 Tf 54 600 Td (25kM2ZHX1RkdHNxQTJlTFJha1otOWFFU3lfMVpWM25Zand5T2hISl9RcU1meloxZVB4MGxiMk1YcWtCOG9CQU5aX3RwTV9) Tj ET
+BT /F1 8 Tf 54 588 Td (wY3BKNFJGRXRpT2tRcGZ1dw?oc=5) Tj ET
+BT /F2 9 Tf 54 576 Td (  [13] https://news.google.com/rss/articles/CBMivAFBVV95cUxORXdqZkR \\(news, Tue, 11 Au\\)) Tj ET
+BT /F1 9 Tf 54 563 Td (SOLiD: Scaling European manufacturing of solid-state lithium-metal batteries - Innovation News) Tj ET
+BT /F1 9 Tf 54 550 Td (Network) Tj ET
+BT /F1 8 Tf 54 537 Td (https://news.google.com/rss/articles/CBMivAFBVV95cUxORXdqZkRTdTd1dnBnMUp6d3ZUenE2S0JBcmlzMGdSQ) Tj ET
+BT /F1 8 Tf 54 525 Td (0dWckRwZnB2akdjbjdGaHUwaU5hUU41b3pxZ1RfRGhhSDZsUDFLd1ZOSHpYRlpsOUo4cGFOVUxLNERscjQ0azBlSzNaRUR) Tj ET
+BT /F1 8 Tf 54 513 Td (Jb1c3WlhrMW00aFBKMGhLekZYdUVMTzdiUnlYSm9hSzdiUHZJbzM0amhyazZwSWd5YTRiUExhNmxBNE1WeXRnUVdYdFEya) Tj ET
+BT /F1 8 Tf 54 501 Td (nY2TFJZZW1ITw?oc=5) Tj ET
+BT /F2 9 Tf 54 489 Td (  [14] https://news.google.com/rss/articles/CBMi3gFBVV95cUxPTnI4RG5 \\(news, Wed, 29 Ju\\)) Tj ET
+BT /F1 9 Tf 54 476 Td (Factorial and SK On Sign MoU to Explore Solid-State Battery Manufacturing - GlobeNewswire) Tj ET
+BT /F1 8 Tf 54 463 Td (https://news.google.com/rss/articles/CBMi3gFBVV95cUxPTnI4RG5FVzJPM0o5a2xPTWhudGY2N2cwcjhUdUk4L) Tj ET
+BT /F1 8 Tf 54 451 Td (WRuSnFXRU0xdWU3WE4xd3hDeEVPUjVWSXhzcVhIUmJpV0YyTlBkc0twcWFpWkZLUTZSWUhINGg4ZFJIdHhtbnp0czVQYjc) Tj ET
+BT /F1 8 Tf 54 439 Td (tclFCTHRSYmJHSmIyRWE2MjM1Z1FYY3AydUF0NVVTV1BLaDFzSlBzVGVXcGtlUUtaR3VaaFA1THlvMWZ0eUpKQUJJZFdyV) Tj ET
+BT /F1 8 Tf 54 427 Td (2dlZzNacm04Q1dUTzlhMFZGQnRidFU4LVlaODNiamRRdjVpV1lxaFNLMVE?oc=5) Tj ET
+BT /F2 9 Tf 54 415 Td (  [15] https://news.google.com/rss/articles/CBMimAFBVV95cUxPcVpmNXp \\(news, Thu, 28 Ma\\)) Tj ET
+BT /F1 9 Tf 54 402 Td (The scale-up gap in solid-state batteries: from coin-cell metrics to grid-scale deployment -) Tj ET
+BT /F1 9 Tf 54 389 Td (Frontiers) Tj ET
+BT /F1 8 Tf 54 376 Td (https://news.google.com/rss/articles/CBMimAFBVV95cUxPcVpmNXpIcTVLeTFBQ1k1SzBlZS1Jb21heXFYNmthM) Tj ET
+BT /F1 8 Tf 54 364 Td (01rbVlqa004aUtwLV9HYVM1V1Btajd5OHFnY2JTaFpDMnVpUm9YbGxWRE80RzdGcEJPR0JNcUNxajNCME5HcDJrMzB1WXN) Tj ET
+BT /F1 8 Tf 54 352 Td (mbjEweENuY3RkeHA3ODRCMndzYUkwUmp6WEMwQWd5WnpLN1pqZTkzbjkzaw?oc=5) Tj ET
+BT /F2 9 Tf 54 340 Td (  [16] https://news.google.com/rss/articles/CBMiekFVX3lxTE1YZWsyMVI \\(news, Wed, 29 Ju\\)) Tj ET
+BT /F1 9 Tf 54 327 Td (Two solid-state EV battery leaders are joining forces to scale the 'breakthrough' tech -) Tj ET
+BT /F1 9 Tf 54 314 Td (Electrek) Tj ET
+BT /F1 8 Tf 54 301 Td (https://news.google.com/rss/articles/CBMiekFVX3lxTE1YZWsyMVI3VURNd0QwX3AtTV9nekdTU2s2TlNZLVZYb) Tj ET
+BT /F1 8 Tf 54 289 Td (1kwSS1FSnJCYlhoaHphdlFhR1NuVi14MTBValJvOHJZTTk5a1lvMkdrT3FJcmNGQk5ScUpzTWt1NHdSMktiUDgwaG1RVEV) Tj ET
+BT /F1 8 Tf 54 277 Td (WN3FyRDNuTEgxNmdR?oc=5) Tj ET
+BT /F2 9 Tf 54 265 Td (  [17] https://news.google.com/rss/articles/CBMiiwFBVV95cUxNLXd1T2Z \\(news, Mon, 03 Au\\)) Tj ET
+BT /F1 9 Tf 54 252 Td (Solid State Battery Materials Market Size, Share | Growth [2034] - Fortune Business Insights) Tj ET
+BT /F1 8 Tf 54 239 Td (https://news.google.com/rss/articles/CBMiiwFBVV95cUxNLXd1T2ZhRlVDUXZuSkdaekk0dHhpMlIwTTZKV1RfV) Tj ET
+BT /F1 8 Tf 54 227 Td (TVodmplUkVnWC16d2p0ak84MVU1bTdXTUZwQlVMeS16VHMyOEFiS3dSeC1VZzBCV3JZQlFTTWRHMHhtQlBGM1kzMVJKNG4) Tj ET
+BT /F1 8 Tf 54 215 Td (zLUZ1bjZsRTlPdE4weHk5SHRzeUNPenV0NTNCQUl3?oc=5) Tj ET
+BT /F2 9 Tf 54 203 Td (  [18] https://news.google.com/rss/articles/CBMickFVX3lxTE9laHlDUG4 \\(news, Wed, 08 Ju\\)) Tj ET
+BT /F1 9 Tf 54 190 Td (Beyond Lithium: New Battery Tech Starts to Break Through - Yale E360) Tj ET
+BT /F1 8 Tf 54 177 Td (https://news.google.com/rss/articles/CBMickFVX3lxTE9laHlDUG43QVFoQ0NFWUNxUXFhV0FYbjZLX3RqYWRuW) Tj ET
+BT /F1 8 Tf 54 165 Td (XNQRkVJaXBER3M0ekxWUGJhOUI3aVNHZHpKdTJGbV9xUVp3RENYZElRakJnSXBIUW4wNmtsdVBTT1JKQjNTVHVfNWxPdHh) Tj ET
+BT /F1 8 Tf 54 153 Td (5blJGUQ?oc=5) Tj ET
+BT /F2 9 Tf 54 141 Td (  [19] https://news.google.com/rss/articles/CBMiogFBVV95cUxPZnN6UkN \\(news, Sat, 08 Au\\)) Tj ET
+BT /F1 9 Tf 54 128 Td (Factorial and SK On Sign MoU to Explore Solid-State Battery Manufacturing - Batteries News) Tj ET
+BT /F1 8 Tf 54 115 Td (https://news.google.com/rss/articles/CBMiogFBVV95cUxPZnN6UkNPNVhkZWgwaVJ1bEZqMWJ0MzBBNFhoYktFX) Tj ET
+BT /F1 8 Tf 54 103 Td (zA1WFkyQ2tjb3RmVC1lMUFFNlZEWUxrcFpRRkhVWThEaEplRW5yWVdia2hKLXhEcWd3YU4zV3hxd2dQWkZHUHNUcWhmRE9) Tj ET
+BT /F1 8 Tf 54 91 Td (raGJXMnVxbU9nZnU5Y3cyZVJzalBwUWkwdlhHZ2lKdzlHSm5LNmh3blpTQnFIWXQ4QWl0RlE?oc=5) Tj ET
+BT /F2 9 Tf 54 79 Td (  [20] https://news.google.com/rss/articles/CBMixAFBVV95cUxNS3ZKaUd \\(news, Wed, 10 Ju\\)) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 14 0 R >>
+endobj
+14 0 obj
+<< /Length 5984 >>
+stream
+BT /F1 9 Tf 54 738 Td (How Far Away Is the "Affordable Era" for All-Solid-State Batteries? - Gasgoo) Tj ET
+BT /F1 8 Tf 54 725 Td (https://news.google.com/rss/articles/CBMixAFBVV95cUxNS3ZKaUdtTWk0TElVREU5OGM4TGJUUjAxellDWXdiO) Tj ET
+BT /F1 8 Tf 54 713 Td (WhwNjFiYXdrSDJadF95YWZQR2hHNmt1SXFLamFoWWpyMm5mcTlyb3RYSUtMSlp5RG9sM2Z3QmRZNDRSby1LZDU0QjNwT0Z) Tj ET
+BT /F1 8 Tf 54 701 Td (ZMV8xWkpUaTNVU3RfS1Bnd2h0b29ORlhHOTY0eUlEd3ZSdWRNenNrdlpCNENZYmd2dmJrWDJpZHZQMjBBWFItbXBpTjhPT) Tj ET
+BT /F1 8 Tf 54 689 Td (0diY01lN0dUY1hPbHF2MmFT?oc=5) Tj ET
+BT /F2 9 Tf 54 677 Td (  [21] https://news.google.com/rss/articles/CBMiowFBVV95cUxOX3FkM2t \\(news, Sun, 21 Ju\\)) Tj ET
+BT /F1 9 Tf 54 664 Td (The EV Battery Call Is Coming From Inside The House - CleanTechnica) Tj ET
+BT /F1 8 Tf 54 651 Td (https://news.google.com/rss/articles/CBMiowFBVV95cUxOX3FkM2tObFhNX1RlS3psV2NGcFRrNDZBbXBzSThyZ) Tj ET
+BT /F1 8 Tf 54 639 Td (WpVUy1hdXBMeGFrc09mRnNVUW1FSVhhZk5DRzZtZEVuOWNreW9vMXlZbG0ydFFvSkNYMU1wazNUNXdfc3psb0FRREdDNEp) Tj ET
+BT /F1 8 Tf 54 627 Td (zUHdvN3BKeWxnOTFadGFPelVEN3FTNU9uRzZHWmtmOHpHTnRjaXBYU2YyRGZRel9SMFpNMzBz?oc=5) Tj ET
+BT /F2 9 Tf 54 615 Td (  [22] https://news.google.com/rss/articles/CBMivAFBVV95cUxOYlpmUEx \\(news, Thu, 13 Au\\)) Tj ET
+BT /F1 9 Tf 54 602 Td (Solid Power at J.P. Morgan Automotive Conference: scale-up and shift - Investing.com) Tj ET
+BT /F1 8 Tf 54 589 Td (https://news.google.com/rss/articles/CBMivAFBVV95cUxOYlpmUEx6Zlc2R0JuSFBEd1p1T2JNOWRqOTBJUmRST) Tj ET
+BT /F1 8 Tf 54 577 Td (nc2WDg2N1VCNU9FSTZ0SW82MXlJYXd6S1BvMkItNGFLNm1lekpFcVd1Sm1UR1FnMzRKeEVxMkdUdUF5OU9TdWZuR0ZZMDF) Tj ET
+BT /F1 8 Tf 54 565 Td (qSUtsbm9sSkhPaUltb0NhRnE0N0hqcXVPSTFxeTd0UWFVMldSc25jeEJmZmIzc3dWYW80VEJZTElDUGtENXJMcEdPc2ZrW) Tj ET
+BT /F1 8 Tf 54 553 Td (lNDV0xrMXFucw?oc=5) Tj ET
+BT /F2 9 Tf 54 541 Td (  [23] https://news.google.com/rss/articles/CBMid0FVX3lxTE1wVXRtamh \\(news, Thu, 26 Fe\\)) Tj ET
+BT /F1 9 Tf 54 528 Td (How do we bridge the battery scale-up gap? - anl.gov) Tj ET
+BT /F1 8 Tf 54 515 Td (https://news.google.com/rss/articles/CBMid0FVX3lxTE1wVXRtamhDTHhBaWZldVpFRnYyOXg3YkE3MVNZaEdhM) Tj ET
+BT /F1 8 Tf 54 503 Td (1ZPQTUzQllvMnJaVVRWSDhUeFVGTXdLYnpRVUFzQ0ZmNXpLakI2VTFtREFKSXBYMnFfRmppemlPa0hCZ012WE1GTDBSRFR) Tj ET
+BT /F1 8 Tf 54 491 Td (sZVJKcUZyenJJ?oc=5) Tj ET
+BT /F2 9 Tf 54 479 Td (  [24] https://news.google.com/rss/articles/CBMixgFBVV95cUxPSFVHZTF \\(news, Wed, 03 Ju\\)) Tj ET
+BT /F1 9 Tf 54 466 Td (Innovations in Battery Manufacturing for Solid-State and Dry Electrodes - Battery Technology) Tj ET
+BT /F1 8 Tf 54 453 Td (https://news.google.com/rss/articles/CBMixgFBVV95cUxPSFVHZTFtMG81TFNVdDd0ODZKbGgzODgxeUhBbTJuV) Tj ET
+BT /F1 8 Tf 54 441 Td (zE3VW9lT1dzT3pXdk9pNWl1M08waDc2alZUN2VlLWgtS1ZMY004OGR5ZG5hck5Od3RiOGRGVG5kQVRwUElDMndiVWxJSUd) Tj ET
+BT /F1 8 Tf 54 429 Td (ab3FXdzVaTURaMmZ4U29uU0xzN0k2YXRQYWRuYnVnVzhSWVlNN3BqbTRKZllEM1RxLWxWYXZlTXU3cUhCVnZIcWFHcjA4N) Tj ET
+BT /F1 8 Tf 54 417 Td (zlBcTRMQ1lESUtjamhTZUlIZVE?oc=5) Tj ET
+BT /F2 9 Tf 54 405 Td (  [25] https://news.google.com/rss/articles/CBMi5AFBVV95cUxPTHpXQlB \\(news, Sat, 08 Au\\)) Tj ET
+BT /F1 9 Tf 54 392 Td (Blue Solutions and AVL Launch Complete Joint Safety Program to Prepare Next Generation) Tj ET
+BT /F1 9 Tf 54 379 Td (Solid-State Cell Technology Scale Up - Batteries News) Tj ET
+BT /F1 8 Tf 54 366 Td (https://news.google.com/rss/articles/CBMi5AFBVV95cUxPTHpXQlBTOE0tMXJ4d2pxVVBub0VJZVZYaWlNZXNJZ) Tj ET
+BT /F1 8 Tf 54 354 Td (XZUbS1KazB2bmVqdjBfOXZWU01mcEh2YXY1eTdScHJFSF9HdVp5djRsT3ZkYUxKaVFZa01GWlVSdFBaNktfUFFkQV9MYmU) Tj ET
+BT /F1 8 Tf 54 342 Td (zem5qdm1yRkdYTGVqWThQaHlrSTNILXVvUkxZUGN1RGlOVERpck1NOUNsZlJERnRUemRvUU5HcnY4bW55N1hxREVkLWEzR) Tj ET
+BT /F1 8 Tf 54 330 Td (UVnSWdjbzlLVVVFY3IzMUk3QW12NDRvMXROR1hhLXdFdkhzSml6SWVnd0Q4Ump5cWg?oc=5) Tj ET
+BT /F2 9 Tf 54 318 Td (  [26] https://news.google.com/rss/articles/CBMimgFBVV95cUxOVTVJdkd \\(news, Wed, 15 Ju\\)) Tj ET
+BT /F1 9 Tf 54 305 Td (Factorial Energy Eyes Solid-State Battery Scale-Up After Nasdaq Debut - Yahoo Finance) Tj ET
+BT /F1 8 Tf 54 292 Td (https://news.google.com/rss/articles/CBMimgFBVV95cUxOVTVJdkdkVkIxdFUzMVJTMVdOc3Z2eWJFemVPYm02Q) Tj ET
+BT /F1 8 Tf 54 280 Td (W1oMkZQX243STZSaDljcTVfeUtyMkUxOUhnVHdpLUZyd1RKQ2daWHdyYmpJOFNjY01SSnJzbXpHd3VYckZneExrbFgyY0J) Tj ET
+BT /F1 8 Tf 54 268 Td (FS1hNUi1HT292MVdIclBoVnpaNjFTUGJLNFFWVlJrYmNNNTBHS1A4WDRlVC1B?oc=5) Tj ET
+BT /F2 9 Tf 54 256 Td (  [27] https://news.google.com/rss/articles/CBMiqgFBVV95cUxPdUJqSDF \\(news, Fri, 31 Ju\\)) Tj ET
+BT /F1 9 Tf 54 243 Td (American And South Korean Battery Companies Team Up To Make Solid State EV Batteries - Yahoo) Tj ET
+BT /F1 9 Tf 54 230 Td (Autos) Tj ET
+BT /F1 8 Tf 54 217 Td (https://news.google.com/rss/articles/CBMiqgFBVV95cUxPdUJqSDF1cThfNGkzRXRDN0I3WVpPY3VFVklMVzRMY) Tj ET
+BT /F1 8 Tf 54 205 Td (mRud2lpRnZYQy1WUW5lT1g5X001dDJmNWFDLTg0V1g0NjF4c3J2eXNSUTl2R3hOamZWalhwUkMwV29XQl9vaW9JOHI1cHZ) Tj ET
+BT /F1 8 Tf 54 193 Td (sZlNBa1p3NHBCOW5MeV90VTE2NnR5X2VTTWxCZ1JHT0RrVVF0bXAwdW8zMkNOWjV3bDN5WE8xb1J1MTNxQQ?oc=5) Tj ET
+BT /F2 9 Tf 54 181 Td (  [28] https://news.google.com/rss/articles/CBMib0FVX3lxTE0yR0k5SDR \\(news, Thu, 30 Ju\\)) Tj ET
+BT /F1 9 Tf 54 168 Td (The Firm Behind Stellantis' Solid-State Cells Just Teamed Up With SK On To Build Them -) Tj ET
+BT /F1 9 Tf 54 155 Td (Carscoops) Tj ET
+BT /F1 8 Tf 54 142 Td (https://news.google.com/rss/articles/CBMib0FVX3lxTE0yR0k5SDRUU0lNYU5rS1Zud09EbGVBWVhnMEZNX1l5V) Tj ET
+BT /F1 8 Tf 54 130 Td (XluWkxKS0d6RUJ0VnNETl9GOVF1TU50NnZBS1NqR2Fad3oxVXZMVXoyY2w4djg2dEFMRzRlcVVTdkhMTW9jZ2V1eldod3N) Tj ET
+BT /F1 8 Tf 54 118 Td (YRQ?oc=5) Tj ET
+BT /F2 9 Tf 54 106 Td (  [29] https://news.google.com/rss/articles/CBMiwgFBVV95cUxNcG84ejc \\(news, Wed, 04 Fe\\)) Tj ET
+BT /F1 9 Tf 54 93 Td (QuantumScape Inaugurates Eagle Line for Solid-State Battery Pilot Production | Wed, 02/04/2026) Tj ET
+BT /F1 9 Tf 54 80 Td (- 19:00 - QuantumScape) Tj ET
+BT /F1 8 Tf 54 67 Td (https://news.google.com/rss/articles/CBMiwgFBVV95cUxNcG84ejc3UnNSV0V5RDNTbHVETHBWdFNQMUpwOGhNR) Tj ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 16 0 R >>
+endobj
+16 0 obj
+<< /Length 6023 >>
+stream
+BT /F1 8 Tf 54 738 Td (G9DWjg1dmdTU25UV0dMWGJrNmhPZjhXYTMyYUt5Tmd2dGN3WU5DeXRRTlotQUNHMGIzTjZhNGptTEM3ZkJicXRSYXFZcDh) Tj ET
+BT /F1 8 Tf 54 726 Td (KdmJoU00ydWNzOVBJWnQ5RG9Qc1FfSVhxczJva2c1MHZqd1J1eDZ0VGdyMkdlZk1iVHM5aUlKRnNGSVYzeHJ4NVNPRUZHT) Tj ET
+BT /F1 8 Tf 54 714 Td (DZwYV80b19sRTBua1hlUQ?oc=5) Tj ET
+BT /F2 9 Tf 54 702 Td (  [30] https://news.google.com/rss/articles/CBMihAFBVV95cUxNb2Mwekp \\(news, Tue, 03 Ma\\)) Tj ET
+BT /F1 9 Tf 54 689 Td (Solid-state battery technology: Toyota, Tesla, and Honda leading the EV charge - EV) Tj ET
+BT /F1 9 Tf 54 676 Td (Infrastructure News) Tj ET
+BT /F1 8 Tf 54 663 Td (https://news.google.com/rss/articles/CBMihAFBVV95cUxNb2MwekpqSU5renFxRWtFWUZ0UzJXWmpYTTItZWgzd) Tj ET
+BT /F1 8 Tf 54 651 Td (240czF5Y2hVdXZLUUJWcEFYSU0wQkpHalRkREdLeFh1aTRnUUFpTjZvV2kxZVdTWW9vRHFhZURRUkV1TXREdkdRZ2ZyZTZ) Tj ET
+BT /F1 8 Tf 54 639 Td (COHhZWWxSZkIzTzlUbk83ZFdaaUxJbmU?oc=5) Tj ET
+BT /F2 9 Tf 54 627 Td (  [31] https://news.google.com/rss/articles/CBMi0wFBVV95cUxOZWFlQzR \\(news, Fri, 14 Au\\)) Tj ET
+BT /F1 9 Tf 54 614 Td (US Nuvvon's Solid-State Battery Deployment in the Polymer Electrolyte Segment [SMM Analysis] -) Tj ET
+BT /F1 9 Tf 54 601 Td (Shanghai Metals Market) Tj ET
+BT /F1 8 Tf 54 588 Td (https://news.google.com/rss/articles/CBMi0wFBVV95cUxOZWFlQzRUMjVjLUlOcVM4RWJrRV82aVNady14WlY1R) Tj ET
+BT /F1 8 Tf 54 576 Td (mZxQnVzX0NKMWtrQkpiYUhWaG9vdURQZ0NlNDBxOGpfcXpRZkctaW84UXdacmVHVTJnQjEtcDl3a0U0T0lFdnhiaXpzN0J) Tj ET
+BT /F1 8 Tf 54 564 Td (3eTF5NXpua21uLXFWT2Nha0JJbGhBeWR5UTgzNjZyQnN3SWZHdnJnVDFXYm1wWG1DdDNQeDhqWFk1anRjVjVheF9NVGItQ) Tj ET
+BT /F1 8 Tf 54 552 Td (kV6Q09URDdHcjR5dWRYVUxPdVhYNzhQMzdwRG42SDJR?oc=5) Tj ET
+BT /F2 9 Tf 54 540 Td (  [32] https://news.google.com/rss/articles/CBMixwFBVV95cUxOWmlsUXB \\(news, Sun, 19 Ju\\)) Tj ET
+BT /F1 9 Tf 54 527 Td (Did Scientists Just Solve The Biggest Mystery Holding Back Solid-State Batteries - Crude Oil) Tj ET
+BT /F1 9 Tf 54 514 Td (Prices Today | OilPrice.com) Tj ET
+BT /F1 8 Tf 54 501 Td (https://news.google.com/rss/articles/CBMixwFBVV95cUxOWmlsUXBhNk5raHMwODFIbXNCLWlaZkhLVFpqdXU0Y) Tj ET
+BT /F1 8 Tf 54 489 Td (2RReEVvNllfSVNST1ljcWxWbXp6QzhPaFFFS2VtLTJsSHllczNHTW9XblRGWWVfRzZ3LUNiS1FTTk9rY19YY1VOc0VjYmx) Tj ET
+BT /F1 8 Tf 54 477 Td (za2U0bXVOVldmXzNwM01oLXI2T3lwUVlVS29HWlRuWXNQTGFvOUhWZFFDdTV3aEQtYUZaYWktMVExTktGbUlweUh0Z2pvb) Tj ET
+BT /F1 8 Tf 54 465 Td (1g2WEhFQnQwRHdONXpvakY0VEZZ0gHMAUFVX3lxTE9xLXROcXV1emUxVDkwcVdKek1qaGFETDlJNWYyc3Z0d09sdkpUb3Y) Tj ET
+BT /F1 8 Tf 54 453 Td (2REJwUTJ0U3NETjRDR2djb1JoV0g1d19iOFpRYkVJMFRSNWl1M2JETVJSOGd1VURubUJUcHZQeHAtUV9YckNJT1YzMkR3d) Tj ET
+BT /F1 8 Tf 54 441 Td (ElGc0dOb1JKRGs0V2NvX1h4azd2eUdNOGpEU2w1RkZkM0IxY0RVVHlrS3NfQ2dGdTRWUjRiejRKT0QwTlYyME0zNHNsSmV) Tj ET
+BT /F1 8 Tf 54 429 Td (jeExncWFQcmd2dVc0MFhuNg?oc=5) Tj ET
+BT /F2 9 Tf 54 417 Td (  [33] https://news.google.com/rss/articles/CBMi2gFBVV95cUxNbFlwY1N \\(news, Thu, 26 Fe\\)) Tj ET
+BT /F1 9 Tf 54 404 Td (Factorial and Philenergy Sign MOU to Accelerate All-Solid-State Battery Manufacturing -) Tj ET
+BT /F1 9 Tf 54 391 Td (Business Wire) Tj ET
+BT /F1 8 Tf 54 378 Td (https://news.google.com/rss/articles/CBMi2gFBVV95cUxNbFlwY1NGWnlZenJ3SWhuclQ2ckdjVDBoZGhnN3kxY) Tj ET
+BT /F1 8 Tf 54 366 Td (k5sVjdmNnRVLW9ZRFNNcXZLSi1VU2VpbUwydGtGV1owYUpYamVzOU41ZnB1NjVwVUJsVG1UTk1YY0x1WVNHekMyRUV4Nzk) Tj ET
+BT /F1 8 Tf 54 354 Td (3RlM1N1A5SXlVTlRtY0dMTkpqWk4wZWtpaGRaTkR3bkQzaTJ4NURFUXNVbHBJeDVRMmlIYXEtMmJyVUVQMjZpVFVTUmdQN) Tj ET
+BT /F1 8 Tf 54 342 Td (DF5WUJWSHdadFM0NGdDaFFWYzBEYm9BTnJCZm5FSjFicDRrX1hSdw?oc=5) Tj ET
+BT /F2 9 Tf 54 330 Td (  [34] https://news.google.com/rss/articles/CBMi2wFBVV95cUxOU2IyUld \\(news, Tue, 17 Ma\\)) Tj ET
+BT /F1 9 Tf 54 317 Td (Axon Partners Group invests in Basquevolt to advance solid-state electrolyte scale-up -) Tj ET
+BT /F1 9 Tf 54 304 Td (Electric & Hybrid Vehicle Technology International) Tj ET
+BT /F1 8 Tf 54 291 Td (https://news.google.com/rss/articles/CBMi2wFBVV95cUxOU2IyUldzTUxpSVBhZ3JGaE1mM3lIanBfWE9ERWFOc) Tj ET
+BT /F1 8 Tf 54 279 Td (EJEdl96aXBlM2IzT3pWZjBNOXpDVjdFWHhXNnFtRGZuQUc3cDFTbWVPeDRGeHJVQ1pGRTVZUmR4bWlVQlVQaDJtVS1fSmZ) Tj ET
+BT /F1 8 Tf 54 267 Td (TZE9UZDcxSnNEdUtOSWp2OV8zNW5OM21DUlpkLU55LXlhN0pSOFFJd2pnbkdKY3gxN1ZHeW9VeWpFcFhDbktBdWc0SWFVZ) Tj ET
+BT /F1 8 Tf 54 255 Td (Wx4YllZRGNJT2lUa2k0RHhqUTVJZFh1MDZ3Q3M0MnFBTFhIOWptNmc?oc=5) Tj ET
+BT /F2 9 Tf 54 243 Td (  [35] https://news.google.com/rss/articles/CBMipAFBVV95cUxPTVpGSEp \\(news, Tue, 07 Ju\\)) Tj ET
+BT /F1 9 Tf 54 230 Td (TaiSan scoops 4.65m for solid-state sodium micromobility batteries - Zag Daily) Tj ET
+BT /F1 8 Tf 54 217 Td (https://news.google.com/rss/articles/CBMipAFBVV95cUxPTVpGSEpfUF9UWkR5dUMyUWhxUlZQT19wQWZPZHg0V) Tj ET
+BT /F1 8 Tf 54 205 Td (E14dWJhUHJpNTNNUmpXaEtLNlJGLW54SW16NEJkeFVmSzdMd0NfRzdBYmNVYUVyU3dNalNJSlBEZzJCME5WNjdtNHcwUnh) Tj ET
+BT /F1 8 Tf 54 193 Td (tOVgzNm5OeXZTWnNTMHRyb3RGSXhKelM0LWZ3QTM4ZDNaSmtXUUpsTXI5WHlCX2k1MEgxWjRPRA?oc=5) Tj ET
+BT /F2 9 Tf 54 181 Td (  [36] https://news.google.com/rss/articles/CBMiogFBVV95cUxOcmxvMjh \\(news, Mon, 23 Fe\\)) Tj ET
+BT /F1 9 Tf 54 168 Td (The latest developments moving solid-state batteries closer to commercial reality - Engineer) Tj ET
+BT /F1 9 Tf 54 155 Td (Live) Tj ET
+BT /F1 8 Tf 54 142 Td (https://news.google.com/rss/articles/CBMiogFBVV95cUxOcmxvMjhIUk9WTzhFQ1RDZEswckNRNTFiNXVwSGhGb) Tj ET
+BT /F1 8 Tf 54 130 Td (jh2czNlbVlPME9KbEUtUmxBdVBqbUZwN29KMkk4VW8tX05OZmV3eTdJM2N2UFdhZEJOa3c1Y1hqeW9PMFRQN2tjZnFoSmp) Tj ET
+BT /F1 8 Tf 54 118 Td (SQ01mUnJtZHpReEVidTRrdUlfTUZQZnRXU1ZQSW9icGFTWjZqMVN4bU5yZnFkeEZRN1Jfb1E?oc=5) Tj ET
+BT /F2 9 Tf 54 106 Td (  [37] https://news.google.com/rss/articles/CBMivwFBVV95cUxQR0NXUjk \\(news, Sun, 12 Ju\\)) Tj ET
+BT /F1 9 Tf 54 93 Td (Solid-State Battery's Biggest Hurdle Solved: What It Means for EVs and Phones - Tech Times) Tj ET
+BT /F1 8 Tf 54 80 Td (https://news.google.com/rss/articles/CBMivwFBVV95cUxQR0NXUjkyaUtqV21KZ29SOFU3NGdGaG5aWXZUejZRX) Tj ET
+BT /F1 8 Tf 54 68 Td (18xTHNmVUJmcFUtN2QtY1BYc0lxOHlmWnBIb0FnTWlOQkh2SFE5RHY0dTRIVXFCV2hVTXY0azJVZzhCdURiaFQ4X2NMb0J) Tj ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 18 0 R >>
+endobj
+18 0 obj
+<< /Length 5907 >>
+stream
+BT /F1 8 Tf 54 738 Td (zVUhTbHN6R0hoeDlEWEYtaFR0dHRsVWlvd2RPam9FR0ZXdFAxcllvMjFHaGdOa3Jyd3RzM0ZqcmhMOTYzUWVFNUdiSzNPc) Tj ET
+BT /F1 8 Tf 54 726 Td (HpOcUN4YWJJUGdnVQ?oc=5) Tj ET
+BT /F2 9 Tf 54 714 Td (  [38] https://news.google.com/rss/articles/CBMilAFBVV95cUxPX1h4TjV \\(news, Tue, 26 Ma\\)) Tj ET
+BT /F1 9 Tf 54 701 Td (EV Next-Generation Solid-State Battery Market Size, Report 2035 - Global Market Insights Inc.) Tj ET
+BT /F1 8 Tf 54 688 Td (https://news.google.com/rss/articles/CBMilAFBVV95cUxPX1h4TjVUMURSUHBXd3lRZW1xQTFYU2FIY3VoWmlFL) Tj ET
+BT /F1 8 Tf 54 676 Td (XpRSWtyeXhWWnNxRURudzcyOF9aWk1TYVFHVmNCeDJmSC00MUlnWmFWaW5kZlFTZXVIT3BVWnlOY1A5NmhBZXgtYVdIT0h) Tj ET
+BT /F1 8 Tf 54 664 Td (4YUtSOC1CaVg4TnVXY3JEUUVLRVFXa1VPRHhQc1dsRVhFaWp6dHJh?oc=5) Tj ET
+BT /F2 9 Tf 54 652 Td (  [39] https://news.google.com/rss/articles/CBMipwFBVV95cUxNNmFiVXZ \\(news, Wed, 08 Ju\\)) Tj ET
+BT /F1 9 Tf 54 639 Td (Factorial Energy: Buy This Speculative Solid-State Battery Story \\(NASDAQ:FAC\\) - Seeking Alpha) Tj ET
+BT /F1 8 Tf 54 626 Td (https://news.google.com/rss/articles/CBMipwFBVV95cUxNNmFiVXZjazVwUE9lV0d1QUJJWXpNcHVVYlR3ekE1Y) Tj ET
+BT /F1 8 Tf 54 614 Td (U1GQ2UydUdnUC1GY3J0UUJRdm9hS0V4WVA0QTlZQVpfd2k5YmJ2SzVXVmluT244LV9NTjc1NktNRHpIMDZyV0tXNFhzRmp) Tj ET
+BT /F1 8 Tf 54 602 Td (sUmpLdEhDelVyM04tTnJGdzlIeW5BTXZOTnhTZmpKVF82bFRIVEFJYkpIRWxOZEdBMnZ3bDRMbWdHdw?oc=5) Tj ET
+BT /F2 9 Tf 54 590 Td (  [40] https://news.google.com/rss/articles/CBMigAFBVV95cUxOQW40YXh \\(news, Thu, 18 Ju\\)) Tj ET
+BT /F1 9 Tf 54 577 Td (Honda Has A New Partner For Solid-State EV Batteries - InsideEVs) Tj ET
+BT /F1 8 Tf 54 564 Td (https://news.google.com/rss/articles/CBMigAFBVV95cUxOQW40YXhYWUlORUh0TXJCb0lReTdhUTh5NUxtN2pVa) Tj ET
+BT /F1 8 Tf 54 552 Td (VlTd1NYamNNTUU4eldiUmhSQ2NuMWV0TFZfc3JHVlVEVXJ5WnpfWVhpTy1kb29EZ0lvN25jVHdGbTd0WlY2T0xRYkdVU3N) Tj ET
+BT /F1 8 Tf 54 540 Td (HYWlLWGpITTQ5MHlaUzhRQmJZNw?oc=5) Tj ET
+BT /F2 9 Tf 54 528 Td (  [41] https://news.google.com/rss/articles/CBMidEFVX3lxTFBucWlOaGt \\(news, Mon, 20 Ju\\)) Tj ET
+BT /F1 9 Tf 54 515 Td (The Real Story Behind Samsung's 600-Mile Solid-State Battery - Top Speed) Tj ET
+BT /F1 8 Tf 54 502 Td (https://news.google.com/rss/articles/CBMidEFVX3lxTFBucWlOaGtDaE15eFhGa2VkQzMtMHdmYy1mb0lVeVdzM) Tj ET
+BT /F1 8 Tf 54 490 Td (0M4Q1owcElxa1NPSGJ2UWgza1ozbWluV3VNc29SamlzZlJKdnlIV0tXT0J1SUlFUzZZeVFhenF0UXM0NGx5OXAxTHdTM1J) Tj ET
+BT /F1 8 Tf 54 478 Td (nWVY0bjZ5?oc=5) Tj ET
+BT /F2 9 Tf 54 466 Td (  [42] https://news.google.com/rss/articles/CBMiwwFBVV95cUxQM1N0VU9 \\(news, Fri, 20 Fe\\)) Tj ET
+BT /F1 9 Tf 54 453 Td (Rewriting the EV cost curve: The tech that has already pushed Chinese EVs below gasoline) Tj ET
+BT /F1 9 Tf 54 440 Td (parity - R&D World) Tj ET
+BT /F1 8 Tf 54 427 Td (https://news.google.com/rss/articles/CBMiwwFBVV95cUxQM1N0VU9IXzRvN2NhbVdXV3RoY0ltRjhWMFdSNjdUN) Tj ET
+BT /F1 8 Tf 54 415 Td (HNEUHZjVEd6bUVKZFpnNmU1dFZjZUtIN04xTzh2MUtPZTZzRHU1Zno4SW5jQTVPeThBQkV2VGRhbVQxY2wwZlhZaFM4ZHh) Tj ET
+BT /F1 8 Tf 54 403 Td (kd29YVHFFM0hvYjQyNmVDd1NtVHNqcGt3VGNpdnUxa2FYZURSTGdDM3NBLXN3YlJWc1FiaENGWFdaQmNyX2Fjam44U2lTc) Tj ET
+BT /F1 8 Tf 54 391 Td (XZuYk15UGZEMnFuQktWd28?oc=5) Tj ET
+BT /F2 9 Tf 54 379 Td (  [43] https://news.google.com/rss/articles/CBMimwFBVV95cUxQNC1mcS1 \\(news, Tue, 09 De\\)) Tj ET
+BT /F1 9 Tf 54 366 Td (QuantumScape \\(QS\\) continues to scale up solid-state cell production, a key goal for 2025 -) Tj ET
+BT /F1 9 Tf 54 353 Td (Electrek) Tj ET
+BT /F1 8 Tf 54 340 Td (https://news.google.com/rss/articles/CBMimwFBVV95cUxQNC1mcS1oaTFMRVlKZzg2cFVxSDVHRUVRTlJYOE93S) Tj ET
+BT /F1 8 Tf 54 328 Td (2dJR0ctMTM3ZEpQT3hpYW91c0lucGFObDNtQ2IxSmp4d01WOWVGQVdiMjFVdGpfREQ2LWd3NlFmSlhNTWV3WHBGUHQ0c19) Tj ET
+BT /F1 8 Tf 54 316 Td (kclpkbThNODFBcWtrbHBERG84QmZONERHQ09qN29RT3RXZEtfWkpxcjRMclVsdw?oc=5) Tj ET
+BT /F2 9 Tf 54 304 Td (  [44] https://news.google.com/rss/articles/CBMiyAFBVV95cUxQZFRoNDN \\(news, Thu, 19 Ma\\)) Tj ET
+BT /F1 9 Tf 54 291 Td (Solid-State Battery Product Launches by Major Manufacturers Had Already Materialized -) Tj ET
+BT /F1 9 Tf 54 278 Td (Shanghai Metals Market) Tj ET
+BT /F1 8 Tf 54 265 Td (https://news.google.com/rss/articles/CBMiyAFBVV95cUxQZFRoNDNBWkVSdG9haEZvblVOMVNDUm9KX0c0TWtCX) Tj ET
+BT /F1 8 Tf 54 253 Td (0p5dzFFWVF2OVFsN0piUUF1VU5tdXpLdFo5ZXpqTXFfSlJOeHZFVG9nZ2JkRmhfY2kzSHVtS3JSbXBwTmZPalB1ZTNtNUl) Tj ET
+BT /F1 8 Tf 54 241 Td (mLVJlZ2ZxQVJmSGd0dE5XdjJVZkt3aEF5NnlKMjMyak9BLTJOc243SjQteFVkZFgxb0ltZ25rWG1oVkdZcUJOTkpoZ3g0Q) Tj ET
+BT /F1 8 Tf 54 229 Td (TFrRnFrQXJ3a1JCNGpzNU0wenNNWg?oc=5) Tj ET
+BT /F2 9 Tf 54 217 Td (  [45] https://news.google.com/rss/articles/CBMigAJBVV95cUxQR2hIU0x \\(news, Thu, 14 Ma\\)) Tj ET
+BT /F1 9 Tf 54 204 Td (Blue Solutions and AVL complete solid-state battery safety evaluation program - Automotive) Tj ET
+BT /F1 9 Tf 54 191 Td (Testing Technology International) Tj ET
+BT /F1 8 Tf 54 178 Td (https://news.google.com/rss/articles/CBMigAJBVV95cUxQR2hIU0xpdWMycHV3Wks4VkxBVlBGTmxfT2c3OThZa) Tj ET
+BT /F1 8 Tf 54 166 Td (Uh1d3gxSVNya0FBRnRuRzRGYkJmN20zRUJvQ2NKR0p1dmFBUmZXczlScTR4alVVWkxrdmVWUmRkWUlzUFpoYnJET1N1bGp) Tj ET
+BT /F1 8 Tf 54 154 Td (mbEpCSEtaNU84a1FKd2dUWFVyblh6WDhxMnhwVHc2SDRlbWh0RHBVRlBNTU80RDNseEZjTTlBT2NkVTVZSFZsdmJNZ05na) Tj ET
+BT /F1 8 Tf 54 142 Td (DRyYUNBYzFubHRhYWNnNEF2dGo4a0lyTlJldk92X3h3QWNOMFE2VTBoNzFSbmt4NjVlZjZETTNzcU9pSFRYWS15UWxPOGF) Tj ET
+BT /F1 8 Tf 54 130 Td (ZY2ROUDRS?oc=5) Tj ET
+BT /F2 9 Tf 54 118 Td (  [46] https://news.google.com/rss/articles/CBMizgFBVV95cUxQamFyVXR \\(news, Mon, 16 Fe\\)) Tj ET
+BT /F1 9 Tf 54 105 Td (China ignites solid-state battery race: production expands in 2026, vehicle demonstrations by) Tj ET
+BT /F1 9 Tf 54 92 Td (2027 - CarNewsChina.com) Tj ET
+BT /F1 8 Tf 54 79 Td (https://news.google.com/rss/articles/CBMizgFBVV95cUxQamFyVXRQaXRpbHNhS1VSYWY0OTRyeUZLR1BFR0s3N) Tj ET
+BT /F1 8 Tf 54 67 Td (Hg0S2N2NUdTeUwwcVFmT1VlWkE4SlQ3NkF2YTNMODN2NnpWZmx5aDl3U211YWxOT3duR3JqMTdZWEFORGZseTNGUm0tTEV) Tj ET
+endstream
+endobj
+19 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 20 0 R >>
+endobj
+20 0 obj
+<< /Length 6253 >>
+stream
+BT /F1 8 Tf 54 738 Td (6MVBOUmVJSXVMVjVOR09QM0tyRUw5eFhtRnR3UE9Jbk9RUF83NEZ2R1lSMVFneTVRdXNYR05TeHdfQ1ljWEVfa24tWHFMS) Tj ET
+BT /F1 8 Tf 54 726 Td (F9LM3VlNVdfaExWSVoydm13TmVTVklVR0JMQQ?oc=5) Tj ET
+BT /F2 9 Tf 54 714 Td (  [47] https://news.google.com/rss/articles/CBMiygFBVV95cUxNRW5kazV \\(news, Mon, 08 Ju\\)) Tj ET
+BT /F1 9 Tf 54 701 Td (Solid-state batteries power 22-km cross-strait eVTOL flight as China eyes commercial scale-up) Tj ET
+BT /F1 9 Tf 54 688 Td (- CarNewsChina.com) Tj ET
+BT /F1 8 Tf 54 675 Td (https://news.google.com/rss/articles/CBMiygFBVV95cUxNRW5kazVTRUFsNno4WlBOSnI4U1NlbkUybF9xX2RGa) Tj ET
+BT /F1 8 Tf 54 663 Td (1R0SGJQM1FPc2pKa1JIeWFCS2ZMaDk0dThkUXdMcU5WMk9TUmRPQml0SGVYb1VoNUw1eDhHUkpNbzJoclp3VThiNGw3NlR) Tj ET
+BT /F1 8 Tf 54 651 Td (jSk1vcFpYcy1GN1JxeFRYZGtTTUg5TXZELWNFbEhvd0p2RjJxNTdkaEU1NVpBOFpfVXAzMUpMeFBZcFRPN2I1TE5GN3VKU) Tj ET
+BT /F1 8 Tf 54 639 Td (XNJUmhOMjZFa1M4VXFWT1hLTEVyUDVn?oc=5) Tj ET
+BT /F2 9 Tf 54 627 Td (  [48] https://news.google.com/rss/articles/CBMiowFBVV95cUxQLS1FTkh \\(news, Fri, 08 Ma\\)) Tj ET
+BT /F1 9 Tf 54 614 Td (QuantumScape \\(QS\\) Advances Solid-State Battery Commercialization with Eagle Line Milestone -) Tj ET
+BT /F1 9 Tf 54 601 Td (Yahoo Finance) Tj ET
+BT /F1 8 Tf 54 588 Td (https://news.google.com/rss/articles/CBMiowFBVV95cUxQLS1FTkhTbWNkSFdvV19FV2M5ZklaX2VlYTFBWlBwd) Tj ET
+BT /F1 8 Tf 54 576 Td (W5VNmhiZFA2NElaVFRkZk15TUY5Y3kxc3hrdGFsZlpfajBoV0VVMXl4Ty02YVlSV3h0OS1wQ2lJbXJQWVV6OEZHY3RrV3N) Tj ET
+BT /F1 8 Tf 54 564 Td (xQ2tqSl9HSnppNlNLYjc5a3dwMG1NUUZsWkZ0Yk1MMEFJdlRGalhYUm5ldzdQdDE3X0hkWUtF?oc=5) Tj ET
+BT /F2 9 Tf 54 552 Td (  [49] https://news.google.com/rss/articles/CBMinwFBVV95cUxPTU5xeUN \\(news, Thu, 26 Fe\\)) Tj ET
+BT /F1 9 Tf 54 539 Td (All-solid-state EV battery specialist Factorial moves one step closer to production - Electrek) Tj ET
+BT /F1 8 Tf 54 526 Td (https://news.google.com/rss/articles/CBMinwFBVV95cUxPTU5xeUNhaFk3UWVSOG5YOWFmQ2k0R0FISjA3ZjJWM) Tj ET
+BT /F1 8 Tf 54 514 Td (W5ZbkpBbjgzWUQ1b1pXYXNPWVd6S2dNLUR2cFA4WjNWMVFtc0VNNzkwN0w5bzd3dGtuendGanhpbkM0NHZySVdjMXQtT0R) Tj ET
+BT /F1 8 Tf 54 502 Td (ha1BPQkZNWkh6RDVPSU5ENXc1Q0hnM3NjQUhsaDZTSVZRRlNDZ1VFLVpVNGpPX1BvczA?oc=5) Tj ET
+BT /F2 9 Tf 54 490 Td (  [50] https://news.google.com/rss/articles/CBMi6AFBVV95cUxNZHNFZlR \\(news, Sun, 08 Fe\\)) Tj ET
+BT /F1 9 Tf 54 477 Td (QuantumScape CTO on Eagle Line and scaling solid-state tech - Battery Technology) Tj ET
+BT /F1 8 Tf 54 464 Td (https://news.google.com/rss/articles/CBMi6AFBVV95cUxNZHNFZlRvNHVTZ0VteElFWjNkYk1DU3g5TlNkRWJMY) Tj ET
+BT /F1 8 Tf 54 452 Td (mg4UUVHN3VoNkhBYzIxcS1nOW13VFFja0RpbzRKWHBXYld6dTVHWW1MbWpnSTB5eXA3clRRSkZTcUE4ZjlNTUtUQm0zVUx) Tj ET
+BT /F1 8 Tf 54 440 Td (6NExraHpHV0EzUVdoOHRWOFB0N0lLZkc5YU9naWFhRjdseFZIRkc1U0lWOElNNy1tQmpCQnR5dTk4b0t0dWlpMEZoSnh5Y) Tj ET
+BT /F1 8 Tf 54 428 Td (lBoTjE2ZzRxRVNrX1MtVlc2Y2dtMkJfaUx6VnZ4X2JTSEJzZjE0cVFuQWRKSnFuaWp3dnYt?oc=5) Tj ET
+BT /F2 9 Tf 54 416 Td (  [51] https://news.google.com/rss/articles/CBMid0FVX3lxTE85OEpyLXJ \\(news, Sat, 18 Ju\\)) Tj ET
+BT /F1 9 Tf 54 403 Td (The Science Behind Honda's Solid-State Battery Breakthrough - Top Speed) Tj ET
+BT /F1 8 Tf 54 390 Td (https://news.google.com/rss/articles/CBMid0FVX3lxTE85OEpyLXJoczZ1UG1UU1VLbnVZdmVGX2NOdGdnZkJGc) Tj ET
+BT /F1 8 Tf 54 378 Td (XpDSDdVcHhYZkR5NjNMeXFXdnFzelNwbUFObEpXNV9MUHZYaUhVdkoyWVM3RFdtOG5lazZQUjljX2FiZE1KeDhMWGkzOFU) Tj ET
+BT /F1 8 Tf 54 366 Td (4OEVqUml3YzZZ?oc=5) Tj ET
+BT /F2 9 Tf 54 354 Td (  [52] https://news.google.com/rss/articles/CBMi5gFBVV95cUxNSkxNUzJ \\(news, Thu, 02 Ju\\)) Tj ET
+BT /F1 9 Tf 54 341 Td (From Laboratory to Mass Production: Solid-State Battery Competitive Landscape Set to Take) Tj ET
+BT /F1 9 Tf 54 328 Td (Shape by 2026-End - Shanghai Metals Market) Tj ET
+BT /F1 8 Tf 54 315 Td (https://news.google.com/rss/articles/CBMi5gFBVV95cUxNSkxNUzJ2bUw0MFRVRHF1RnRGZk1WTFVyNERYQ3Jla) Tj ET
+BT /F1 8 Tf 54 303 Td (WdOVVVlX2tKYTJUS2xtZm1XUEEzTDJzejg0MUtHYXFTaUtPbTBDNjJCcE5BTDR4NXozRm9JdjhLdWJXcERmcU9LUWg5bU5) Tj ET
+BT /F1 8 Tf 54 291 Td (YejBPZXl4aTNJOS1CTG1MSU9iRVRZdHVaaVczN09HUFVnMmlKdkdzdTVhaTlWNGVfbl9YcVhDYXc1S0Vrd1Zzb2tVZW5xT) Tj ET
+BT /F1 8 Tf 54 279 Td (UNZa2ZQaVJLc0tzVFVFTnpOR3RaZ3VoZTgzYXF1S2xnMWFBTDFwdHhZZ3E3MUtBaGhiUQ?oc=5) Tj ET
+BT /F2 9 Tf 54 267 Td (  [53] https://news.google.com/rss/articles/CBMi7wFBVV95cUxPenIyYkx \\(news, Sun, 15 Ma\\)) Tj ET
+BT /F1 9 Tf 54 254 Td (Academician Ouyang Minggao's Latest Views as a Solid-State Battery Expert Scale-Up in 2030,) Tj ET
+BT /F1 9 Tf 54 241 Td (Consumers "Need Not Wait" - Shanghai Metals Market) Tj ET
+BT /F1 8 Tf 54 228 Td (https://news.google.com/rss/articles/CBMi7wFBVV95cUxPenIyYkxMb0kwZVJFd2pnU2hoWGREc2g1UlBvRnB0V) Tj ET
+BT /F1 8 Tf 54 216 Td (GVNQV9fc1Q1TGdrZGxLUWhZWm11d1l5XzN6cllZSzJGd0ZBZG9OT2hlT3FIM0pBQ1ZKZzJPclg1Ymh5T1RpZnl4V0FvNFp) Tj ET
+BT /F1 8 Tf 54 204 Td (PcDlXOVN3blNiVnBRRmJ3UTFxSkJBRUY4QlRtejM3dXhxQVAyanhxcDVLc1o2NnVaSm1UVHZWM21ZSEgtT3ZyYTNESm5aY) Tj ET
+BT /F1 8 Tf 54 192 Td (VBnSjlOWWo2OUNoWmdiQndLWVBFdDhLY2NQdEgyTjBKRF8xWE44OC05dF9nMDhZODBlanNWR3RkUmdONA?oc=5) Tj ET
+BT /F2 9 Tf 54 180 Td (  [54] https://news.google.com/rss/articles/CBMiqwFBVV95cUxQUXZjczV \\(news, Thu, 05 Fe\\)) Tj ET
+BT /F1 9 Tf 54 167 Td (First U.S. Solid-State Passenger EV Program Begins with Karma Kaveya - Electric Cars Report) Tj ET
+BT /F1 8 Tf 54 154 Td (https://news.google.com/rss/articles/CBMiqwFBVV95cUxQUXZjczVhai1INTBUa0hmbW91WWYwQnBQTUt5WkdEQ) Tj ET
+BT /F1 8 Tf 54 142 Td (zJzUzFRcmlqcHVlQlZTancyWkRQV0tmamdyMGhiRmhiRXUyN1JyTFluODZ0czIzbnpGajN3SFVsRVZHVDhacmxBZjBqSWx) Tj ET
+BT /F1 8 Tf 54 130 Td (ORWNmbV9UMjZhSV9id3pWSWVvV3JlWFF1eTJXNDI2aExBUWVCOEo2ZHBhSlVVVTFsWXVSRGliWlB3SmJRQms?oc=5) Tj ET
+BT /F2 9 Tf 54 118 Td (  [55] https://news.google.com/rss/articles/CBMiuwFBVV95cUxQZkZZSUY \\(news, Tue, 14 Ju\\)) Tj ET
+BT /F1 9 Tf 54 105 Td (MG's semi-solid battery: a long-term factory bet - Automotive Manufacturing Solutions) Tj ET
+BT /F1 8 Tf 54 92 Td (https://news.google.com/rss/articles/CBMiuwFBVV95cUxQZkZZSUYwTWlUOHFBaENzQjZxQndrR3B1Z0NRUUczN) Tj ET
+BT /F1 8 Tf 54 80 Td (UhDenRSVVRLQWh3S0dKRlJueFl2akxlTm9TVzRRekEwRGVFUlg4WUx0ZUl0SC1jNVdEcGNYUV9mc1VkSGlVdld6eGVBUF9) Tj ET
+BT /F1 8 Tf 54 68 Td (YdWNpUzdRRlMyeHExZjE4MVVGNnFCcGxhZlA1Z2RZYkJfWUVOMmVoWXZRNjJrdlZzSlBUTVAzNXJPMUF6YXJOQW9lUktCb) Tj ET
+endstream
+endobj
+21 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 22 0 R >>
+endobj
+22 0 obj
+<< /Length 3531 >>
+stream
+BT /F1 8 Tf 54 738 Td (TluWGpFUzFJ?oc=5) Tj ET
+BT /F2 9 Tf 54 726 Td (  [56] https://news.google.com/rss/articles/CBMigAFBVV95cUxOYUtWTmF \\(news, Mon, 04 Ma\\)) Tj ET
+BT /F1 9 Tf 54 713 Td (Domestic US Solid-State Batteries Coming in 2026? Inside Greater Bay's A-Sample Manufacturing) Tj ET
+BT /F1 9 Tf 54 700 Td (Milestone - Intelligent Living) Tj ET
+BT /F1 8 Tf 54 687 Td (https://news.google.com/rss/articles/CBMigAFBVV95cUxOYUtWTmFsMXlVVmxrOUR1ZU9hRmw4cTdRMW9qVE85N) Tj ET
+BT /F1 8 Tf 54 675 Td (3NWaXdRbFM0WWlycFU4d0JFTzk4ZXM0b2hRaF9MdkNzWmcxRU50SjQ4Mzk2Q0pLWklONUtpQW9VYktXOUc1NWptR0k5M0F) Tj ET
+BT /F1 8 Tf 54 663 Td (yYkRUaWVrdlR6ZHJwazZMdG9wMw?oc=5) Tj ET
+BT /F2 9 Tf 54 651 Td (  [57] https://news.google.com/rss/articles/CBMipgFBVV95cUxOdThjSzh \\(news, Thu, 30 Oc\\)) Tj ET
+BT /F1 9 Tf 54 638 Td (SOLiD: Scaling solid-state battery manufacturing for Europe - Innovation News Network) Tj ET
+BT /F1 8 Tf 54 625 Td (https://news.google.com/rss/articles/CBMipgFBVV95cUxOdThjSzhXclZBaFhkN3kzWFE3YlpaZjNwU0ZpWW85W) Tj ET
+BT /F1 8 Tf 54 613 Td (jVqUW1WblViekVoMUR3NDgzcTlQakw4SVF4b1hmdjV3aWJfQjNQZklET3VHWF9YTGl3SHBtbUJJNUs4NzlOQzJCdkhpSk9) Tj ET
+BT /F1 8 Tf 54 601 Td (USzBqMU9wY3lBLVNDSGxvUG8wNzJkeDdmWXVDc1VaaDduVXQ0RDBBdzEzZEJvVHZfR0U0X1ZCUmVn?oc=5) Tj ET
+BT /F2 9 Tf 54 589 Td (  [58] https://news.google.com/rss/articles/CBMiygFBVV95cUxPamZpNW1 \\(news, Wed, 24 Ju\\)) Tj ET
+BT /F1 9 Tf 54 576 Td (CATL solid state battery stuck at level four out of nine tiers, delaying commercial deployment) Tj ET
+BT /F1 9 Tf 54 563 Td (- CarNewsChina.com) Tj ET
+BT /F1 8 Tf 54 550 Td (https://news.google.com/rss/articles/CBMiygFBVV95cUxPamZpNW1xc1B3a1ZCMGVHeDVWMTdMUmpqN0pzWDdrM) Tj ET
+BT /F1 8 Tf 54 538 Td (2ZHS0ZMZFRfbXJHbFE4dVp2bkF6SDFwS1ZTdEdPSzNWbWVUQnh1NExlMkR0a3hkNENZMGZhRWU3dzgxZVJMTzlva0ZMZGt) Tj ET
+BT /F1 8 Tf 54 526 Td (tQ3NWVnUwSWt4QlRveFpma1dhaWNLdjhlTm5uWkVGNmtaZ2RYd21Cb3ZMNF9STFlzcDUxT0o2bUtIVWp2MVdaUk9ZYXVxc) Tj ET
+BT /F1 8 Tf 54 514 Td (FkzaV9CMEJHdkVXZjFvT05JeXhodnh3?oc=5) Tj ET
+BT /F2 9 Tf 54 502 Td (  [59] https://news.google.com/rss/articles/CBMitgFBVV95cUxPY2d1a2Z \\(news, Tue, 21 Oc\\)) Tj ET
+BT /F1 9 Tf 54 489 Td (Scaling Solid-State Batteries: Challenges and Infrastructure - Battery Technology) Tj ET
+BT /F1 8 Tf 54 476 Td (https://news.google.com/rss/articles/CBMitgFBVV95cUxPY2d1a2ZNalBYVDd5Qm1hOG0zS0tsOEpfdmdLZERHT) Tj ET
+BT /F1 8 Tf 54 464 Td (1RYblF1LWpWUGwzZ1oyYTdOMjN2dFZ2S2RRY1JIWHFDX0xpcGJBS25xdVpmTzBkN3F5NUV5R3RwZ1ZVdjBNbUZMeWVSdFh) Tj ET
+BT /F1 8 Tf 54 452 Td (1SlBhOFJ4bERldTZFcm1mT0RGN291dlNla3lJV1k0Vm1pa01TbDlXOGduQ2pEVWIza0pFaGRyandGendXY1FfZ1haM1Jpc) Tj ET
+BT /F1 8 Tf 54 440 Td (zZPdw?oc=5) Tj ET
+BT /F2 9 Tf 54 428 Td (  [60] https://news.google.com/rss/articles/CBMiYEFVX3lxTE5OX21NRkI \\(news, Mon, 23 Ma\\)) Tj ET
+BT /F1 9 Tf 54 415 Td (Solus Advanced Materials Completes Development of 'Nickel-Plated Copper Foil' for Solid-State) Tj ET
+BT /F1 9 Tf 54 402 Td (Batteries, Aiming for 2027 Commercialization - finance.biggo.com) Tj ET
+BT /F1 8 Tf 54 389 Td (https://news.google.com/rss/articles/CBMiYEFVX3lxTE5OX21NRkI5ZkV1R1FqOHVrd3VzdERXbEFIVEZOdVlYS) Tj ET
+BT /F1 8 Tf 54 377 Td (2FiczhRQTNTREs1X19MRHBaYXN4M0lsWDktS3hVXzhEekxuQ281NTFrYTNQbjUteTloRWJZaHVOSQ?oc=5) Tj ET
+BT /F2 12 Tf 54 365 Td () Tj ET
+BT /F1 9 Tf 54 348 Td (--------------------------------------------------------------------------------------------------) Tj ET
+BT /F1 8 Tf 54 335 Td (Generated automatically by SIGNAL - The Internet's Early Warning System | n8n orchestration | 20260822-071611) Tj ET
+endstream
+endobj
+xref
+0 23
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000169 00000 n 
+0000000266 00000 n 
+0000000368 00000 n 
+0000000504 00000 n 
+0000003385 00000 n 
+0000003521 00000 n 
+0000007806 00000 n 
+0000007943 00000 n 
+0000012441 00000 n 
+0000012579 00000 n 
+0000018407 00000 n 
+0000018545 00000 n 
+0000024581 00000 n 
+0000024719 00000 n 
+0000030794 00000 n 
+0000030932 00000 n 
+0000036891 00000 n 
+0000037029 00000 n 
+0000043334 00000 n 
+0000043472 00000 n 
+trailer
+<< /Size 23 /Root 1 0 R >>
+startxref
+47055
+%%EOF
