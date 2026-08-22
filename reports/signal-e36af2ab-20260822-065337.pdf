@@ -1,0 +1,164 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 2759 >>
+stream
+BT /F2 15 Tf 54 738 Td (SIGNAL INTELLIGENCE REPORT) Tj ET
+BT /F1 9 Tf 54 716 Td (SIGNAL - The Internet's Early Warning System  |  orchestrated by n8n) Tj ET
+BT /F1 9 Tf 54 703 Td (--------------------------------------------------------------------------------------------------) Tj ET
+BT /F1 9 Tf 54 690 Td (Topic: orbital data center feasibility) Tj ET
+BT /F1 9 Tf 54 677 Td (Run ID: e36af2ab-701e-430f-8e96-0d5e02b48dec) Tj ET
+BT /F1 9 Tf 54 664 Td (Signal ID: 086610eb-5e18-4f1c-9c52-df9aaf2aa0a7) Tj ET
+BT /F1 9 Tf 54 651 Td (Generated \\(UTC\\): 2026-08-22T06:53:37.574Z) Tj ET
+BT /F1 9 Tf 54 638 Td (Input mode: natural \\(DEMO SIMULATION\\)) Tj ET
+BT /F1 9 Tf 54 625 Td (Analysis path: full) Tj ET
+BT /F2 12 Tf 54 612 Td () Tj ET
+BT /F2 12 Tf 54 595 Td (1. VERDICT & SCORE) Tj ET
+BT /F1 9 Tf 54 578 Td (Signal score: 61/100 \\(EMERGING\\)) Tj ET
+BT /F1 9 Tf 54 565 Td (Confidence: 65%) Tj ET
+BT /F1 9 Tf 54 552 Td (Leading hypothesis: orbital data center feasibility ecosystem entering a genuine acceleration) Tj ET
+BT /F1 9 Tf 54 539 Td (phase) Tj ET
+BT /F2 12 Tf 54 526 Td () Tj ET
+BT /F2 12 Tf 54 509 Td (2. SIGNAL DNA) Tj ET
+BT /F1 9 Tf 54 492 Td (  source_quality.... 60/100) Tj ET
+BT /F1 9 Tf 54 479 Td (  independence...... 100/100) Tj ET
+BT /F1 9 Tf 54 466 Td (  acceleration...... 50/100) Tj ET
+BT /F1 9 Tf 54 453 Td (  novelty........... 48/100) Tj ET
+BT /F1 9 Tf 54 440 Td (  cross_domain...... 44/100) Tj ET
+BT /F1 9 Tf 54 427 Td (  contradiction..... 0/100) Tj ET
+BT /F2 12 Tf 54 414 Td () Tj ET
+BT /F2 12 Tf 54 397 Td (3. TEMPORAL ANALYSIS) Tj ET
+BT /F1 9 Tf 54 380 Td (Velocity vs baseline: 0%) Tj ET
+BT /F1 9 Tf 54 367 Td (Re-emergence: no match with dismissed history) Tj ET
+BT /F2 12 Tf 54 354 Td () Tj ET
+BT /F2 12 Tf 54 337 Td (4. SOURCE FORENSICS) Tj ET
+BT /F1 9 Tf 54 320 Td (Articles found: 6) Tj ET
+BT /F1 9 Tf 54 307 Td (Underlying events collapsed: 6) Tj ET
+BT /F1 9 Tf 54 294 Td (Independent sources: 6) Tj ET
+BT /F1 9 Tf 54 281 Td (Unique domains: 6) Tj ET
+BT /F1 9 Tf 54 268 Td (Duplicates removed: 0) Tj ET
+BT /F2 12 Tf 54 255 Td () Tj ET
+BT /F2 12 Tf 54 238 Td (5. SENSOR SWEEP) Tj ET
+BT /F1 9 Tf 54 221 Td (  news.......... AVAILABLE \\(2 items\\)) Tj ET
+BT /F1 9 Tf 54 208 Td (  research...... AVAILABLE \\(1 items\\)) Tj ET
+BT /F1 9 Tf 54 195 Td (  github........ AVAILABLE \\(1 items\\)) Tj ET
+BT /F1 9 Tf 54 182 Td (  community..... AVAILABLE \\(1 items\\)) Tj ET
+BT /F1 9 Tf 54 169 Td (  policy........ AVAILABLE \\(1 items\\)) Tj ET
+BT /F2 12 Tf 54 156 Td () Tj ET
+BT /F2 12 Tf 54 139 Td (6. RED TEAM) Tj ET
+BT /F1 9 Tf 54 122 Td (Adversarial searches executed: 5) Tj ET
+BT /F1 9 Tf 54 109 Td (Contradictions surfaced: 0) Tj ET
+BT /F2 12 Tf 54 96 Td () Tj ET
+BT /F2 12 Tf 54 79 Td (7. COMPETING HYPOTHESES) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 3588 >>
+stream
+BT /F2 10 Tf 54 738 Td (  #1 [LEADING] prior 58% -> posterior 58%) Tj ET
+BT /F1 9 Tf 54 723 Td (orbital data center feasibility ecosystem entering a genuine acceleration phase) Tj ET
+BT /F2 10 Tf 54 710 Td (  #2 [CANDIDATE] prior 34% -> posterior 34%) Tj ET
+BT /F1 9 Tf 54 695 Td (Short-term spike; cyclical or seasonal noise) Tj ET
+BT /F2 10 Tf 54 682 Td (  #3 [CANDIDATE] prior 26% -> posterior 26%) Tj ET
+BT /F1 9 Tf 54 667 Td (Coordinated publicity inflating perceived momentum) Tj ET
+BT /F2 12 Tf 54 654 Td () Tj ET
+BT /F2 12 Tf 54 637 Td (8. INVALIDATORS \\(what would kill this signal\\)) Tj ET
+BT /F1 9 Tf 54 620 Td ([ ] Coverage volume for "orbital data center feasibility" returns to historical baseline within) Tj ET
+BT /F1 9 Tf 54 607 Td (one week) Tj ET
+BT /F1 9 Tf 54 594 Td ([ ] Independent outlets stop adding NEW reporting \\(only syndicated copies appear\\)) Tj ET
+BT /F1 9 Tf 54 581 Td ([ ] No independent confirmation emerges within the time horizon) Tj ET
+BT /F1 9 Tf 54 568 Td ([ ] Key named entities issue denials or retractions) Tj ET
+BT /F1 9 Tf 54 555 Td ([ ] Downstream indicators \\(hiring/GitHub/procurement\\) flatten or reverse) Tj ET
+BT /F2 12 Tf 54 542 Td () Tj ET
+BT /F2 12 Tf 54 525 Td (9. EXTRACTED CLAIMS) Tj ET
+BT /F2 10 Tf 54 508 Td (  C1. [publishes_research] SSM) Tj ET
+BT /F1 9 Tf 54 493 Td (SSM hybrid inference benchmark beats transformers at long context) Tj ET
+BT /F2 10 Tf 54 480 Td (  C2. [launches] Chipmaker) Tj ET
+BT /F1 9 Tf 54 465 Td (Chipmaker launches SSM accelerator block) Tj ET
+BT /F2 12 Tf 54 452 Td () Tj ET
+BT /F2 12 Tf 54 435 Td (10. ENTITY GRAPH) Tj ET
+BT /F1 9 Tf 54 418 Td (Entities / relationships: 4 entities, 2 relationships) Tj ET
+BT /F1 9 Tf 54 405 Td (    ssm --appears_in--> ssm hybrid inference benchmark beats transformers at long context \\(w=0.25\\)) Tj ET
+BT /F1 9 Tf 54 392 Td (    chipmaker --announces--> chipmaker launches ssm accelerator block \\(w=0.25\\)) Tj ET
+BT /F2 12 Tf 54 379 Td () Tj ET
+BT /F2 12 Tf 54 362 Td (11. PIPELINE TIMELINE) Tj ET
+BT /F1 9 Tf 54 345 Td (  [INPUT] natural request received) Tj ET
+BT /F1 9 Tf 54 332 Td (  [THINK] strategist via openrouter: 6 queries, 3 counter-queries) Tj ET
+BT /F1 9 Tf 54 319 Td (  [SENSE] 5 radar channels activated) Tj ET
+BT /F1 9 Tf 54 306 Td (  [INVESTIGATE] 6 articles, 0 deep-crawled) Tj ET
+BT /F1 9 Tf 54 293 Td (  [CONNECT] 4 entities resolved, 2 relationships mapped) Tj ET
+BT /F1 9 Tf 54 280 Td (  [DETECT CHANGE] velocity 0% vs baseline) Tj ET
+BT /F1 9 Tf 54 267 Td (  [FORM HYPOTHESES] 3 competing hypotheses) Tj ET
+BT /F1 9 Tf 54 254 Td (  [RED TEAM] 5 adversarial searches, 0 contradictions found) Tj ET
+BT /F1 9 Tf 54 241 Td (  [VERIFY] forensics collapsed 6 articles -> 6 events) Tj ET
+BT /F1 9 Tf 54 228 Td (  [SCORE] deterministic score 61/100 EMERGING) Tj ET
+BT /F1 9 Tf 54 215 Td (  [REMEMBER] persisted to PostgreSQL memory) Tj ET
+BT /F1 9 Tf 54 202 Td (  [HUMAN LOOP] notification \\(demo\\) dispatched; review requested) Tj ET
+BT /F2 12 Tf 54 189 Td () Tj ET
+BT /F2 12 Tf 54 172 Td (12. RESOURCES EXAMINED \\(6\\)) Tj ET
+BT /F2 9 Tf 54 155 Td (  [1] The Information \\(news, 2026-08-21\\)) Tj ET
+BT /F1 9 Tf 54 142 Td (Startups pivot from transformer-only stacks to hybrid SSM architectures) Tj ET
+BT /F1 8 Tf 54 129 Td (demo://37e3ac8a) Tj ET
+BT /F2 9 Tf 54 117 Td (  [2] arXiv \\(research, 2026-08-20\\)) Tj ET
+BT /F1 9 Tf 54 104 Td (SSM hybrid inference benchmark beats transformers at long context) Tj ET
+BT /F1 8 Tf 54 91 Td (demo://8842b013) Tj ET
+BT /F2 9 Tf 54 79 Td (  [3] GitHub Trending \\(github, 2026-08-21\\)) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 10 0 R >>
+endobj
+10 0 obj
+<< /Length 1003 >>
+stream
+BT /F1 9 Tf 54 738 Td (Hybrid-ssm-inference library crosses 8k stars) Tj ET
+BT /F1 8 Tf 54 725 Td (demo://12d5738a) Tj ET
+BT /F2 9 Tf 54 713 Td (  [4] SemiAnalysis \\(news, 2026-08-20\\)) Tj ET
+BT /F1 9 Tf 54 700 Td (Chipmaker launches SSM accelerator block) Tj ET
+BT /F1 8 Tf 54 687 Td (demo://8437ea6f) Tj ET
+BT /F2 9 Tf 54 675 Td (  [5] Blogosphere \\(community, 2026-08-19\\)) Tj ET
+BT /F1 9 Tf 54 662 Td (Are SSMs overhyped? A contrarian view) Tj ET
+BT /F1 8 Tf 54 649 Td (demo://947cd8c5) Tj ET
+BT /F2 9 Tf 54 637 Td (  [6] Policy Desk \\(policy, 2026-08-18\\)) Tj ET
+BT /F1 9 Tf 54 624 Td (Agency drafts guidance on novel model architectures) Tj ET
+BT /F1 8 Tf 54 611 Td (demo://42dd9ea8) Tj ET
+BT /F2 12 Tf 54 599 Td () Tj ET
+BT /F1 9 Tf 54 582 Td (--------------------------------------------------------------------------------------------------) Tj ET
+BT /F1 8 Tf 54 569 Td (Generated automatically by SIGNAL - The Internet's Early Warning System | n8n orchestration | 20260822-065337) Tj ET
+endstream
+endobj
+xref
+0 11
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000127 00000 n 
+0000000224 00000 n 
+0000000326 00000 n 
+0000000462 00000 n 
+0000003272 00000 n 
+0000003408 00000 n 
+0000007047 00000 n 
+0000007184 00000 n 
+trailer
+<< /Size 11 /Root 1 0 R >>
+startxref
+8239
+%%EOF
