@@ -28,6 +28,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    env_file:
+      - .env
     ports:
       - "${SIGNAL_N8N_PORT:-5678}:5678"
     environment:
