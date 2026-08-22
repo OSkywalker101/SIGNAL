@@ -383,7 +383,28 @@ wf.add(node("Log Quiet Observation", "n8n-nodes-base.noOp", 1, [13400, 420], {})
 # ---- 13 OUTPUT ----
 wf.add(sticky("## 13 · OUTPUT\nFull intelligence package returned to the caller:\nscore · DNA · forensics · hypotheses · red-team deltas · graph · re-emergence · invalidators · timeline.", [15150, -140], 560, 400, 4))
 wf.add(node("Assemble Final Report", "n8n-nodes-base.code", 2, [15170, 120], {"jsCode": C.ASSEMBLE_REPORT}))
-wf.add(node("Return Intelligence Package", "n8n-nodes-base.respondToWebhook", 1.5, [15390, 120],
+
+# ---- 14 REPORT ARTIFACT (PDF -> GITHUB) ----
+wf.add(sticky("## 14 · REPORT ARTIFACT\n**📄 PDF FACTORY → GITHUB**\nEvery execution compiles a timestamped multi-page PDF of everything inferred and collected — verdict, DNA, temporal, forensics, sensors, red team, hypotheses, claims, graph, timeline and **every source URL examined** — then pushes it to GitHub via the Contents API.\nEnv-gated on `GITHUB_TOKEN` + `GITHUB_REPO`. Always saved to the mounted reports volume.", [15560, -220], 940, 480, 6))
+wf.add(node("📄 BUILD REPORT PDF", "n8n-nodes-base.code", 2, [15610, 120], {"jsCode": C.BUILD_PDF_REPORT}))
+wf.add(iff("GitHub Report Push?", [15830, 20],
+           "={{ (($env.GITHUB_TOKEN || '') !== '' && ($env.GITHUB_REPO || '') !== '') ? 'yes' : 'no' }}"))
+wf.add(node("🐙 PUSH REPORT TO GITHUB", "n8n-nodes-base.httpRequest", 4.2, [16050, -80],
+            {"method": "PUT",
+             "url": "=https://api.github.com/repos/{{ $env.GITHUB_REPO }}/contents/{{ $json.report_filename }}",
+             "sendHeaders": True,
+             "headerParameters": {"parameters": [
+                 {"name": "Authorization", "value": "=Bearer {{ $env.GITHUB_TOKEN }}"},
+                 {"name": "Accept", "value": "application/vnd.github+json"},
+                 {"name": "X-GitHub-Api-Version", "value": "2022-11-28"},
+                 {"name": "User-Agent", "value": "signal-early-warning"}]},
+             "sendBody": True, "specifyBody": "json",
+             "jsonBody": "={{ JSON.stringify({ message: $json.report_commit_message, content: $json.pdf_base64 }) }}",
+             "options": {"timeout": 20000}},
+            on_error="continueRegularOutput"))
+wf.add(node("🚫 Mark Report Push Skipped", "n8n-nodes-base.code", 2, [16050, 120], {"jsCode": C.MARK_REPORT_SKIPPED}))
+wf.add(node("📎 MERGE REPORT METADATA", "n8n-nodes-base.code", 2, [16270, 20], {"jsCode": C.MERGE_REPORT}))
+wf.add(node("Return Intelligence Package", "n8n-nodes-base.respondToWebhook", 1.5, [16490, 20],
             {"respondWith": "firstIncomingItem", "options": {}}))
 
 # ---- WIRING ----
@@ -475,7 +496,13 @@ wf.link("📝 Notion Memory Page", "Assemble Final Report")
 wf.link("Emerging? Queue Digest", "Assemble Final Report", 0)
 wf.link("Emerging? Queue Digest", "Log Quiet Observation", 1)
 wf.link("Log Quiet Observation", "Assemble Final Report")
-wf.link("Assemble Final Report", "Return Intelligence Package")
+wf.link("Assemble Final Report", "📄 BUILD REPORT PDF")
+wf.link("📄 BUILD REPORT PDF", "GitHub Report Push?")
+wf.link("GitHub Report Push?", "🐙 PUSH REPORT TO GITHUB", 0)
+wf.link("GitHub Report Push?", "🚫 Mark Report Push Skipped", 1)
+wf.link("🐙 PUSH REPORT TO GITHUB", "📎 MERGE REPORT METADATA")
+wf.link("🚫 Mark Report Push Skipped", "📎 MERGE REPORT METADATA")
+wf.link("📎 MERGE REPORT METADATA", "Return Intelligence Package")
 
 wf.dump("signal-intelligence-pipeline.json")
 

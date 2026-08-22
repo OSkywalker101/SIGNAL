@@ -926,3 +926,173 @@ return [{ json: {
   at: new Date().toISOString(),
   sql: `INSERT INTO actions (action_type,payload,status,detail) VALUES ('error','${JSON.stringify({ workflow: e.workflow && e.workflow.name, node: e.execution && e.execution.lastNodeExecuted }).replace(/'/g, "''")}'::jsonb,'failed','${String((e.execution && e.execution.error && e.execution.error.message) || "unknown").replace(/'/g, "''").slice(0, 250)}');`
 }}];"""
+
+BUILD_PDF_REPORT = UTILS + r"""
+// 📄 REPORT ARTIFACT — compile the full investigation into a real, downloadable PDF.
+// Zero-dependency PDF writer (valid xref table, Helvetica core fonts, multi-page).
+// Saves to /home/node/reports (mounted volume) when fs access is allowed, always
+// embeds base64 so downstream nodes can push it anywhere.
+const g = (n) => { try { const r = $(n); return r.all().length ? r.first().json : null; } catch (e) { return null; } };
+const R = g("Assemble Final Report") || {};
+// ---- text hygiene ------------------------------------------------------
+function A(s) { return String(s === null || s === undefined ? "" : s)
+  .replace(/[\u2013\u2014]/g, "-").replace(/[\u2018\u2019\u201B]/g, "'")
+  .replace(/[\u201C\u201D]/g, '"').replace(/[\u2022\u25CF]/g, "*")
+  .replace(/\u2026/g, "...").replace(/\u2192/g, "->")
+  .replace(/\u2713/g, "[OK]").replace(/[\u2717\u2714]/g, "[x]")
+  .replace(/\u2264/g, "<=").replace(/\u2265/g, ">=")
+  .replace(/[^\x20-\x7E]/g, ""); }
+function esc(s) { return A(s).replace(/\\\\/g, "\\\\\\\\").replace(/\(/g, "\\\\(").replace(/\)/g, "\\\\)"); }
+function wrap(text, width) {
+  const words = A(text).split(/\s+/); const out = []; let cur = "";
+  for (const w of words) {
+    if ((cur + " " + w).trim().length <= width) cur = (cur ? cur + " " : "") + w;
+    else { if (cur) out.push(cur); if (w.length > width) { for (let i = 0; i < w.length; i += width) out.push(w.slice(i, i + width)); cur = ""; } else cur = w; }
+  }
+  if (cur) out.push(cur); return out.length ? out : [""];
+}
+// ---- collect sections --------------------------------------------------
+const L = []; // {f,s,t}
+const H = (t) => L.push({ f: "F2", s: 12, t: "" }, { f: "F2", s: 12, t: t });
+const rule = () => L.push({ f: "F1", s: 9, t: "-".repeat(98) });
+const kv = (k, v) => wrap(k + ": " + (v === null || v === undefined || v === "" ? "-" : v), 98).forEach(t => L.push({ f: "F1", s: 9, t }));
+L.push({ f: "F2", s: 15, t: "SIGNAL INTELLIGENCE REPORT" });
+L.push({ f: "F1", s: 9, t: A(R.product || "SIGNAL") + "  |  orchestrated by n8n" });
+rule();
+kv("Topic", R.topic); kv("Run ID", R.run_id); kv("Signal ID", R.signal_id);
+const NOW = new Date(); const p2 = n => String(n).padStart(2, "0");
+const STAMP = `${NOW.getUTCFullYear()}${p2(NOW.getUTCMonth() + 1)}${p2(NOW.getUTCDate())}-${p2(NOW.getUTCHours())}${p2(NOW.getUTCMinutes())}${p2(NOW.getUTCSeconds())}`;
+kv("Generated (UTC)", NOW.toISOString()); kv("Input mode", `${R.mode || "-"}${R.demo_simulation ? " (DEMO SIMULATION)" : " (LIVE)"}`);
+kv("Analysis path", R.analysis_path);
+H("1. VERDICT & SCORE");
+if (R.score === null || R.score === undefined) kv("Result", "BELOW THRESHOLD - quiet observation logged, no alert raised");
+else {
+  kv("Signal score", `${R.score}/100  (${R.classification})`);
+  kv("Confidence", (R.confidence !== null && R.confidence !== undefined) ? R.confidence + "%" : "-");
+  const hyp = (R.hypotheses || []).find(h => h.status === "leading") || (R.hypotheses || [])[0];
+  kv("Leading hypothesis", hyp ? hyp.statement : "-");
+}
+if (R.dna) { H("2. SIGNAL DNA"); Object.entries(R.dna).forEach(([k, v]) => L.push({ f: "F1", s: 9, t: `  ${A(k).padEnd(18, ".")} ${v}/100` })); }
+H((R.dna ? "3" : "2") + ". TEMPORAL ANALYSIS");
+kv("Velocity vs baseline", (R.velocity_pct !== undefined ? R.velocity_pct : "-") + "%");
+if (R.reemergence) { kv("Re-emergence", R.reemergence.is_reemergence ? `YES - ${R.reemergence.best_similarity_pct}% match with previously dismissed pattern` : "no match with dismissed history"); }
+H((R.dna ? "4" : "3") + ". SOURCE FORENSICS");
+const fo = R.forensics || {};
+kv("Articles found", fo.articles_found); kv("Underlying events collapsed", fo.underlying_events);
+kv("Independent sources", fo.independent_sources); kv("Unique domains", fo.unique_domains);
+kv("Duplicates removed", fo.duplicates_removed);
+const sensors = R.sensors || {};
+if (Object.keys(sensors).length) { H((R.dna ? "5" : "4") + ". SENSOR SWEEP"); Object.entries(sensors).forEach(([k, v]) => L.push({ f: "F1", s: 9, t: `  ${A(k).padEnd(14, ".")} ${v.state} (${v.found} items)` })); }
+const rt = R.red_team;
+if (rt) {
+  H((R.dna ? "6" : "5") + ". RED TEAM");
+  kv("Adversarial searches executed", rt.searches_executed);
+  kv("Contradictions surfaced", (rt.contradictions || []).length);
+  (rt.contradictions || []).slice(0, 4).forEach(c => wrap(`  ! ${c.title || c.statement || ""}${c.url ? " - " + c.url : ""}`, 98).forEach(t => L.push({ f: "F1", s: 9, t })));
+}
+const hyps = R.hypotheses || [];
+if (hyps.length) {
+  H((R.dna ? "7" : "6") + ". COMPETING HYPOTHESES");
+  hyps.forEach((h, i) => {
+    L.push({ f: "F2", s: 10, t: `  #${i + 1} [${A(h.status || "").toUpperCase()}] prior ${h.prior}% -> posterior ${h.posterior}%` });
+    wrap("     " + h.statement, 94).forEach(t => L.push({ f: "F1", s: 9, t }));
+  });
+}
+const inv = R.invalidators || [];
+if (inv.length) { H((R.dna ? "8" : "7") + ". INVALIDATORS (what would kill this signal)"); inv.forEach(v => wrap("  [ ] " + v, 96).forEach(t => L.push({ f: "F1", s: 9, t }))); }
+const ev = R.evidence || {};
+if ((ev.top_claims || []).length) {
+  H((R.dna ? "9" : "8") + ". EXTRACTED CLAIMS");
+  ev.top_claims.forEach((c, i) => {
+    L.push({ f: "F2", s: 10, t: `  C${i + 1}. [${A(c.action)}] ${A(c.actor || "?")}` });
+    wrap("     " + c.statement, 94).forEach(t => L.push({ f: "F1", s: 9, t }));
+  });
+}
+const gr = R.graph || {};
+if ((gr.edges || []).length) {
+  H((R.dna ? "10" : "9") + ". ENTITY GRAPH");
+  kv("Entities / relationships", `${(gr.nodes || []).length} entities, ${(gr.edges || []).length} relationships`);
+  gr.edges.slice(0, 12).forEach(e => L.push({ f: "F1", s: 9, t: `    ${A(e.from)} --${A(e.label)}--> ${A(e.to)} (w=${e.weight})` }));
+}
+const tl = R.timeline || [];
+if (tl.length) { H((R.dna ? "11" : "10") + ". PIPELINE TIMELINE"); tl.forEach(s => L.push({ f: "F1", s: 9, t: `  [${A(s.stage)}] ${A(s.detail)}` })); }
+// ---- RESOURCES: every source examined ----------------------------------
+let corpus = [];
+try { corpus = $("Cap Corpus").all().map(i => i.json).filter(c => c.source_url); } catch (e) {}
+if (!corpus.length) { try { corpus = ($("⚖️ SIGNAL JUDGE — Deterministic Score").first().json.corpus || []).filter(c => c.source_url); } catch (e) {} }
+H((R.dna ? "12" : "11") + `. RESOURCES EXAMINED (${corpus.length})`);
+if (!corpus.length) L.push({ f: "F1", s: 9, t: "  (no external sources captured this run)" });
+corpus.forEach((c, i) => {
+  L.push({ f: "F2", s: 9, t: `  [${i + 1}] ${A(c.publisher || c.domain || "unknown")} (${A(c.channel || "-")}${c.published_at ? ", " + String(c.published_at).slice(0, 10) : ""})` });
+  wrap("      " + (c.title || "(untitled)"), 94).forEach(t => L.push({ f: "F1", s: 9, t }));
+  wrap("      " + c.source_url, 94).forEach(t => L.push({ f: "F1", s: 8, t }));
+});
+L.push({ f: "F2", s: 12, t: "" }); rule();
+L.push({ f: "F1", s: 8, t: `Generated automatically by SIGNAL - The Internet's Early Warning System | n8n orchestration | ${STAMP}` });
+// ---- paginate & render PDF ---------------------------------------------
+const PAGE_W = 612, PAGE_H = 792, MARGIN = 54;
+const pages = []; let cur = [], y = PAGE_H - MARGIN;
+for (const ln of L) {
+  const lead = Math.round(ln.s * 1.45);
+  if (y - lead < MARGIN) { pages.push(cur); cur = []; y = PAGE_H - MARGIN; }
+  cur.push({ ...ln, y }); y -= lead;
+}
+if (cur.length) pages.push(cur); if (!pages.length) pages.push([]);
+const objs = [];
+objs.push({ body: "<< /Type /Catalog /Pages 2 0 R >>" });
+const kids = pages.map((_, i) => `${5 + i * 2} 0 R`).join(" ");
+objs.push({ body: `<< /Type /Pages /Kids [${kids}] /Count ${pages.length} >>` });
+objs.push({ body: "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>" });
+objs.push({ body: "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>" });
+pages.forEach((pg, i) => {
+  let s = "";
+  for (const ln of pg) s += `BT /${ln.f} ${ln.s} Tf ${MARGIN} ${ln.y} Td (${esc(ln.t)}) Tj ET\n`;
+  const cnum = 6 + i * 2;
+  objs.push({ body: `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${PAGE_W} ${PAGE_H}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents ${cnum} 0 R >>` });
+  objs.push({ num: cnum, body: `<< /Length ${Buffer.byteLength(s, "latin1")} >>\nstream\n${s}endstream` });
+});
+objs.forEach((o, i) => { o.num = o.num || (i + 1); });
+objs.sort((a, b) => a.num - b.num);
+let pdf = "%PDF-1.4\n"; const offs = [];
+for (const o of objs) { offs[o.num] = Buffer.byteLength(pdf, "latin1"); pdf += `${o.num} 0 obj\n${o.body}\nendobj\n`; }
+const xref = Buffer.byteLength(pdf, "latin1");
+pdf += `xref\n0 ${objs.length + 1}\n0000000000 65535 f \n`;
+for (let i = 1; i <= objs.length; i++) pdf += `${String(offs[i]).padStart(10, "0")} 00000 n \n`;
+pdf += `trailer\n<< /Size ${objs.length + 1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;
+const buf = Buffer.from(pdf, "latin1");
+// ---- persist + hand off ------------------------------------------------
+const base = `signal-${String(R.run_id || "adhoc").slice(0, 8)}-${STAMP}`;
+const filename = `reports/${base}.pdf`;
+let saved = false;
+try { const fs = require("fs"); fs.mkdirSync("/home/node/reports", { recursive: true }); fs.writeFileSync(`/home/node/reports/${base}.pdf`, buf); saved = true; } catch (e) {}
+return [{ json: {
+  report_name: `${base}.pdf`, report_filename: filename,
+  report_size_bytes: buf.length, report_pages: pages.length,
+  report_generated_at: NOW.toISOString(), report_saved_locally: saved,
+  report_commit_message: A(`SIGNAL report: ${R.topic || "unknown topic"} (${R.classification || "?"} ${R.score !== null && R.score !== undefined ? R.score + "/100" : "below-threshold"})`).replace(/["\\\\]/g, ""),
+  pdf_base64: buf.toString("base64"),
+  report_meta: { topic: R.topic, score: R.score, classification: R.classification, signal_id: R.signal_id }
+} }];"""
+
+MARK_REPORT_SKIPPED = UTILS + r"""
+return [{ json: { report_push_skipped: true, description: "GITHUB_TOKEN/GITHUB_REPO not configured - PDF artifact still embedded in execution data and saved to the reports volume" } }];"""
+
+MERGE_REPORT = UTILS + r"""
+// Reassemble the full intelligence package + report metadata as the final response.
+const pkg = $("Assemble Final Report").first().json;
+const rep = $("📄 BUILD REPORT PDF").first().json;
+const inp = ($input.first() && $input.first().json) || {};
+let push = { pushed: false, detail: null, url: null };
+if (inp.report_push_skipped) push.detail = inp.description;
+else if (inp.commit && inp.commit.sha) { push.pushed = true; push.url = (inp.content && inp.content.html_url) || null; push.sha = inp.commit.sha; }
+else push.detail = "GitHub API returned no commit (check token scopes / repo permissions)";
+return [{ json: { ...pkg,
+  report: {
+    filename: rep.report_name, path: rep.report_filename,
+    generated_at: rep.report_generated_at, pages: rep.report_pages,
+    size_bytes: rep.report_size_bytes, saved_locally: rep.report_saved_locally,
+    download_url: `http://localhost:${$env.SIGNAL_API_PORT || 8000}/reports/${rep.report_name}`,
+    github_pushed: push.pushed, github_url: push.url, github_note: push.detail,
+    sha256_prefix: String(rep.pdf_base64 || "").length
+  }
+} }];"""

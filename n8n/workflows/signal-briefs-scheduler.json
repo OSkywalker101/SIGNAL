@@ -12,7 +12,7 @@
      ]
     }
    },
-   "id": "00000066-0000-4000-8000-000000000102",
+   "id": "0000006b-0000-4000-8000-000000000107",
    "name": "Daily Trigger",
    "type": "n8n-nodes-base.scheduleTrigger",
    "typeVersion": 1.2,
@@ -32,7 +32,7 @@
      ]
     }
    },
-   "id": "00000067-0000-4000-8000-000000000103",
+   "id": "0000006c-0000-4000-8000-000000000108",
    "name": "Weekly Trigger",
    "type": "n8n-nodes-base.scheduleTrigger",
    "typeVersion": 1.2,
@@ -56,7 +56,7 @@
     "includeOtherFields": true,
     "options": {}
    },
-   "id": "00000068-0000-4000-8000-000000000104",
+   "id": "0000006d-0000-4000-8000-000000000109",
    "name": "Tag Window Daily",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -80,7 +80,7 @@
     "includeOtherFields": true,
     "options": {}
    },
-   "id": "00000069-0000-4000-8000-000000000105",
+   "id": "0000006e-0000-4000-8000-000000000110",
    "name": "Tag Window Weekly",
    "type": "n8n-nodes-base.set",
    "typeVersion": 3.4,
@@ -95,7 +95,7 @@
     "query": "=SELECT title, classification, signal_score, confidence, status, is_demo, '{{ $json.window }}' AS window FROM signals WHERE last_updated_at > now() - interval '{{ $json.window === 'weekly' ? '7 days' : '24 hours' }}' AND status NOT IN ('RESOLVED','DISMISSED') ORDER BY signal_score DESC LIMIT 30;",
     "options": {}
    },
-   "id": "0000006a-0000-4000-8000-000000000106",
+   "id": "0000006f-0000-4000-8000-000000000111",
    "name": "Load Recent Signals",
    "type": "n8n-nodes-base.postgres",
    "typeVersion": 2.6,
@@ -137,7 +137,7 @@
     },
     "options": {}
    },
-   "id": "0000006b-0000-4000-8000-000000000107",
+   "id": "00000070-0000-4000-8000-000000000112",
    "name": "Summarize By Classification",
    "type": "n8n-nodes-base.summarize",
    "typeVersion": 1.1,
@@ -150,7 +150,7 @@
    "parameters": {
     "jsCode": "\nconst UTIL = {\n  esc(v) { if (v === null || v === undefined) return \"''\"; return String(v).replace(/'/g, \"''\"); },\n  hash(s) { let h = 5381; s = String(s || \"\"); for (let i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) | 0; } return (h >>> 0).toString(16); },\n  uuid() { return \"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\".replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === \"x\" ? r : (r & 0x3 | 0x8)).toString(16); }); },\n  clamp(x, a, b) { return Math.max(a, Math.min(b, x)); },\n  tokens(t) { return String(t || \"\").toLowerCase().replace(/[^a-z0-9 ]/g, \" \").split(/\\s+/).filter(w => w.length > 2); },\n  embed(text) {\n    const v = new Array(384).fill(0);\n    const toks = this.tokens(text);\n    for (const w of toks) {\n      let h = 2166136261;\n      for (let i = 0; i < w.length; i++) { h ^= w.charCodeAt(i); h = Math.imul(h, 16777619); }\n      const a = Math.abs(h) % 384; v[a] += 1;\n      const b = Math.abs(Math.imul(h, 41) + 7) % 384; v[b] += 0.5;\n    }\n    const n = Math.sqrt(v.reduce((s, x) => s + x * x, 0)) || 1;\n    return \"[\" + v.map(x => (x / n).toFixed(5)).join(\",\") + \"]\";\n  },\n  shingles(t, k) { const w = this.tokens(t); const out = []; for (let i = 0; i + k <= w.length; i++) out.push(w.slice(i, i + k).join(\" \")); return new Set(out); },\n  jaccard(a, b) { let inter = 0; for (const x of a) if (b.has(x)) inter++; const uni = a.size + b.size - inter; return uni ? inter / uni : 0; },\n  overlapPct(a, b) { const A = new Set(a), B = new Set(b); if (!A.size) return 0; let hit = 0; for (const x of A) if (B.has(x)) hit++; return hit / A.size * 100; }\n};\n\nconst summaryRows = $input.all().map(i => i.json);\nlet window = \"daily\";\ntry { window = $(\"Load Recent Signals\").first().json.window || \"daily\"; } catch (e) {}\nconst lines = summaryRows.map(r => `${r.classification}: ${r.signal_count} signal(s), avg score ${Math.round(parseFloat(r.avg_score || 0))}`);\nconst brief = [`\ud83d\udef0\ufe0f SIGNAL ${String(window).toLowerCase() === \"weekly\" ? \"WEEKLY REVIEW\" : \"MORNING BRIEF\"}`, \"\", ...(lines.length ? lines : [\"No meaningful changes detected.\"]), \"\", \"Orchestrated by n8n\"].join(\"\\n\");\nreturn [{ json: { brief, has_content: lines.length > 0, window } }];"
    },
-   "id": "0000006c-0000-4000-8000-000000000108",
+   "id": "00000071-0000-4000-8000-000000000113",
    "name": "Format Brief",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -169,7 +169,7 @@
      },
      "conditions": [
       {
-       "id": "c7447",
+       "id": "c2066",
        "leftValue": "={{ $json.has_content }}",
        "rightValue": "true",
        "operator": {
@@ -182,7 +182,7 @@
     },
     "options": {}
    },
-   "id": "0000006d-0000-4000-8000-000000000109",
+   "id": "00000072-0000-4000-8000-000000000114",
    "name": "Has Content?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.3,
@@ -201,7 +201,7 @@
      },
      "conditions": [
       {
-       "id": "c530",
+       "id": "c2717",
        "leftValue": "={{ $env.TELEGRAM_BOT_TOKEN || '' }}",
        "rightValue": "",
        "operator": {
@@ -214,7 +214,7 @@
     },
     "options": {}
    },
-   "id": "0000006e-0000-4000-8000-000000000110",
+   "id": "00000073-0000-4000-8000-000000000115",
    "name": "Telegram Token?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2.3,
@@ -234,7 +234,7 @@
      "timeout": 10000
     }
    },
-   "id": "0000006f-0000-4000-8000-000000000111",
+   "id": "00000074-0000-4000-8000-000000000116",
    "name": "Send Brief",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -250,7 +250,7 @@
     "query": "=INSERT INTO actions (action_type,payload,status,detail) VALUES ('brief','{\"window\":\"{{ $(\"Load Recent Signals\").first().json.window }}\"}'::jsonb,'done','digest generated');",
     "options": {}
    },
-   "id": "00000070-0000-4000-8000-000000000112",
+   "id": "00000075-0000-4000-8000-000000000117",
    "name": "Brief Logged To Actions",
    "type": "n8n-nodes-base.postgres",
    "typeVersion": 2.6,
@@ -268,7 +268,7 @@
   },
   {
    "parameters": {},
-   "id": "00000071-0000-4000-8000-000000000113",
+   "id": "00000076-0000-4000-8000-000000000118",
    "name": "No Changes Today",
    "type": "n8n-nodes-base.noOp",
    "typeVersion": 1,

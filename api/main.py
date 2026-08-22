@@ -4,6 +4,9 @@ the PostgreSQL memory to the Command Center UI.
 """
 import json
 import datetime as dt
+import os
+import subprocess
+import threading
 from pathlib import Path
 
 import httpx
@@ -25,6 +28,33 @@ app.add_middleware(
 
 STATIC = Path(__file__).parent / "static"
 app.mount("/app", StaticFiles(directory=str(STATIC), html=True), name="app")
+
+REPORTS = Path(__file__).resolve().parent.parent / "reports"
+REPORTS.mkdir(exist_ok=True)
+app.mount("/reports", StaticFiles(directory=str(REPORTS)), name="reports")
+
+
+# ------------------------------------------------------------- report artifacts
+def push_reports_async():
+    """Commit + push any newly generated PDF reports to GitHub in the background.
+    Non-fatal by design: demo must never break because of git."""
+    def job():
+        try:
+            repo = str(Path(__file__).resolve().parent.parent)
+            subprocess.run(["git", "add", "-A", "reports"], cwd=repo,
+                           capture_output=True, text=True, timeout=60)
+            c = subprocess.run(["git", "commit", "-m",
+                                "report artifact: auto-generated SIGNAL PDF report"],
+                               cwd=repo, capture_output=True, text=True, timeout=60)
+            if c.returncode != 0 and "nothing to commit" not in (c.stdout + c.stderr).lower():
+                return
+            subprocess.run(["git", "pull", "--rebase", "--autostash"], cwd=repo,
+                           capture_output=True, text=True, timeout=60)
+            subprocess.run(["git", "push"], cwd=repo,
+                           capture_output=True, text=True, timeout=120)
+        except Exception:
+            pass
+    threading.Thread(target=job, daemon=True).start()
 
 
 @app.get("/")
@@ -73,9 +103,11 @@ def investigate(body: InvestigateBody):
     if not r.content:
         raise HTTPException(502, "n8n returned an empty response (check n8n executions)")
     try:
-        return r.json()
+        out = r.json()
     except Exception:
         raise HTTPException(502, f"n8n returned non-JSON: {r.text[:200]}")
+    push_reports_async()
+    return out
 
 
 # ---------------------------------------------------------------- signals
